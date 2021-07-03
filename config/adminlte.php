@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>LABORATORIO</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -169,7 +169,7 @@ return [
 
     'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
+    'right_sidebar_theme' => 'light',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
@@ -226,98 +226,71 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        
+      
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+       
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+      
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Inicio',
+            'url'         => 'admin',
+            'icon'        => 'fas fa-heartbeat',
+            'icon_color' => 'red',
+            
         ],
-        ['header' => 'account_settings'],
+
         [
-            'text' => 'profile',
+            'text' => 'Roles',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-users-cog',
+        ],
+        [
+            'text' => 'Usuario',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'ADM Reservas',
+            'icon'    => 'fas fa-fw fa-calendar-check',
+            'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Gestionar periodo',
+                    'icon'    => "fas fa-calendar-plus",
+                    'route'  => 'periods.index',
+                    'icon_color'=>'red',
+                    //'can'=>'Ver lista de reservas',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Gestionar sala',
+                    'icon'    => "fas fa-procedures",
+                    'route'  => 'rooms.index',
+                    'icon_color'=>'red',
+                  
+                    //'can'=>'Ver lista de reservas',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Gestionar reserva',
+                    'icon'    => "fas fa-calendar",
+                    'route'  => 'reservations.index',
+                    'icon_color'=>'red',
+                    //'can'=>'Ver lista de reservas',
                 ],
+               
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+
+        
+        
+       
+       
+
     ],
 
     /*
