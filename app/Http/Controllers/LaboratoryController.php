@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laboratory;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 
 class LaboratoryController extends Controller
@@ -22,9 +23,11 @@ class LaboratoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($plan_id)
     {
-        //
+        $plan = Plan::findOrFail($plan_id);
+        //dd($plan);
+        return view('laboratories.create', compact('plan'));
     }
 
     /**
@@ -35,7 +38,13 @@ class LaboratoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $credentials =   Request()->validate([
+            'name' => ['required','string']
+        ]);
+        Laboratory::create([
+            'name' => request('name'),
+        ]);
+        return redirect()->route('user.create');
     }
 
     /**

@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <br><br><br>      
                 <img style="background-size: cover; height: 90%;
-                width: 100%; margin-right: 10%;" src="{{asset('./Icons/enfermera.jpg')}}" class="img-fluid">
+                width: 100%; margin-right: 10%;" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d60dee72-6ded-4e94-afc5-e414a2d93836/d5hq2mv-9bd2e028-9e94-47cc-895f-39b7f0b303eb.jpg/v1/fill/w_762,h_1049,q_75,strp/enfermera_kawaii_by_amoelanimme-d5hq2mv.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9kNjBkZWU3Mi02ZGVkLTRlOTQtYWZjNS1lNDE0YTJkOTM4MzYvZDVocTJtdi05YmQyZTAyOC05ZTk0LTQ3Y2MtODk1Zi0zOWI3ZjBiMzAzZWIuanBnIiwid2lkdGgiOiI8PTc2MiIsImhlaWdodCI6Ijw9MTA0OSJ9XV19.lB8Wmzf9pvt-YxxwQxNK-A93hOh-wNoMbqbU5yIyf3w" class="img-fluid">
             <br><br>   
         </div>
         <br><br>
