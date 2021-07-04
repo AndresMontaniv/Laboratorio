@@ -16,6 +16,27 @@
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
         {{ csrf_field() }}
+        {{-- Choose Lab --}}
+        <?php
+        $labs=DB::table('labs')->where('estado',true)->get();
+        ?>
+        <div class="input-group mb-3">
+            <select name="labId" id="select-lab" class="form-control" onchange="habilitar()" >
+                <option value="nulo">Seleccione un Laboratorio</option>
+                    @foreach ($labs as $lab)
+                        <option value="{{$lab->id}}">
+                            {{$lab->nombre}}
+                        </option>
+                    @endforeach
+            </select>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-flask"></span>
+                </div>
+            </div>
+        </div>
+
+
 
         {{-- Name field --}}
         <div class="input-group mb-3">
