@@ -23,6 +23,9 @@ class RoleSeeder extends Seeder
             ],
             [
                 'name' => 'Paciente'
+            ],
+            [
+                'name' => 'Super Usuario'
             ]
         ]);
     }

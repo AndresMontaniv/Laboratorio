@@ -70,6 +70,9 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('plan.index') }}">{{ __('Planes') }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>

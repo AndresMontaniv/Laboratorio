@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
+        $this->call(PlanSeeder::class);
 
+        
         $lab1 = new lab();
         $lab1->nombre = 'Laboratorio 1';
         $lab1->estado= true;
@@ -32,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $lab3->nombre = 'Laboratorio 3';
         $lab3->estado= false;
         $lab3->save();
+        
     }
 }
