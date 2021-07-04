@@ -7,7 +7,7 @@ use App\Http\Controllers\SalasController;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-/*
+/*P
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
