@@ -17,6 +17,8 @@ class CreateLaboratoryPlansTable extends Migration
             $table->id();
             $table->date('expirationDate')->nullable();
             $table->date('initialDate');
+            $table->foreignId('plan_id')->constrained('plans');
+            $table->foreignId('laboratory_id')->constrained('laboratories');
             $table->timestamps();
         });
     }

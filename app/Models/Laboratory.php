@@ -9,8 +9,9 @@ class Laboratory extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'expirationDate',
-        'initialDate'
+        'status',
+        'imagen',
+        'name'
     ];
     public function laboratoyPlan(){
         return $this->hasMany('App\Models\LaboratoryPlan');

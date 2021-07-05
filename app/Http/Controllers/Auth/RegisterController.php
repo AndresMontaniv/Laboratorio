@@ -51,7 +51,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
             'ci' => ['required', 'string', 'min:3'],
@@ -67,23 +67,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $labName=DB::table('labs')->where('id',$data['labId'])->value('nombre');
-        $final=$labName."-".$data['name'];
         $user=User::create([
-            'name' => $final,
+            'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            
-        ]);
-        DB::table('users')->where('id',$user->id)->update([
-            'labId' => $data['labId'],
+            'password' => Hash::make($data['password']),  
+            'laboratory_id' => $data['labId'],
             'ci' => $data['ci'],
             'phone' => $data['telefono'],
             'birthday' => $data['fechaNac']
         ]);
+        $user->username = User::getUniqueUsername($data['name'],$labName, $user->id);
+        $user->update();
         DB::table('permissions')->insert([
             [
                 'user_id' => $user->id,
-                'role_id' => 3
+                'role_id' => 1
             ],
         ]);
         return $user;

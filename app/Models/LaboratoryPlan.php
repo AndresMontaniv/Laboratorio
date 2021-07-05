@@ -9,11 +9,19 @@ class LaboratoryPlan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'imagen',
-        'name',
-        'status'
+        'laboratory_id',
+        'expirationDate',
+        'initialDate',
+        'plan_id',
     ];
-    
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'expirationDate',
+        'initialDate'
+    ];
+
     public function laboratory(){
         return $this->BelongsTo('App\Models\Laboratory');
     }

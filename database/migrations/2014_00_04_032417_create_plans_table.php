@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->id();
             $table->float('price');
             $table->string('name');
+            $table->integer('months');
             $table->string('description');
             $table->timestamps();
         });

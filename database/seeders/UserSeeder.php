@@ -17,46 +17,12 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                
-                'name' => 'Carlos',
+                'name' => 'Monti',
+                'username' => 'TELCHI-Monti1',
                 'phone' => '76041031',
-                'email' => 'jaldin@gmail.com',
-                'password' => Hash::make('123')
-            ],
-            [
-                
-                'name' => 'Carla',
-                'phone' => '76088031',
-                'email' => 'cruz@gmail.com',
-                'password' => Hash::make('123')
-            ],
-            [
-               
-                'name' => 'Valeria',
-                'phone' => '76647031',
-                'email' => 'vale@gmail.com',
-                'password' => Hash::make('123')
-            ],
-            [
-                
-                'name' => 'Franz',
-                'phone' => '77047071',
-                'email' => 'franz@gmail.com',
-                'password' => Hash::make('123')
-            ],
-            [
-                
-                'name' => 'Andres',
-                'phone' => '66023031',
-                'email' => 'montano@gmail.com',
-                'password' => Hash::make('123')
-            ],
-            [
-               
-                'name' => 'Sebastian',
-                'phone' => '66071031',
-                'email' => 'sebas@gmail.com',
-                'password' => Hash::make('123')
+                'email' => 'monti@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id' => 1
             ]
         ]);
     }
