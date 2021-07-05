@@ -44,4 +44,11 @@ class User extends Authenticatable
     public function permissions(){
         return $this->BelongsTo('App\Models\Permission');
     }
+
+    public static function getUniqueUsername($name,$labName){    
+        $labName = strtoupper($labName);                   
+        $palabraLimpia = str_replace(' ', '', $labName);  
+        $final=$palabraLimpia."-".$name; 
+        return $final;
+    }
 }

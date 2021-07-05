@@ -67,7 +67,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $labName=DB::table('labs')->where('id',$data['labId'])->value('nombre');
-        $final=$labName."-".$data['name'];
+        $final=User::getUniqueUsername($data['name'],$labName);
         $user=User::create([
             'name' => $final,
             'email' => $data['email'],
