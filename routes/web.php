@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PeriodController;
-use App\Http\Controllers\PlanController;
+use App\Http\Controllers\Auth\PatientController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SalasController;
 use App\Models\Laboratory;
 use App\Models\Reservation;
@@ -26,6 +27,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::view('login/patient', 'patients.login')->name('patient.login');
+Route::post('patient/login',[PatientController::class, 'login'])->name('patients.login');
+Route::post('patient/create',[PatientController::class, 'create'])->name('patients.create');
+Route::get('patient/index/{id}',[PatientController::class, 'index'])->name('patients.index');
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('room', RoomController::class)->names('rooms');

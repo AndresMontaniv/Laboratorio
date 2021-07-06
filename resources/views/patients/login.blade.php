@@ -18,36 +18,11 @@
     @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
 
-@section('auth_header', 'Ingresa tus datos de administrador o personal medico para acceder')
+@section('auth_header', 'Ingresa tus datos de paciente para acceder')
 
 @section('auth_body')
-    @if ($errors->count() > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    <form action="{{ $login_url }}" method="post">
+    <form action="{{ route('patients.login') }}" method="post">
         {{ csrf_field() }}
-
-        {{-- Email field --}}
-        {{-- <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-            @if($errors->has('email'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </div>
-            @endif
-        </div> --}}
 
         <div class="input-group mb-3">
             <input type="text" name="username" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}"
@@ -97,9 +72,16 @@
         </div>
 
     </form>
+    
 @stop
 
 @section('auth_footer')
+
+    <p class="my-0">
+        <a  href="{{route('login')}}">
+            Ingresar como personal medico
+        </a>
+    </p>
     {{-- Password reset link --}}
     @if($password_reset_url)
         <p class="my-0">

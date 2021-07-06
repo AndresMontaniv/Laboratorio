@@ -84,6 +84,7 @@ class RegisterController extends Controller
                 'role_id' => 1
             ],
         ]);
-        return $user;
+
+        //redireccionar a perfil cliente
     }
 }

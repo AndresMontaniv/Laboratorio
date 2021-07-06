@@ -16,6 +16,7 @@ class CreateLaboratoryPlansTable extends Migration
         Schema::create('laboratory_plans', function (Blueprint $table) {
             $table->id();
             $table->date('expirationDate')->nullable();
+            $table->Integer('status')->default('0');
             $table->date('initialDate');
             $table->foreignId('plan_id')->constrained('plans');
             $table->foreignId('laboratory_id')->constrained('laboratories');
