@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'phone' => $data['telefono'],
             'birthday' => $data['fechaNac']
         ]);
-        $user->username = User::getUniqueUsername($data['name'],$labName, $user->id);
+        $user->username = User::getUniqueUsername($data['name'],$labName);
         $user->update();
         DB::table('permissions')->insert([
             [

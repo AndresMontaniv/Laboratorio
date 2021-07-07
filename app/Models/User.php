@@ -55,10 +55,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Binnacle');
     }
 
-    public static function getUniqueUsername($name,$labName,$id){    
+    public static function getUniqueUsername($name,$labName){    
         $labName = strtoupper($labName);                   
         $palabraLimpia = str_replace(' ', '', $labName);  
-        $final= $palabraLimpia."-".str_replace(' ', '', $name).$id; 
+        $final= $palabraLimpia."-".str_replace(' ', '', $name); 
         return $final;
     }
 

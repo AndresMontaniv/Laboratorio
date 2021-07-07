@@ -77,7 +77,7 @@ class LaboratoryController extends Controller
             'laboratory_id' => $lab->id,
             'password' => Hash::make(request('password')),
         ]);
-        $user->username = User::getUniqueUsername(request('name'),request('nameL'), $user->id);
+        $user->username = User::getUniqueUsername(request('name'),request('nameL'));
         $user->update();
         DB::table('permissions')->insert([
             [

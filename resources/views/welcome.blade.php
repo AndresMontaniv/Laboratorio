@@ -6,12 +6,13 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>home</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src={{asset("https://use.fontawesome.com/releases/v5.15.3/js/all.js")}} crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <link rel="shortcut icon" type="image/png" href=" {{asset('./Icons/hospital.png')}}">
+
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href={{asset("css/styles.css")}} rel="stylesheet" />
     </head>
@@ -29,8 +30,13 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
+                        @guest
                         <li class="nav-item px-lg-4"><a href="{{ route('patient.login') }}"><button type="button" class="btn btn-info">Login <i class="fas fa-heartbeat"></i> </button></a> </li>
+                        @endguest
+                        @auth
                         
+                        <li class="nav-item px-lg-4"><a href="{{ route('patients.index', Auth::user()->id) }}"><button type="button" class="btn btn-info">Perfil <i class="fas fa-heartbeat"></i> </button></a> </li>
+                        @endauth
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ route('register') }}">Registro</a></li>
                         {{-- <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li> --}}
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ route('plan.index') }}">Planes</a></li>

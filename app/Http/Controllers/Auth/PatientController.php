@@ -72,7 +72,7 @@ class PatientController extends Controller
             'ci' => request('ci')
         ]);
         $labotarorio = Laboratory::findOrFail(request('labId'));
-        $user->username = User::getUniqueUsername($user->name,$labotarorio->name, $user->id);
+        $user->username = User::getUniqueUsername($user->name,$labotarorio->name);
         $user->update();
         // Binnacle::create([
         //     'entity' => Request('user'),
