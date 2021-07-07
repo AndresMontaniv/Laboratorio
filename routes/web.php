@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PeriodController;
+use App\Http\Controllers\Auth\PatientController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SalasController;
+use App\Models\Laboratory;
 use App\Models\Reservation;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +28,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::view('login/patient', 'patients.login')->name('patient.login');
+Route::post('patient/login',[PatientController::class, 'login'])->name('patients.login');
+Route::post('patient/create',[PatientController::class, 'create'])->name('patients.create');
+Route::get('patient/index/{id}',[PatientController::class, 'index'])->name('patients.index');
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('room', RoomController::class)->names('rooms');
@@ -37,3 +47,6 @@ Route::get('registrar_reserva/{period}/{date}', [ReservationController::class, '
 Route::post('store_reservation', [ReservationController::class, 'store'])->name('store_reservation');
 Route::delete('destroy_reservation/{id}', [ReservationController::class,'destroy'])->name('destroy_reservations');
 Route::get('update_status/{id}', [ReservationController::class,'update'])->name('update_status');
+Route::get('plans',[PlanController::class, 'index'])->name('plan.index');
+Route::get('Laboratory/create/{plan_id}',[LaboratoryController::class, 'create'])->name('laboratory.create');
+Route::post('Laboratory/store',[LaboratoryController::class, 'store'])->name('laboratory.store');

@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Lab extends Model
 {
     use HasFactory;
-    
-    public function permissions(){
-        return $this->hasMany('App\Models\Permission');
-    }
+    protected $table="labs";
+    protected $guarded=['id','created_at','updated_at'];
 }

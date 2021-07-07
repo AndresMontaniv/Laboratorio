@@ -38,9 +38,14 @@ class AuthServiceProvider extends ServiceProvider
             return ( sizeof($permissions) != 0);
         });
 
-        Gate::define('patient', function($user){   
-            
+        Gate::define('patient', function($user){      
             $permissions = DB::table('permissions')->where('user_id',$user->id)->where('role_id',3)->where('status',1)->get();
+            // si es que la longitud de la consulta permission 0 != 0 -> false 1 != 0  ->true
+            return ( sizeof($permissions) != 0);
+        });
+
+        Gate::define('superAdmin', function($user){      
+            $permissions = DB::table('permissions')->where('user_id',$user->id)->where('role_id',4)->where('status',1)->get();
             // si es que la longitud de la consulta permission 0 != 0 -> false 1 != 0  ->true
             return ( sizeof($permissions) != 0);
         });

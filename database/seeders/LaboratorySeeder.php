@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PermissionSeeder extends Seeder
+class LaboratorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,10 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert([
+        DB::table('laboratories')->insert([
             [
-                'user_id' => 1,
-                'role_id' => 1
+                'name' => 'Telchi',
+                'status' => 1
             ]
         ]);
     }
