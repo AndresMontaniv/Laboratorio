@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Binnacle;
 use Illuminate\Support\Facades\DB;
 use App\Models\Period;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PeriodController extends Controller
 {
@@ -39,11 +42,12 @@ class PeriodController extends Controller
         $inicio=request('inicio');
         $fin=request('fin');
 
-        $periodo=Period::create([
+        $periodo = Period::create([
             'inicio'=> request('inicio'),
             'fin'=> request('fin'), 
             
         ]);
+        Binnacle::setInsert($periodo->inicio." - ".$periodo->fin,"periodos", Auth::user());
         return redirect()->route('periods.index');
     }
 

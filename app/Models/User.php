@@ -48,7 +48,11 @@ class User extends Authenticatable
     ];
 
     public function permissions(){
-        return $this->BelongsTo('App\Models\Permission');
+        return $this->hasMany('App\Models\Permission');
+    }
+
+    public function binnacles(){
+        return $this->hasMany('App\Models\Binnacle');
     }
 
     public static function getUniqueUsername($name,$labName,$id){    

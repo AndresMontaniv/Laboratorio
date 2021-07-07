@@ -18,8 +18,8 @@
     <body>
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
-                <span class="site-heading-upper text-primary mb-3">SOFTWARE BUSSINES FOR...</span>
-                <span class="site-heading-lower">ANALYSIS CLINIC</span>
+                <span class="site-heading-upper text-primary mb-3">Sistema de informacion para</span>
+                <span class="site-heading-lower">LABORATORIO DE ANALISIS</span>
             </h1>
         </header>
         <!-- Navigation-->
@@ -29,11 +29,11 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a href="{{route('login')}}"><button type="button" class="btn btn-info">Login <i class="fas fa-heartbeat"></i> </button></a> </li>
+                        <li class="nav-item px-lg-4"><a href="{{ route('patient.login') }}"><button type="button" class="btn btn-info">Login <i class="fas fa-heartbeat"></i> </button></a> </li>
                         
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">Registro</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="store.html">Store</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ route('register') }}">Registro</a></li>
+                        {{-- <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li> --}}
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ route('plan.index') }}">Planes</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +41,7 @@
         <section class="page-section clearfix">
             <div class="container">
                 <div class="intro">
-                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src={{asset("assets/img/intro.jpg")}} alt="..." />
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src={{asset("assets/img/intro1.jpg")}} alt="..." />
                     <div class="intro-text left-0 text-center bg-faded p-5 rounded">
                         <h2 class="section-heading mb-4">
                             <span class="section-heading-upper">ABOUT US...</span>

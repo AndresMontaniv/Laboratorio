@@ -10,6 +10,6 @@ class Role extends Model
     use HasFactory;
     
     public function permissions(){
-        return $this->BelongsTo('App\Models\Permission');
+        return $this->hasMany('App\Models\Permission');
     }
 }

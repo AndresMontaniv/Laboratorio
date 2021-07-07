@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Binnacle;
 use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
@@ -45,6 +47,7 @@ class RoomController extends Controller
             'estado'=> request('estado'), 
             
         ]);
+        Binnacle::setInsert($sala->nombre,"salas", Auth::user());
         return redirect()->route('rooms.index');
     }
 
@@ -89,6 +92,7 @@ class RoomController extends Controller
             'estado'=>$dato['estado'],
            
             ]);
+        Binnacle::setUpdate($dato['nombre'],"salas", Auth::user());
             return redirect()->route('rooms.index');
     }
 
@@ -100,7 +104,9 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
+        $sala = Room::findOrFail($id);
         Room::destroy($id);
+        Binnacle::setDelete($sala->nombre,"salas", Auth::user());
         return redirect()->route('rooms.index');
     }
 }

@@ -14,9 +14,10 @@ use App\Models\Permission;
 use Carbon\Carbon;
 class PatientController extends Controller
 {
+
     public function login()
     {
-        
+        // dd(request()->ip());
         $user = User::where('username', request('username'))->first();
         
         $credentials =   Request()->validate([
@@ -26,12 +27,7 @@ class PatientController extends Controller
         $remember = request()->filled('remember');
          if(Auth::attempt($credentials, $remember)){
             request()->session()->regenerate();
-            // Binnacle::create([
-            //     'entity' => Request('user'),
-            //     'action' => "Se loggeo en",
-            //     'table' => "El sistema",
-            //     'user_id'=> Auth::user()->id
-            // ]); 
+            Binnacle::setLogin($user->username,"usuarios",$user);
             return redirect()->route('patients.index', $user->id);
             // view('patients.index',compact('user'));
          }
@@ -84,10 +80,11 @@ class PatientController extends Controller
         //     'table' => "Usuarios",
         //     'user_id'=> Auth::user()->id
         // ]);
-        Permission::created([
+        Permission::create([
             'role_id' => 3,
             'user_id' => $user->id
         ]);
+        Binnacle::setInsert($user->username,"usuarios", $user);
         return redirect()->route('patient.login');
     }
 
