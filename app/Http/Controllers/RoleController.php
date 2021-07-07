@@ -14,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+       $roles=Role::whereNoint('id',4);
+       return view('roles.index',compact('roles'));
     }
 
     /**

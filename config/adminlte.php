@@ -247,12 +247,12 @@ return [
 
         [
             'text' => 'Roles',
-            'url'  => 'admin/settings',
+            'route'  => 'roles.index',
             'icon' => 'fas fa-users-cog',
         ],
         [
             'text' => 'Usuario',
-            'url'  => 'admin/settings',
+            'route'  => 'users.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

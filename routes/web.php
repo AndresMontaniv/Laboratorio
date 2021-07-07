@@ -6,9 +6,8 @@ use App\Http\Controllers\Auth\PatientController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\PlanController;
-use App\Http\Controllers\SalasController;
-use App\Models\Laboratory;
-use App\Models\Reservation;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -33,12 +32,13 @@ Route::post('patient/login',[PatientController::class, 'login'])->name('patients
 Route::post('patient/create',[PatientController::class, 'create'])->name('patients.create');
 Route::get('patient/index/{id}',[PatientController::class, 'index'])->name('patients.index');
 
-
+Route::resource('role', RoleController::class)->names('roles');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('room', RoomController::class)->names('rooms');
 //Route::resource('reservation', ReservationController::class)->names('reservations');
 Route::resource('period', PeriodController::class)->names('periods');
+Route::resource('user',UserController::class)->names('users');
 
 Route::get('reservations_create', [ReservationController::class, 'create'] )->name('reservations_create');
 Route::get('reservacion', [ReservationController::class, 'index'] )->name('reservations');
