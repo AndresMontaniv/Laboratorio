@@ -14,7 +14,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-       $roles=Role::whereNoint('id',4);
+     
+         $roles=Role::all();
+
        return view('roles.index',compact('roles'));
     }
 
@@ -25,7 +27,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -36,51 +38,44 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $dato = request()->validate([
+            'name' => 'required',
+       
+        ]);
+        $rol = request()->except('_token');
+        Role::insert($rol);
+        return redirect()->route('roles.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function show(Role $role)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Role $role)
     {
-        //
+        return view('roles.edit',compact('role'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Role $role)
     {
-        //
+        $dato = request()->validate([
+            'name' => 'required',
+       
+        ]);
+        DB::table('roles')->where('id',$role->id)->update( [
+                'name'=>$dato['name']
+            
+
+         ] );
+         return redirect()->route('roles.index');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return redirect()->route('roles.index');
+
     }
 }

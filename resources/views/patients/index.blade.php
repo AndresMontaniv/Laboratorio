@@ -1,12 +1,15 @@
 @extends('layouts.app')
 @section('content')
 <br>
-<br>
 <div class="container">
-        <h1>{{"hola ".$user->name}}</h1>
-        <br>
-        <h1>Aqui entrara el perfil del paciente</h1>
-    <br>
-    <br>
-</div>
+    <div class="card-body">     
+            <ul class="list-group list-group-flush "> 
+                <li class="list-group-item" style="text-align: center">{{"Nombre: ".Auth::user()->name}}</li>
+                <li class="list-group-item" style="text-align: center">{{"Usuario: ".Auth::user()->username}}</li>
+                <li class="list-group-item" style="text-align: center">{{"Telefono: ".Auth::user()->phone}}</li>
+                <li class="list-group-item" style="text-align: center">{{"Email: ".Auth::user()->email}}</li>
+            </ul>
+    </div>
+</div>                
+<br>
 @endsection

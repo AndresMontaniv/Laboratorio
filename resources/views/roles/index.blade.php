@@ -9,10 +9,8 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        @can('Crear roles')
-        <a href="" class="btn btn-primary btb-sm">Crear Rol</a>
-    
-        @endcan
+        <a href="{{route('roles.create')}}" class="btn btn-primary btb-sm">Crear Rol</a>
+
     </div>
 </div>
 <div class="card">
@@ -28,10 +26,13 @@
 
             <tbody>
                 @foreach ($roles as $rol)
+                 @if ($rol->id!=4)
+                     
+               
                     <tr>
                         <td>{{$rol->id}}</td>
                         <td>{{$rol->name}}</td>                            
-                      {{--  <td >
+                        <td >
                             <form action="{{route('roles.destroy', $rol->id)}}" method="post">
                                 @csrf
                                 @method('delete')
@@ -40,9 +41,10 @@
                                 <button class="btn btn-danger btn-sm fas fa-trash-alt  cursor-pointer" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>                                    
 
                             </form>
-                        </td>--}}
+                        </td>-
                         
                     </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
