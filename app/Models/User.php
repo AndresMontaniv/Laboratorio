@@ -55,10 +55,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Binnacle');
     }
 
-    public static function getUniqueUsername($name,$labName,$id){    
+    public static function getUniqueUsername($name,$labName){    
         $labName = strtoupper($labName);                   
         $palabraLimpia = str_replace(' ', '', $labName);  
-        $final= $palabraLimpia."-".str_replace(' ', '', $name).$id; 
+        $final= $palabraLimpia."-".str_replace(' ', '', $name); 
         return $final;
     }
 
@@ -75,5 +75,10 @@ class User extends Authenticatable
     public static function isPatient(User $user){    
         $permissions = Permission::where('user_id', $user->id)->where('role_id',3)->where('status',1)->get();
         return ( sizeof($permissions) != 0);
+    }
+    
+    public function reservations()
+    {
+        return  $this->hasMany('App\Models\Reservation');
     }
 }

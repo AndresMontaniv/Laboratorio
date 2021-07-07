@@ -20,10 +20,11 @@ class UserSeeder extends Seeder
                 'name' => 'Monti',
                 'username' => 'TELCHI-Monti1',
                 'phone' => '76041031',
-                'email' => 'monti@gmail.com',
+                'email' => 'jaldin@gmail.com',
                 'password' => Hash::make('123'),
-                'laboratory_id' => 1
+                'laboratory_id'=> 1
             ]
+           
         ]);
     }
 }

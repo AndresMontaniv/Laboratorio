@@ -15,9 +15,13 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->datetime('inicio');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('date');
+            $table->text('description')->nullable();
+            $table->integer('active')->default(1); //1 significa en proceso 2 finalizado
+           // $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('period_id')->constrained('periods');
+            $table->foreignId('room_id')->constrained('rooms');
+
             $table->timestamps();
         });
     }

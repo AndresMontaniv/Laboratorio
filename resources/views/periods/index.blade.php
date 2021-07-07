@@ -25,8 +25,8 @@
 
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">Fecha Inicio</th>
-            <th scope="col">Fecha Fin</th>        
+            <th scope="col"> Inicio</th>
+            <th scope="col"> Fin</th>        
             <th scope="col"> Acciones</th>
           </tr>
         </thead>
@@ -35,21 +35,13 @@
 
             <tr>
                 <td>{{$periodos->id}}</td>
-                <td>{{$periodos->inicio}}</td>
-                <td>{{$periodos->fin}}</td>
-                
-               
-               
-             
-
-          
+                <td>{{$periodos->inicio->toTimeString()}}</td>
+                <td>{{$periodos->fin->toTimeString()}}</td>
+    
               <td>
                 <form action="{{route('periods.destroy',$periodos->id)}}" method="post">
                   @csrf
                   @method('delete')
-                
-          
-                 {{-- <a class="btn btn-primary btn-sm fas fa-eye cursor-pointer" href="{{route('periodos.show',$periodos->id)}}"> </a>--}}
                   
                     
                   <a class="btn btn-success btn-sm fas fa-edit  cursor-pointer" href="{{route('periods.edit',$periodos->id)}}"></a>
