@@ -48,7 +48,11 @@ class User extends Authenticatable
     ];
 
     public function permissions(){
-        return $this->BelongsTo('App\Models\Permission');
+        return $this->hasMany('App\Models\Permission');
+    }
+
+    public function binnacles(){
+        return $this->hasMany('App\Models\Binnacle');
     }
 
     public static function getUniqueUsername($name,$labName,$id){    
@@ -56,5 +60,20 @@ class User extends Authenticatable
         $palabraLimpia = str_replace(' ', '', $labName);  
         $final= $palabraLimpia."-".str_replace(' ', '', $name).$id; 
         return $final;
+    }
+
+    public static function isAdmin(User $user){    
+        $permissions = Permission::where('user_id', $user->id)->where('role_id',1)->where('status',1)->get();
+        return ( sizeof($permissions) != 0);
+    }
+
+    public static function isNurse(User $user){    
+        $permissions = Permission::where('user_id', $user->id)->where('role_id',2)->where('status',1)->get();
+        return ( sizeof($permissions) != 0);
+    }
+
+    public static function isPatient(User $user){    
+        $permissions = Permission::where('user_id', $user->id)->where('role_id',3)->where('status',1)->get();
+        return ( sizeof($permissions) != 0);
     }
 }

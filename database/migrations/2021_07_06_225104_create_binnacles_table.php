@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLaboratoryPlansTable extends Migration
+class CreateBinnaclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateLaboratoryPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('laboratory_plans', function (Blueprint $table) {
+        Schema::create('binnacles', function (Blueprint $table) {
             $table->id();
-            $table->date('expirationDate')->nullable();
-            $table->Integer('status')->default('0');
-            $table->date('initialDate');
-            $table->foreignId('plan_id')->constrained('plans');
+            $table->string('action');
+            $table->string('entity');
+            $table->string('table');
+            $table->string('ip')->nullable();
             $table->foreignId('laboratory_id')->constrained('laboratories');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateLaboratoryPlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laboratory_plans');
+        Schema::dropIfExists('binnacles');
     }
 }

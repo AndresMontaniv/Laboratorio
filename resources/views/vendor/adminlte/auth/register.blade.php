@@ -14,18 +14,18 @@
 @section('auth_header', "Registrar nuevo Usuario")
 
 @section('auth_body')
-    <form action="{{ $register_url }}" method="post">
+    <form action="{{ route('patients.create') }}" method="post">
         {{ csrf_field() }}
         {{-- Choose Lab --}}
         <?php
-        $labs=DB::table('labs')->where('estado',true)->get();
+        $labs=DB::table('laboratories')->where('status',true)->get();
         ?>
         <div class="input-group mb-3">
             <select name="labId" id="select-lab" class="form-control" onchange="habilitar()" >
-                <option value="nulo">Seleccione un Laboratorio</option>
+                <option value="">--seleccione su laboratorio--</option>
                     @foreach ($labs as $lab)
                         <option value="{{$lab->id}}">
-                            {{$lab->nombre}}
+                            {{$lab->name}}
                         </option>
                     @endforeach
             </select>
