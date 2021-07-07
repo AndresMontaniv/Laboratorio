@@ -37,12 +37,12 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $nombre=request('nombre');
-        $estado=request('estado');
+        $name=request('name');
+        $status=request('status');
 
         $sala=Room::create([
-            'nombre'=> request('nombre'),
-            'estado'=> request('estado'), 
+            'name'=> request('name'),
+            'status'=> request('status'), 
             
         ]);
         return redirect()->route('rooms.index');
@@ -81,12 +81,12 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $dato=request()->validate([
-            'nombre'=>['required'],
-            'estado'=>['required'],
+            'name'=>['required'],
+            'status'=>['required'],
             ]);
         DB::table('rooms')->where('id',$id)->update([
-            'nombre'=>$dato['nombre'],
-            'estado'=>$dato['estado'],
+            'name'=>$dato['name'],
+            'status'=>$dato['status'],
            
             ]);
             return redirect()->route('rooms.index');

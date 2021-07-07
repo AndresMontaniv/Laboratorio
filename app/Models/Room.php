@@ -9,4 +9,10 @@ class Room extends Model
 {
     use HasFactory;
     public $guarded =['id','created_at','updated_at'];
+
+   public function reservations(){
+
+     //relcion reserva y sala
+     return  $this->hasMany('App\Models\Reservation');
+   }
 }

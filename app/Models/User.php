@@ -44,4 +44,9 @@ class User extends Authenticatable
     public function permissions(){
         return $this->BelongsTo('App\Models\Permission');
     }
+    
+    public function reservations()
+    {
+        return  $this->hasMany('App\Models\Reservation');
+    }
 }

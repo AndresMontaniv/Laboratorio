@@ -13,14 +13,18 @@
         <div class="card">
             <div class="card-header">
                 <div class="p-3">
-                  <h5>Buscar Reservas por fechas</h5>
-                  <form method="get" action="" novalidate>
-                    <input type="date" name="fechaElegir">
-                      <button class="btn btn-primary btn-sm" type="submit">Ver por fecha</button>
+                  <h5>Fecha a Reservar</h5>
+                  <form method="POST" action="{{route('show_periods')}}" novalidate>
+                    @csrf
+                    <input id="date" type="date"  class=" @error('date') is-invalid @enderror" name="date" >
+                    <button class="btn btn-primary btn-sm" type="submit">  {{ __('Buscar') }}</button>
                    </form>
                 </div>
             </div>
         </div>
+
+
+    
         {{--<form method="post" action="{{route('reservas.store')}}" novalidate >
             @csrf
         
