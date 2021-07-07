@@ -20,6 +20,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'username',
+        'phone',
+        'ci',
+        'birthday',
+        'laboratory_id'
     ];
 
     /**
@@ -45,10 +51,10 @@ class User extends Authenticatable
         return $this->BelongsTo('App\Models\Permission');
     }
 
-    public static function getUniqueUsername($name,$labName){    
+    public static function getUniqueUsername($name,$labName,$id){    
         $labName = strtoupper($labName);                   
         $palabraLimpia = str_replace(' ', '', $labName);  
-        $final=$palabraLimpia."-".$name; 
+        $final= $palabraLimpia."-".str_replace(' ', '', $name).$id; 
         return $final;
     }
 }

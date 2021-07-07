@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laboratory;
+use App\Models\LaboratoryPlan;
 use App\Models\Plan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class LaboratoryController extends Controller
 {
@@ -26,7 +31,6 @@ class LaboratoryController extends Controller
     public function create($plan_id)
     {
         $plan = Plan::findOrFail($plan_id);
-        //dd($plan);
         return view('laboratories.create', compact('plan'));
     }
 
@@ -36,15 +40,54 @@ class LaboratoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function store(Request $request)
     {
-        $credentials =   Request()->validate([
-            'name' => ['required','string']
+        $credentials =   Request()->validate([ //validate all attributes 
+            'nameL' => ['required','string'],
+            'name' => ['required','string'],
+            'phone' => ['string'],
+            'ci' => ['required','string'],
+            'birthday' => ['date'],
+            'password' => ['required','string','min:3', 'confirmed'],
         ]);
-        Laboratory::create([
+
+        $lab = Laboratory::create([ //create a new instance of laboratory
+            'name' => request('nameL')
+        ]);
+
+        $plan = Plan::findOrFail(request('plan_id'));
+        $finaldate = Carbon::now('America/Caracas');
+        $finaldate->addMonths($plan->months); // calculate the expiration date
+        LaboratoryPlan::create([
+            'expirationDate' => $finaldate,
+            'initialDate' => Carbon::now('America/Caracas')->today(),
+            'plan_id' => $plan->id,
+            'laboratory_id' => $lab->id
+        ]);
+        $user = User::create([
             'name' => request('name'),
+            'phone' => request('phone'),
+            'ci' => request('ci'),
+            'birthday' => request('birthday'),
+            'email' => request('email'),
+            'laboratory_id' => $lab->id,
+            'password' => Hash::make(request('password')),
         ]);
-        return redirect()->route('user.create');
+        $user->username = User::getUniqueUsername(request('name'),request('nameL'), $user->id);
+        $user->update();
+        DB::table('permissions')->insert([
+            [
+                'user_id' => $user->id,
+                'role_id' => 3  // add ADMIN role to laboratory's owner
+            ],
+        ]);
+        // despues de crear el usuario administrador y laboratorio no se donde deberia redireccionarlo
+        //quizas a la HOME PAGE debido a que su laboratorio no lo habriamos activado y por lo tanto deberia tener status = 0  lab pendiente
+        dd($user);
+        //return redirect()->route('user.create');
     }
 
     /**

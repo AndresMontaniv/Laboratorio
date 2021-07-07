@@ -34,4 +34,4 @@ Route::resource('period', PeriodController::class)->names('periods');
 
 Route::get('plans',[PlanController::class, 'index'])->name('plan.index');
 Route::get('Laboratory/create/{plan_id}',[LaboratoryController::class, 'create'])->name('laboratory.create');
-Route::get('Laboratory/store',[LaboratoryController::class, 'store'])->name('laboratory.store');
+Route::post('Laboratory/store',[LaboratoryController::class, 'store'])->name('laboratory.store');

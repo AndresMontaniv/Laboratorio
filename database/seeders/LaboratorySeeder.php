@@ -15,7 +15,9 @@ class LaboratorySeeder extends Seeder
     public function run()
     {
         DB::table('laboratories')->insert([
-
+            [
+                'name' => 'Telchi'
+            ]
         ]);
     }
 }
