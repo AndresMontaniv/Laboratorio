@@ -20,6 +20,7 @@ class AuthController extends Controller {
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->laboratory_id = $request->laboratory_id;
         $user->save();
         if ($this->loginAfterSignUp) {
         return $this->login($request);
