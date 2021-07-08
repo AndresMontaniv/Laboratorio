@@ -19,7 +19,7 @@
 
 <div class="card">
   <div class="card-header">
-    <a href="{{route('reservations_create')}}" class="btn btn-danger btn-sm">Registrar Reserva</a>
+    <a href="{{route('reservations_create')}}" class="btn btn-primary ">Registrar Reserva</a>
 </div>
         
   </div>

@@ -7,7 +7,7 @@
     <div class="card-body ">
         <form method="post" action="{{route('store_reservation')}}" novalidate >
             @csrf
-        <h5>Descripcion:</h5>
+            <label for="description">Descripcion</label>
 
         <input type="text"  name="description" class="focus border-primary  form-control " >
 
@@ -15,7 +15,8 @@
          <span class="text-danger">{{$message}}</span>
          @enderror
 
-         <h5>Seleccionar Sala:</h5>
+         <label for="room_id">Seleccionar Sala</label>
+
          <select name="room_id" id="select-room" class="form-control" onchange="habilitar()" >
              <option value="nulo">Salas Disponibles</option>
                  @foreach ($room as $rooms)

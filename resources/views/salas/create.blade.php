@@ -11,7 +11,8 @@
     <div class="card-body">
         <form method="post" action="{{route('rooms.store')}}" novalidate >
             @csrf
-        <h5>Descripcion:</h5>
+     
+        <label for="name">Descripcion</label>
 
         <input type="text"  name="name" class="focus border-primary  form-control " >
 
@@ -21,7 +22,7 @@
           
         
          <div class="form-group">
-            <h5>Estado:</h5>
+            <label for="status">Estado</label>
             <select name="status" id=""  class="focus border-primary  form-control">
                 <option value=1>Activo</option>
                 <option value=2>Inactivo</option>

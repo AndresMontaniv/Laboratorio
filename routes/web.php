@@ -3,6 +3,7 @@
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\Auth\PatientController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\PlanController;
@@ -52,3 +53,5 @@ Route::get('update_status/{id}', [ReservationController::class,'update'])->name(
 Route::get('plans',[PlanController::class, 'index'])->name('plan.index');
 Route::get('Laboratory/create/{plan_id}',[LaboratoryController::class, 'create'])->name('laboratory.create');
 Route::post('Laboratory/store',[LaboratoryController::class, 'store'])->name('laboratory.store');
+Route::get('exceluser',[ExcelController::class, 'exportExcel'])->name('exceluser');
+Route::get('pdfuser',[ExcelController::class, 'PdfUser'])->name('pdfuser');

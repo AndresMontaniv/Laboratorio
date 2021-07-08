@@ -11,8 +11,22 @@
     <div class="card">
      
         <div class="card-header">
-            <a href="" class="btn btn-primary btb-sm mr-3">Crear Usuario</a>
-            <a href="{{url('/userbuscador/create')}}" class="btn btn-success btb-sm mx-3">Query Builder</a>
+            
+            <div class="row">
+                <div class="col">
+                    <a href="{{route('users.create')}}" class="btn btn-primary btb-sm">Crear Usuario</a>
+  
+                </div>
+                <div class="col">
+                    <a href="{{route('exceluser')}}" class="btn btn-danger btb-sm ">Exportar Excel</a>
+                </div>
+                <div class="col">
+                    <a href="{{route('pdfuser')}}" class="btn btn-warning btb-sm ">Exportar PDF</a>
+                </div>
+                <div class="col"> 
+                    <a href="{{url('/userbuscador/create')}}" class="btn btn-success btb-sm mx-3">Query Builder</a>
+                </div> 
+            </div>
         </div>
      
        
@@ -25,6 +39,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre de usuario</th>
+                        <th scope="col">Nombre </th>
                         <th scope="col">Email</th>
 
                         <th scope="col">Acciones</th>
@@ -35,22 +50,23 @@
                     @foreach ($users as $user)
                         <tr>
                             <td>{{$user->id}}</td>
+                            <td>{{$user->username}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
 
-                            {{-- <td>
+                            <td>
                                <form action="{{route('users.destroy', $user->id)}}" method="post">
                                     @csrf
                                     @method('delete')
                                     <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm fas fa-edit  cursor-pointer"><a>
-
+       
                                     <button class="btn btn-danger btn-sm fas fa-trash-alt" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button> 
-
+                                    
                                     <a href="{{route('users.show', $user->id)}}" class="btn btn-success btn-sm fas fa-eye  cursor-pointer"><a> 
 
                                     
                                 </form>
-                            </td>--}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -41,7 +41,7 @@
                                 <button class="btn btn-danger btn-sm fas fa-trash-alt  cursor-pointer" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>                                    
 
                             </form>
-                        </td>-
+                        </td>
                         
                     </tr>
                     @endif
