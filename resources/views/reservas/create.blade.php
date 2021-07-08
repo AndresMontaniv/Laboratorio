@@ -13,7 +13,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="p-3">
-                  <h5>Fecha a Reservar</h5>
+                  <label for="">Fecha a Reservar</label>
+
                   <form method="POST" action="{{route('show_periods')}}" novalidate>
                     @csrf
                     <input id="date" type="date"  class=" @error('date') is-invalid @enderror" name="date" >
