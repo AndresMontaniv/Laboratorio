@@ -4,30 +4,26 @@
 
 
 @section('content_header')
-    <h1>Usuarios</h1>
+    <h1>Resultados de la Busqueda</h1>
 @stop
 
 @section('content')
-    <div class="card">
-     
-        <div class="card-header">
-            <a href="" class="btn btn-primary btb-sm mr-3">Crear Usuario</a>
-            <a href="{{url('/userbuscador/create')}}" class="btn btn-success btb-sm mx-3">Query Builder</a>
-        </div>
-     
-       
-    </div>
 
     <div class="card">
         <div class="card-body">
-            <table class="table table-striped" id="usuarios" style="width:100%">
+            <table class="table table-striped" id="resultados" style="width:100%">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
                         <th scope="col">Nombre de usuario</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">CI</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Laboratorio</th>
 
-                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
 
@@ -36,7 +32,13 @@
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
+                            <td>{{$user->lastname}}</td>
+                            <td>{{$user->username}}</td>
                             <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td>{{$user->ci}}</td>
+                            <td>{{$user->birthday}}</td>
+                            <td>{{DB::table('laboratories')->where('id',$user->laboratory_id)->value('name')}}</td>
 
                             {{-- <td>
                                <form action="{{route('users.destroy', $user->id)}}" method="post">
@@ -55,6 +57,8 @@
                     @endforeach
                 </tbody>
             </table>
+            <br><br>
+            <a href="{{url('/user/')}}"class="btn btn-primary text-white btn-lg btn-block">VOLVER A USERS</a>
         </div>
     </div>
 @stop
@@ -70,7 +74,7 @@
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-        $('#usuarios').DataTable();
+        $('#resultados').DataTable();
         } );
     </script> 
 @stop
