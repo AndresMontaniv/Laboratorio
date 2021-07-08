@@ -13,6 +13,7 @@
                   <h4 class="card-title">{{$plan->name}}</h4>
                   <p class="card-text">{{$plan->description}}</p>
                   <br>
+                  {{-- <p class="card-text"><b>{{ App\Models\Plan::getPrice($plan)}}</b></p> --}}
                   <p class="card-text"><b>{{$plan->price}}</b></p>
                   <a href="{{route('laboratory.create', $plan->id)}}" class="btn btn-success">Comprar</a>
                 </div>

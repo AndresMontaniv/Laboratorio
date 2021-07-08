@@ -11,6 +11,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserBuscadorController;
+use App\Http\Controllers\UserSpecialityController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -59,3 +60,15 @@ Route::get('Laboratory/create/{plan_id}',[LaboratoryController::class, 'create']
 Route::post('Laboratory/store',[LaboratoryController::class, 'store'])->name('laboratory.store');
 Route::get('exceluser',[ExcelController::class, 'exportExcel'])->name('exceluser');
 Route::get('pdfuser',[ExcelController::class, 'PdfUser'])->name('pdfuser');
+
+Route::get('reservation/periods',[ReservationController::class, 'menu'])->name('reservation.menu');
+Route::post('reservation/searched/{id}',[ReservationController::class, 'searched'])->name('reservation.searched');
+Route::get('reservation/myReservations/{id}',[ReservationController::class, 'myReservations'])->name('reservation.myReservations');
+Route::get('reservation/desactivate/{id}',[ReservationController::class, 'desactivate'])->name('reservation.desactivate');
+Route::get('reservation/select/{id}/{date}',[ReservationController::class, 'select'])->name('reservation.select');
+
+
+Route::get('reservation/index/{id}',[UserSpecialityController::class, 'index'])->name('userSpeciality.index');
+Route::get('reservation/index/{id}/{speciality}',[UserSpecialityController::class, 'setSpeciality'])->name('userSpeciality.setSpeciality');
+Route::get('reservation/activateSpeciality/{id}',[UserSpecialityController::class, 'activateSpeciality'])->name('userSpeciality.activateSpeciality');
+Route::get('reservation/desactivateSpeciality/{id}',[UserSpecialityController::class, 'desactivateSpeciality'])->name('userSpeciality.desactivateSpeciality');

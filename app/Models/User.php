@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Permission');
     }
 
+    public function user_specialities(){
+        return $this->hasMany('App\Models\Speciality');
+    }
+
     public function binnacles(){
         return $this->hasMany('App\Models\Binnacle');
     }

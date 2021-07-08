@@ -70,7 +70,7 @@
                             <a class="nav-link" href="#">{{ __('mis analisis') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('reservar') }}</a>
+                            <a class="nav-link" href="{{route('reservation.menu')}}">{{ __('reservar') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{ __('campaña') }}</a>
