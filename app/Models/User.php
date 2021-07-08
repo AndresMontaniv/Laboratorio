@@ -67,6 +67,114 @@ class User extends Authenticatable
         return $final;
     }
 
+    public static function getIdArray($id){
+        $array=array();
+        $users=User::all();
+        if ($id!=null){
+            array_push($array,$id);
+        }else{
+            foreach($users as $user){
+                if($user->id!=null){
+                    array_push($array,$user->id);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getUsernameArray($username){
+        $array=array();
+        $users=User::all();
+        if ($username!=null){
+            array_push($array,$username);
+        }else{
+            foreach($users as $user){
+                if($user->username!=null){
+                    array_push($array,$user->username);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getNameArray($name){
+        $array=array();
+        $users=User::all();
+        if ($name!=null){
+            array_push($array,$name);
+        }else{
+            foreach($users as $user){
+                if($user->name!=null){
+                    array_push($array,$user->name);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getLastnameArray($lastname){
+        $array=array();
+        $users=User::all();
+        if ($lastname!=null){
+            array_push($array,$lastname);
+        }else{
+            foreach($users as $user){
+                if($user->lastname!=null){
+                    array_push($array,$user->lastname);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getPhoneArray($phone){
+        $array=array();
+        $users=User::all();
+        if ($phone!=null){
+            array_push($array,$phone);
+        }else{
+            foreach($users as $user){
+                if($user->phone!=null){
+                    array_push($array,$user->phone);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getCiArray($ci){
+        $array=array();
+        $users=User::all();
+        if ($ci!=null){
+            array_push($array,$ci);
+        }else{
+            foreach($users as $user){
+                if($user->ci!=null){
+                    array_push($array,$user->ci);
+                }
+            }
+        }
+        return $array;
+    }
+
+    
+
+    public static function getEmailArray($email){
+        $array=array();
+        $users=User::all();
+        if ($email!=null){
+            array_push($array,$email);
+        }else{
+            foreach($users as $user){
+                if($user->email!=null){
+                    array_push($array,$user->email);
+                }
+            }
+        }
+        return $array;
+    }
+    
+
     public static function isAdmin(User $user){    
         $permissions = Permission::where('user_id', $user->id)->where('role_id',1)->where('status',1)->get();
         return ( sizeof($permissions) != 0);
@@ -80,5 +188,10 @@ class User extends Authenticatable
     public static function isPatient(User $user){    
         $permissions = Permission::where('user_id', $user->id)->where('role_id',3)->where('status',1)->get();
         return ( sizeof($permissions) != 0);
+    }
+    
+    public function reservations()
+    {
+        return  $this->hasMany('App\Models\Reservation');
     }
 }

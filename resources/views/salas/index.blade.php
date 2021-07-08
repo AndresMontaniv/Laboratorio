@@ -26,7 +26,7 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Descripcion</th>     
-            <th></th> 
+           <th></th>
             <th scope="col">Estado</th>
             <th scope="col"> Acciones</th>
           </tr>
@@ -36,9 +36,9 @@
 
             <tr>
                 <td>{{$salas->id}}</td>
-                <td>{{$salas->nombre}}</td>
+                <td>{{$salas->name}}</td>
                 <td>
-                    @if ($salas->estado==='A')
+                    @if ($salas->status==1)
                      <th><button class="btn btn-warning btn-sm" >Activo</button></th>
                          @else
                          <th><button class="btn btn-success btn-sm" >Inactivo</button></th> 
@@ -46,20 +46,13 @@
                     
                  </td>
                 
-               
-               
-             
-              
-             
-          
-              <td>
+           
+             <td>          
                 <form action="{{route('rooms.destroy',$salas->id)}}" method="post">
                   @csrf
                   @method('delete')
                 
-          
-                 {{-- <a class="btn btn-primary btn-sm fas fa-eye cursor-pointer" href="{{route('salas.show',$salas->id)}}"> </a>--}}
-                  
+                          
                     
                   <a class="btn btn-success btn-sm fas fa-edit  cursor-pointer" href="{{route('rooms.edit',$salas->id)}}"></a>
                 
@@ -68,6 +61,7 @@
                  
                 </form>
               </td>
+
             </tr>
 
            @endforeach

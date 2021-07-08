@@ -11,24 +11,23 @@
     <div class="card-body">
         <form method="post" action="{{route('rooms.store')}}" novalidate >
             @csrf
-        <h5>Descripcion:</h5>
+     
+        <label for="name">Descripcion</label>
 
-        <input type="text"  name="nombre" class="focus border-primary  form-control " >
+        <input type="text"  name="name" class="focus border-primary  form-control " >
 
-         @error('nombre')
+         @error('name')
          <span class="text-danger">{{$message}}</span>
          @enderror
           
         
          <div class="form-group">
-            <h5>Estado:</h5>
-            <select name="estado" id=""  class="focus border-primary  form-control">
-                <option value="A">Activo</option>
-                <option value="I">Inactivo</option>
+            <label for="status">Estado</label>
+            <select name="status" id=""  class="focus border-primary  form-control">
+                <option value=1>Activo</option>
+                <option value=2>Inactivo</option>
                 </select>
          </div>
-
-
 
         <br>
         <button  class="btn btn-danger btn-sm" type="submit">Registrar</button>

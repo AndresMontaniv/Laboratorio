@@ -11,7 +11,8 @@
     <div class="card-body">
         <form method="post" action="{{route('periods.store')}}" novalidate >
             @csrf
-        <h5>Fecha Inicio:</h5>
+       
+        <label for="inicio">Fecha Inicio</label>
 
         <input type="time"  name="inicio" class="focus border-primary  form-control " >
 
@@ -19,7 +20,7 @@
          <span class="text-danger">{{$message}}</span>
          @enderror
           
-         <h5>Fecha Fin:</h5>
+         <label for="fin">Fecha Fin</label>
 
         <input type="time"  name="fin" class="focus border-primary  form-control " >
 

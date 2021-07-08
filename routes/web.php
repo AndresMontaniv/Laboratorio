@@ -4,12 +4,14 @@ use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\Auth\PatientController;
 use App\Http\Controllers\BinnacleController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\PlanController;
-use App\Http\Controllers\SalasController;
-use App\Models\Laboratory;
-use App\Models\Reservation;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserBuscadorController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*P
@@ -36,13 +38,24 @@ Route::get('patient/credentials/{id}',[PatientController::class, 'showCredential
 
 Route::get('binnacle/index',[BinnacleController::class, 'index'])->name('binnacle.index');
 
-
+Route::resource('role', RoleController::class)->names('roles');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('room', RoomController::class)->names('rooms');
-Route::resource('reservation', ReservationController::class)->names('reservations');
+//Route::resource('reservation', ReservationController::class)->names('reservations');
 Route::resource('period', PeriodController::class)->names('periods');
+Route::resource('user',UserController::class)->names('users');
+Route::resource('userbuscador',UserBuscadorController::class)->names('userbuscador');
 
+Route::get('reservations_create', [ReservationController::class, 'create'] )->name('reservations_create');
+Route::get('reservacion', [ReservationController::class, 'index'] )->name('reservations');
+Route::post('reservacion_mostrar', [ReservationController::class, 'show'])->name('show_periods');
+Route::get('registrar_reserva/{period}/{date}', [ReservationController::class, 'register'])->name('register_reservation');
+Route::post('store_reservation', [ReservationController::class, 'store'])->name('store_reservation');
+Route::delete('destroy_reservation/{id}', [ReservationController::class,'destroy'])->name('destroy_reservations');
+Route::get('update_status/{id}', [ReservationController::class,'update'])->name('update_status');
 Route::get('plans',[PlanController::class, 'index'])->name('plan.index');
 Route::get('Laboratory/create/{plan_id}',[LaboratoryController::class, 'create'])->name('laboratory.create');
 Route::post('Laboratory/store',[LaboratoryController::class, 'store'])->name('laboratory.store');
+Route::get('exceluser',[ExcelController::class, 'exportExcel'])->name('exceluser');
+Route::get('pdfuser',[ExcelController::class, 'PdfUser'])->name('pdfuser');

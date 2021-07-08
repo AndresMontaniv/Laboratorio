@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
-use App\Models\Salas;
-use Illuminate\Http\Request;
 
-class SalasController extends Controller
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+
+class UserBuscadorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class SalasController extends Controller
      */
     public function index()
     {
-        $sala=Salas::all();
-        return view('salas.index',compact('sala'));
+        //
     }
 
     /**
@@ -25,7 +25,8 @@ class SalasController extends Controller
      */
     public function create()
     {
-        return view('salas.create');
+        $labs=DB::table('laboratories')->get();
+        return view('userBuscador.search',compact('labs'));
     }
 
     /**
@@ -36,15 +37,33 @@ class SalasController extends Controller
      */
     public function store(Request $request)
     {
-        $nombre=request('nombre');
-        $estado=request('estado');
+        $id=User::getIdArray(request('id'));
+        $ci=User::getCiArray(request('ci'));
+        $username=User::getUsernameArray(request('username'));
+        $name=User::getNameArray(request('name'));
+        $lastname=User::getLastnameArray(request('lastname'));
+        $phone=User::getPhoneArray(request('phone'));
+        $email=User::getEmailArray(request('email'));
+        $from=request('from');
+        $to=request('to');
+        $labs=request('labs');
+        // dd($request, $id, $ci, $username, $name, $lastname, $phone, $email, $labs);
 
-        $sala=Salas::create([
-            'nombre'=> request('nombre'),
-            'estado'=> request('estado'), 
-            
-        ]);
-        return redirect()->route('salas.index');
+
+        $users=DB::table('users')
+                ->whereIn('id', $id )
+                // ->whereIn('ci', $ci)
+                ->whereIn('username', $username)
+                ->whereIn('name', $name)
+                // ->whereIn('lastname', $lastname)
+                ->whereIn('phone', $phone)
+                ->whereIn('email', $email)
+                ->whereIn('laboratory_id', $labs)
+                // ->whereBetween('birthday', [$from, $to])
+                ->get();
+        
+        
+        return view('userbuscador.index',compact('users'));
     }
 
     /**
@@ -66,8 +85,7 @@ class SalasController extends Controller
      */
     public function edit($id)
     {
-        $sala=Salas::findOrfail($id);
-        return view('salas.edit',compact('sala'));
+        //
     }
 
     /**
@@ -79,16 +97,7 @@ class SalasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dato=request()->validate([
-            'nombre'=>['required'],
-            'estado'=>['required'],
-            ]);
-        DB::table('salas')->where('id',$id)->update([
-            'nombre'=>$dato['nombre'],
-            'estado'=>$dato['estado'],
-           
-            ]);
-            return redirect()->route('salas.index');
+        //
     }
 
     /**
@@ -99,7 +108,6 @@ class SalasController extends Controller
      */
     public function destroy($id)
     {
-        Salas::destroy($id);
-        return redirect()->route('salas.index');
+        //
     }
 }

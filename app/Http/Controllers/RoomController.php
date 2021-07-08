@@ -39,8 +39,8 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $nombre=request('nombre');
-        $estado=request('estado');
+        $name=request('name');
+        $status=request('status');
 
         $sala=Room::create([
             'name'=> request('nombre'),
@@ -83,8 +83,8 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $dato=request()->validate([
-            'nombre'=>['required'],
-            'estado'=>['required'],
+            'name'=>['required'],
+            'status'=>['required'],
             ]);
         DB::table('rooms')->where('id',$id)->update([
             'name'=>$dato['nombre'],
