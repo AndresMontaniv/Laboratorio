@@ -15,8 +15,10 @@ class CreatePeriodsTable extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
-            $table->time('inicio');
-            $table->time('fin');
+            $table->time('begin');
+            $table->time('end');
+            $table->Integer('status')->default('1');
+            $table->foreignId('laboratory_id')->constrained('laboratories');
             $table->timestamps();
         });
     }

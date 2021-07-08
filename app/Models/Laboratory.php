@@ -16,4 +16,7 @@ class Laboratory extends Model
     public function laboratoyPlan(){
         return $this->hasMany('App\Models\LaboratoryPlan');
     }
+    public function users(){
+        return $this->hasMany('App\Models\User');
+    }
 }

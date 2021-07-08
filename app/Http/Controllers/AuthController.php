@@ -15,7 +15,7 @@ class AuthController extends Controller {
         $lab = Laboratory::findOrFail($request->laboratory_id);
         $user->birthday = $request->birthday;
         $user->phone = $request->phone;
-        $user->username = User::getUniqueUsername($request->name, $lab->name);
+        $user->username = User::getUniqueUsername($request->name, $lab->name, $user->id);
         $user->ci = $request->ci;
         $user->name = $request->name;
         $user->email = $request->email;

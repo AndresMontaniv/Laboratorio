@@ -1,5 +1,7 @@
 <?php
 
+// use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -254,6 +256,13 @@ return [
             'text' => 'Usuario',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Bitacora',
+            'icon' => 'fas fa-fw fa-address-book',
+            'can'  => 'admin',
+            // 'url' => '#'
+            'route' => 'binnacle.index'
         ],
         [
             'text'    => 'ADM Reservas',

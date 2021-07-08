@@ -25,7 +25,8 @@ class User extends Authenticatable
         'phone',
         'ci',
         'birthday',
-        'laboratory_id'
+        'laboratory_id',
+        'photo'
     ];
 
     /**
@@ -55,10 +56,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Binnacle');
     }
 
-    public static function getUniqueUsername($name,$labName){    
+    public function laboratory(){
+        return $this->belongsTo('App\Models\Laboratory');
+    }
+
+    public static function getUniqueUsername($name,$labName, $id){    
         $labName = strtoupper($labName);                   
         $palabraLimpia = str_replace(' ', '', $labName);  
-        $final= $palabraLimpia."-".str_replace(' ', '', $name); 
+        $final= $palabraLimpia."-".str_replace(' ', '', $name).$id; 
         return $final;
     }
 

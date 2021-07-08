@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Binnacle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BinnacleController extends Controller
 {
@@ -14,7 +15,8 @@ class BinnacleController extends Controller
      */
     public function index()
     {
-        //
+        $binnacles = Binnacle::where('laboratory_id', Auth::user()->laboratory_id)->get();
+        return view('binnacles.index', compact('binnacles'));
     }
 
     /**

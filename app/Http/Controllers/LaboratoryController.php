@@ -68,6 +68,10 @@ class LaboratoryController extends Controller
             'plan_id' => $plan->id,
             'laboratory_id' => $lab->id
         ]);
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+        }
+        $request->image->storeAs('images', $filename, 'public');
         $user = User::create([
             'name' => request('name'),
             'phone' => request('phone'),
@@ -76,8 +80,9 @@ class LaboratoryController extends Controller
             'email' => request('email'),
             'laboratory_id' => $lab->id,
             'password' => Hash::make(request('password')),
+            'photo' => $filename
         ]);
-        $user->username = User::getUniqueUsername(request('name'),request('nameL'));
+        $user->username = User::getUniqueUsername(request('name'),request('nameL'),$user->id);
         $user->update();
         DB::table('permissions')->insert([
             [
@@ -88,7 +93,7 @@ class LaboratoryController extends Controller
         // despues de crear el usuario administrador y laboratorio no se donde deberia redireccionarlo
         //quizas a la HOME PAGE debido a que su laboratorio no lo habriamos activado y por lo tanto deberia tener status = 0  lab pendiente
         Binnacle::setInsert($user->username,"usuarios", $user);
-        return redirect()->route('login');
+        return redirect()->route('patients.credentials', $user->id);
         //return redirect()->route('user.create');
     }
 

@@ -25,12 +25,14 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                @auth
                 @php
                     $labName =  DB::table('laboratories')->select('name')->where('id',Auth::user()->laboratory_id)->first();
                     $realName = $labName->name;
                 @endphp
+                @endauth
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{($realName!= null)? "Laboratorio ".$realName: "Laboratorio "}}
+                    {{isset($realName)? "Laboratorio ".$realName: "Laboratorio "}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

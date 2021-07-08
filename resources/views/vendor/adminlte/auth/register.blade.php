@@ -14,7 +14,7 @@
 @section('auth_header', "Registrar nuevo Usuario")
 
 @section('auth_body')
-    <form action="{{ route('patients.create') }}" method="post">
+    <form action="{{ route('patients.create') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         {{-- Choose Lab --}}
         <?php
@@ -36,7 +36,20 @@
             </div>
         </div>
 
-
+        {{-- image field --}}
+        <div class="input-group mb-3">
+            <input id="image" type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" >
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+            @if($errors->has('image'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('image') }}</strong>
+                </div>
+            @endif
+        </div>
 
         {{-- Name field --}}
         <div class="input-group mb-3">

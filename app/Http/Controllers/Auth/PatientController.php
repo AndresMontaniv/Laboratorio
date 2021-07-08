@@ -48,7 +48,7 @@ class PatientController extends Controller
         return redirect('/');
     }
 
-    public function create(){
+    public function create(Request $request){
         //dd(request());
         // $name = User::where('username',request('username'))->get();
         // //dd($name);
@@ -62,6 +62,11 @@ class PatientController extends Controller
             'password' => ['required', 'string', 'confirmed'],
             'labId' => ['required']
         ]);
+        //dd($request->image);
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+        }
+        $request->image->storeAs('images', $filename, 'public');
         $user = User::create([
             'phone' => request('telefono'),
             'name' => request('name'),
@@ -69,23 +74,27 @@ class PatientController extends Controller
             'password' => Hash::make(request('password')),
             'laboratory_id' => request('labId'),
             'birthday' => request('fechaNac'),
-            'ci' => request('ci')
+            'ci' => request('ci'),
+            'photo' => $filename
         ]);
         $labotarorio = Laboratory::findOrFail(request('labId'));
-        $user->username = User::getUniqueUsername($user->name,$labotarorio->name);
+        $user->username = User::getUniqueUsername($user->name,$labotarorio->name,$user->id);
         $user->update();
-        // Binnacle::create([
-        //     'entity' => Request('user'),
-        //     'action' => "inserto",
-        //     'table' => "Usuarios",
-        //     'user_id'=> Auth::user()->id
-        // ]);
         Permission::create([
             'role_id' => 3,
             'user_id' => $user->id
         ]);
         Binnacle::setInsert($user->username,"usuarios", $user);
-        return redirect()->route('patient.login');
+        
+        //should redirect to a view which shows all the inserted data and USERNAME to login
+
+        return redirect()->route('patients.credentials', $user->id);
+    }
+
+    public function showCredentials($id){
+        $user = User::where('id',$id)->first();
+        $user->load('laboratory');
+        return view('patients.credentials', compact('user'));
     }
 
 }

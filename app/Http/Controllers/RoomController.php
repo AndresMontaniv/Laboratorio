@@ -17,7 +17,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $sala=Room::all();
+        $sala=Room::where('laboratory_id', Auth::user()->laboratory_id)->get();
         return view('salas.index',compact('sala'));
     }
 
@@ -43,9 +43,8 @@ class RoomController extends Controller
         $estado=request('estado');
 
         $sala=Room::create([
-            'nombre'=> request('nombre'),
-            'estado'=> request('estado'), 
-            
+            'name'=> request('nombre'),
+            'laboratory_id' => Auth::user()->laboratory_id
         ]);
         Binnacle::setInsert($sala->nombre,"salas", Auth::user());
         return redirect()->route('rooms.index');
@@ -88,9 +87,7 @@ class RoomController extends Controller
             'estado'=>['required'],
             ]);
         DB::table('rooms')->where('id',$id)->update([
-            'nombre'=>$dato['nombre'],
-            'estado'=>$dato['estado'],
-           
+            'name'=>$dato['nombre'],
             ]);
         Binnacle::setUpdate($dato['nombre'],"salas", Auth::user());
             return redirect()->route('rooms.index');

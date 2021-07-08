@@ -3,6 +3,7 @@
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\Auth\PatientController;
+use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\PlanController;
@@ -31,6 +32,9 @@ Route::view('login/patient', 'patients.login')->name('patient.login');
 Route::post('patient/login',[PatientController::class, 'login'])->name('patients.login');
 Route::post('patient/create',[PatientController::class, 'create'])->name('patients.create');
 Route::get('patient/index/{id}',[PatientController::class, 'index'])->name('patients.index');
+Route::get('patient/credentials/{id}',[PatientController::class, 'showCredentials'])->name('patients.credentials');
+
+Route::get('binnacle/index',[BinnacleController::class, 'index'])->name('binnacle.index');
 
 
 
