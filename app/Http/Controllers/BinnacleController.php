@@ -15,7 +15,14 @@ class BinnacleController extends Controller
      */
     public function index()
     {
+        
         $binnacles = Binnacle::where('laboratory_id', Auth::user()->laboratory_id)->get();
+        return view('binnacles.index', compact('binnacles'));
+    }
+
+    public function all()
+    {
+        $binnacles = Binnacle::all();
         return view('binnacles.index', compact('binnacles'));
     }
 

@@ -14,6 +14,15 @@
 @section('auth_header', "Registrar nuevo Usuario")
 
 @section('auth_body')
+    @if ($errors->count() > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('patients.create') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         {{-- Choose Lab --}}

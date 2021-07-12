@@ -21,7 +21,7 @@ class Binnacle extends Model
         return $this->BelongsTo('App\Models\User');
     }
 
-    public static function setInsert($entity, $table,User $user){
+    public static function setInsert($entity, $table,User $user = null){
         Binnacle::create([
             'action' => 'Inserto',
             'entity' => $entity,
@@ -61,7 +61,7 @@ class Binnacle extends Model
             'table' => $table,
             'ip' => Binnacle::getIp(),
             'user_id' => $user->id,
-            'laboratory_id' => $user->laboratory_id   
+            'laboratory_id' => $user->laboratory_id
         ]);
     }
 

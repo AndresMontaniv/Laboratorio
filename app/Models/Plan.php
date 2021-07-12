@@ -11,14 +11,13 @@ class Plan extends Model
     protected $fillable = [
         'price',
         'name',
-        'description'
+        'description',
+        'months',
+        'image',
+        'status'
     ];
     
     public function laboratoyPlan(){
         return $this->hasMany('App\Models\LaboratoryPlan');
     }
-
-    // public static function getPrice(Plan $plan){
-    //     return $plan->price." holaa";
-    // }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Binnacle;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,14 +40,12 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $name=request('name');
-        $status=request('status');
-
         $sala=Room::create([
-            'name'=> request('nombre'),
+            'name'=> request('name'),
             'laboratory_id' => Auth::user()->laboratory_id
         ]);
-        Binnacle::setInsert($sala->nombre,"salas", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert(request('name'),"salas",$actor);
         return redirect()->route('rooms.index');
     }
 
@@ -89,7 +88,8 @@ class RoomController extends Controller
         DB::table('rooms')->where('id',$id)->update([
             'name'=>$dato['nombre'],
             ]);
-        Binnacle::setUpdate($dato['nombre'],"salas", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($dato['nombre'],"salas", $actor);
             return redirect()->route('rooms.index');
     }
 
@@ -103,7 +103,8 @@ class RoomController extends Controller
     {
         $sala = Room::findOrFail($id);
         Room::destroy($id);
-        Binnacle::setDelete($sala->nombre,"salas", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setDelete($sala->nombre,"salas",$actor);
         return redirect()->route('rooms.index');
     }
 }

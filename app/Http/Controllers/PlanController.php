@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Binnacle;
 use App\Models\Plan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
@@ -14,10 +17,15 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans =  Plan::all();
+        $plans =  Plan::where('status',1)->get();
         return view('plans.index', compact('plans'));
     }
 
+    public function show()
+    {
+        $plans =  Plan::all();
+        return view('plans.show', compact('plans'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +34,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('plans.create');
     }
 
     /**
@@ -35,31 +43,56 @@ class PlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function activate($id){
+        $plan = Plan::findOrFail($id);
+        $plan->status = 1;
+        $plan->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($plan->name." activo","planes",$actor);
+        return redirect()->route('plans.show');
+    }
+
+    public function desactivate($id){
+        $plan = Plan::findOrFail($id);
+        $plan->status = 0;
+        $plan->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($plan->name." desactivo","planes",$actor);
+        return redirect()->route('plans.show');
+    }
+
     public function store(Request $request)
     {
-        //
+        $credentials =   Request()->validate([ //validate all attributes 
+            'price' => ['required'],
+            'name' => ['required','string'],
+            'months' => ['required'],
+            'description' => ['required','string'],
+        ]);
+
+        $filename1 = null;
+        if($request->hasFile('image')){
+            $filename1 = $request->image->getClientOriginalName(). time();
+            $request->image->storeAs('images', $filename1, 'public');
+        }
+
+        $plan = Plan::create([ //create a new instance of laboratory
+            'name' => request('name'),
+            'image' => $filename1,
+            'price' => request('price'),
+            'months' => request('months'),
+            'description' => request('description'),
+        ]);
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert(request('name'),"planes",$actor);
+        return redirect()->route('plans.show');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Plan $plan)
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Plan $plan)
-    {
-        //
+        $plan = Plan::findOrFail($id);
+        return view('plans.edit',compact('plan'));
     }
 
     /**
@@ -69,9 +102,30 @@ class PlanController extends Controller
      * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plan $plan)
+    public function update(Request $request, $id)
     {
-        //
+        $credentials =   Request()->validate([ //validate all attributes 
+            'price' => ['required'],
+            'name' => ['required','string'],
+            'months' => ['required'],
+            'description' => ['required','string'],
+        ]);
+        $filename1 = null;
+        if($request->hasFile('image')){
+            $filename1 = $request->image->getClientOriginalName(). time();
+            $request->image->storeAs('images', $filename1, 'public');
+        }
+        $plan = Plan::findOrFail($id);
+        $plan->price = request('price');
+        $plan->name = request('name');
+        $plan->months = request('months');
+        $plan->description = request('description');
+        $plan->image = $filename1;
+        $plan->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($plan->name,"planes",$actor);
+        return redirect()->route('plans.show');
+
     }
 
     /**

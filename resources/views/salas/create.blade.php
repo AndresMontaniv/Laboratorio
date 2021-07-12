@@ -20,14 +20,6 @@
          <span class="text-danger">{{$message}}</span>
          @enderror
           
-        
-         <div class="form-group">
-            <label for="status">Estado</label>
-            <select name="status" id=""  class="focus border-primary  form-control">
-                <option value=1>Activo</option>
-                <option value=2>Inactivo</option>
-                </select>
-         </div>
 
         <br>
         <button  class="btn btn-danger btn-sm" type="submit">Registrar</button>

@@ -15,7 +15,7 @@
             <tbody>
                 @foreach ($reservations as $reservation)
                 <tr>
-                    <td>{{$reservation->date->diffForHumans()}}</td>
+                    <td>{{$reservation->date->toFormattedDateString()}}</td>
                     <td>{{$reservation->room->name}}</td>
                     <td>{{$reservation->period->begin->toTimeString()}}</td>
                     <td>{{$reservation->period->end->toTimeString()}}</td>

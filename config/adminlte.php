@@ -245,34 +245,61 @@ return [
             'icon'        => 'fas fa-heartbeat',
             'icon_color' => 'red',
             
+        ], 
+        [
+            'text' => 'Laboratorios',
+            'route'  => 'laboratories.index',
+            'can'  => 'superAdmin',
+            'icon' => 'fas fa-flask',
         ],
-
         [
             'text' => 'Roles',
             'route'  => 'roles.index',
+            'can'  => 'superAdmin',
+            'icon' => 'fas fa-users-cog',
+        ],
+        [
+            'text' => 'Planes',
+            'route'  => 'plans.show',
+            'can'  => 'superAdmin',
             'icon' => 'fas fa-users-cog',
         ],
         [
             'text' => 'Usuario',
             'route'  => 'users.index',
+            'can'  => 'nurse',
+            'can'  => 'admin',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Bitacora',
             'icon' => 'fas fa-fw fa-address-book',
             'can'  => 'admin',
-            // 'url' => '#'
             'route' => 'binnacle.index'
+        ],
+        [
+            'text' => 'Bitacora',
+            'icon' => 'fas fa-fw fa-address-book',
+            'can'  => 'superAdmin',
+            'route' => 'binnacle.all'
+        ],
+        [
+            'text' => 'Todos los Usuarios',
+            'icon' => 'fas fa-address-book',
+            'can'  => 'superAdmin',
+            'route' => 'user.allUsers'
         ],
         [
             'text'    => 'ADM Reservas',
             'icon'    => 'fas fa-fw fa-calendar-check',
             'icon_color' => 'red',
+            'can'  => 'admin',
             'submenu' => [
                 [
                     'text' => 'Gestionar periodo',
                     'icon'    => "far fa-clock",
                     'route'  => 'periods.index',
+                    'can'  => 'admin',
                     'icon_color'=>'red',
                     //'can'=>'Ver lista de reservas',
                 ],
@@ -280,6 +307,7 @@ return [
                     'text' => 'Gestionar sala',
                     'icon'    => "fas fa-procedures",
                     'route'  => 'rooms.index',
+                    'can'  => 'admin',
                     'icon_color'=>'red',
                   
                     //'can'=>'Ver lista de reservas',
@@ -288,6 +316,7 @@ return [
                     'text' => 'Gestionar reserva',
                     'icon'    => "fas fa-calendar",
                     'route'  => 'reservations',
+                    'can'  => 'admin',
                     'icon_color'=>'red',
                     //'can'=>'Ver lista de reservas',
                 ],

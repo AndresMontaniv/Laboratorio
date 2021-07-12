@@ -64,7 +64,7 @@
                             </li>
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('mis reservas') }}</a>
+                            <a class="nav-link" href="{{route('reservation.myReservations', Auth::user()->id)}}">{{ __('mis reservas') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{ __('mis analisis') }}</a>
