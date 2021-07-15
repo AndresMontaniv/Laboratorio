@@ -17,13 +17,16 @@
           <a href="#" class="d-flex">
             <img src="{{ asset('/vendor/adminlte/dist/img/usuario.png') }}" alt="image" class="avatar">
           </a>
-          <h5 class="font-weight-bold text-center">{{$user->name}}</h5> 
-        
-        <h2 class="text-sm"> User Name:{{$user->username}}</h2>  <br>
-        
-         <h2 class="text-sm">Teléfono: {{$user->phone}}</h2> <br>
-           
-           <h2 class="text-sm">Email:  {{$user->email}}</h2> <br>
+          
+          <h5 class="font-weight-bold ">{{$user->name}}</h5> 
+         
+          <p>
+             <label for="">User Name:</label> {{$user->username}}<br>
+             <label for="">Ci:</label> {{$user->ci}}<br>
+             <label for="">Teléfono:</label>{{$user->phone}}</h2> <br>
+             <label for="">Email:</label> {{$user->email}} <br>
+          </p>
+       
           </p>
         </div>
      </div>

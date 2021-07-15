@@ -16,7 +16,6 @@ class UserController extends Controller
     public function index()
     {
         //'user_id'=> Auth::user()->id
-
         $id=Auth::user()->laboratory_id;
         $users=DB::table('users')->where('laboratory_id',$id)->where('status','=',1)->get();
         return view('users.index',compact('users'));
@@ -27,6 +26,7 @@ class UserController extends Controller
     public function create()
     {
         $roles=DB::table('roles')->where('id','!=',3)->where('id','!=',4)->get();
+        
        return view('users.create',compact('roles'));
     }
 
@@ -66,6 +66,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+       // $permiso=DB::table('permissions')->where('user_id',$id)->get();
         return view('users.show',compact('user'));
     }
 
@@ -112,7 +113,7 @@ class UserController extends Controller
        $user->update();
        $permiso = DB::table('permissions')->where('user_id', $user->id)->update(['user_id'=>null,'role_id'=>null]);
        Permission::destroy($permiso->id);*/
-        $user->status=2; //inavilitado
+        $user->status=0; //inavilitado
         $user->update();
        return redirect()->route('users.index');
     }

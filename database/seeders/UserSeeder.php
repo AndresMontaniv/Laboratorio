@@ -23,6 +23,22 @@ class UserSeeder extends Seeder
                 'email' => 'jaldin@gmail.com',
                 'password' => Hash::make('123'),
                 'laboratory_id'=> 1
+            ],
+            [
+                'name' => 'Carla',
+                'username' => 'MDM-Carla',
+                'phone' => '76056031',
+                'email' => 'carla.ccc344@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id'=> 2
+            ],
+            [
+                'name' => 'David',
+                'username' => 'FARMACOR-David',
+                'phone' => '74940481',
+                'email' => 'david@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id'=> 3
             ]
            
         ]);

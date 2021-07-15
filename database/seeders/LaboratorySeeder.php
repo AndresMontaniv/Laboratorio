@@ -16,7 +16,15 @@ class LaboratorySeeder extends Seeder
     {
         DB::table('laboratories')->insert([
             [
-                'name' => 'Telchi',
+                'name' => 'TELCHI',
+                'status' => 1
+            ],
+            [
+                'name' => 'MDM',
+                'status' => 1
+            ],
+            [
+                'name' => 'FARMACOR',
                 'status' => 1
             ]
         ]);

@@ -37,7 +37,6 @@
                         <th scope="col">Nombre de usuario</th>
                         <th scope="col">Nombre </th>
                         <th scope="col">Email</th>
-
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -49,7 +48,7 @@
                             <td>{{$user->username}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-
+                
                             <td>
                                <form action="{{route('users.destroy', $user->id)}}" method="post">
                                     @csrf
