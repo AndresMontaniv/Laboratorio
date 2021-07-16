@@ -19,8 +19,8 @@ class ReservationController extends Controller
     public function index()
     {
         $users = User::select('id')->where('laboratory_id', Auth::user()->laboratory_id)->get();
-        $reserva= Reservation::whereIn('id',$users)->get();
-        return view('reservas.index',compact('reserva'));
+        $reservations= Reservation::whereIn('id',$users)->get();
+        return view('reservas.index',compact('reservations'));
     }
 
 
@@ -28,11 +28,43 @@ class ReservationController extends Controller
         return view('reservations.index');
     }
 
-    public function searched(Request $request){
+    public function searched(Request $request, $id){
         $today = Carbon::now('America/Caracas')->today();
-        $usedPeriods = Reservation::select('period_id')->where('date',$request['date'])->where('status',1)->get();
-        $availablePeriods = Period::whereNotIn('id',$usedPeriods)->get();
-        // $availableReservation = Reservation::select('room_id')->whereIn('id',$availablePeriods)->get();
+        $dateUsed = ["date" => $request['date'], "error" => "No es posible
+        realizar una reserva para una fecha pasada a la actual, se mostrara los periodos disponibles para 
+        el dia de hoy", "now" => Carbon::now()];
+        $periods = Period::where('status',1)->where('laboratory_id', $id)->get();
+        if($today == Carbon::parse($request['date'])){
+            $periods = Period::where('begin','>', Carbon::now('America/Caracas'))->where('laboratory_id', $id)->where('status',1)->get();
+        }
+        return view('reservations.index', compact('periods'))->with('dateUsed', $dateUsed);
+    }
+
+    public function select($id,$date){
+        $usedRooms = Reservation::select('room_id')->where('period_id',$id)->where('date', $date)->where('status',1)->get();
+        $room = Room::whereNotIn('id',$usedRooms)->first();
+        Reservation::create([
+            'date' => $date,
+            'user_id' => Auth::user()->id,
+            'period_id' => $id,
+            'room_id' => $room->id
+        ]);  
+        return redirect()->route('reservation.myReservations', Auth::user()->id);
+    }
+
+    public function myReservations($id){
+        $reservations = Reservation::where('user_id',$id)->get();
+        $reservations->load('user');
+        $reservations->load('period');
+        $reservations->load('room');
+        return view('reservations.myReservations',compact('reservations'));
+    }
+
+    public function desactivate($id){
+        $reservation = Reservation::findOrFail($id);
+        $reservation->status = 0;
+        $reservation->update();
+        return redirect()->route('reservation.myReservations', $reservation->user_id);
     }
     /**
      * Show the form for creating a new resource.
@@ -42,7 +74,6 @@ class ReservationController extends Controller
     public function create()
     {
         return view('reservas.create');
-    
     }
 
     

@@ -17,15 +17,23 @@ class UserSpecialityController extends Controller
     public function index($id)
     {
         $user = User::findOrFail($id);
-        $using = UserSpeciality::select('speciality_id')->where('user_id',$id)->get();
+        $using = UserSpeciality::select('speciality_id')->where('user_id',$user->id)->get();
         $User_Specialities = UserSpeciality::where('user_id',$id)->get();
         $User_Specialities->load('speciality');
         $User_Specialities->load('user');
-        $specialities = Speciality::where('status',1)->whereNotin('id', $using)->get();
+        $specialities = Speciality::where('status',1)->whereNotIn('id', $using)->get();
         
-        return view('report.specialities', compact('specialities'),compact('User_Specialities'))->with('usuario',$user);
+        return view('users.specialities', compact('specialities'),compact('User_Specialities'))->with('usuario',$user);
     }
 
+    public function setSpeciality($id,$speciality){
+        $r = UserSpeciality::create([
+            'user_id' => $id,
+            'speciality_id' => $speciality
+        ]);     
+        $r->load('user');
+        return redirect()->route('userSpeciality.index', $id);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +57,7 @@ class UserSpecialityController extends Controller
             'speciality_id' => $speciality
         ]);     
         $r->load('user');
-        return redirect()->route('user.specialities', $id);
+        return redirect()->route('userSpeciality.index', $id);
     }
 
     public function activateSpeciality($id){
@@ -58,7 +66,7 @@ class UserSpecialityController extends Controller
         $user_Speciality->status = 1;
         $user_Speciality->update();
     
-        return redirect()->route('user.specialities', $user_Speciality->user->id);
+        return redirect()->route('userSpeciality.index', $user_Speciality->user->id);
     }
 
     public function desactivateSpeciality($id){
@@ -67,7 +75,7 @@ class UserSpecialityController extends Controller
         $user_Speciality->status = 0;
         $user_Speciality->update();
 
-        return redirect()->route('user.specialities', $user_Speciality->user->id);
+        return redirect()->route('userSpeciality.index', $user_Speciality->user->id);
     }
 
     /**

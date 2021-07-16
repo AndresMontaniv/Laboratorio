@@ -17,4 +17,8 @@ class Plan extends Model
     public function laboratoyPlan(){
         return $this->hasMany('App\Models\LaboratoryPlan');
     }
+
+    // public static function getPrice(Plan $plan){
+    //     return $plan->price." holaa";
+    // }
 }

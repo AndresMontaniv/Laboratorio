@@ -52,7 +52,7 @@ class UserController extends Controller
         ]);
         $user->laboratory_id=$id;
         $laboratorio=Laboratory::findOrfail($user->laboratory_id);
-        $user->username=User::getUniqueUsername($user->name,$laboratorio->name);
+        $user->username=User::getUniqueUsername($user->name,$laboratorio->name,$user->id);
         $user->update();
         $permiso=new Permission();
         $permiso->user_id=$user->id;
@@ -96,7 +96,7 @@ class UserController extends Controller
           ]);
           $user=User::findOrfail($id);
         $laboratorio=Laboratory::findOrfail($user->laboratory_id);
-        $user->username=User::getUniqueUsername($user->name,$laboratorio->name);
+        $user->username=User::getUniqueUsername($user->name,$laboratorio->name,$user->id);
         $user->update();
 
         DB::table('permissions')->where('user_id', $user->id)->update(['role_id'=>$request->roles]); 
