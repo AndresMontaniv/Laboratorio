@@ -4,7 +4,7 @@
 
 
 @section('content_header')
-    <h1>Roles de usuario</h1>
+    <h1>Especialidades de usuario</h1>
 @stop
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="container">
         <br>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h2>permisos</h2></li>
+            <li class="list-group-item"><h2>Especialidades</h2></li>
         </ul>
         <br>
         <div class="dropdown">

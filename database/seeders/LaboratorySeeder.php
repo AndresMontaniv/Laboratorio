@@ -17,7 +17,8 @@ class LaboratorySeeder extends Seeder
         DB::table('laboratories')->insert([
             [
                 'name' => 'Telchi',
-                'status' => 1
+                'status' => 1,
+                'imagen' => 'logotelchi.png'
             ]
         ]);
     }

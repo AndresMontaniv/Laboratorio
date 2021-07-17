@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Binnacle;
 use App\Models\Speciality;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,20 +47,26 @@ class SpecialityController extends Controller
             'name' => request('name'),
             'laboratory_id' => Auth::user()->laboratory_id
         ]);
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert(request('name'),"especialidades",$actor);
         return redirect()->route('speciality.all');
     }
 
     public function activate($id){
-        $Instrument_type = Speciality::findOrFail($id);
-        $Instrument_type->status = 1;
-        $Instrument_type->update();
+        $speciality = Speciality::findOrFail($id);
+        $speciality->status = 1;
+        $speciality->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate("activo ".$speciality->name,"especialidades",$actor);
         return redirect()->route('speciality.all');
     }
 
     public function desactivate($id){
-        $Instrument_type = Speciality::findOrFail($id);
-        $Instrument_type->status = 0;
-        $Instrument_type->update();
+        $speciality = Speciality::findOrFail($id);
+        $speciality->status = 0;
+        $speciality->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate("desactivo ".$speciality->name,"especialidades", $actor);
         return redirect()->route('speciality.all');
     }
     /**
@@ -98,7 +106,8 @@ class SpecialityController extends Controller
         $speciality = Speciality::findOrFail($id);
         $speciality->name = Request('name');
         $speciality->update();
-
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($speciality->name,"especialidades", $actor);
         return redirect()->route('speciality.all');
     }
 

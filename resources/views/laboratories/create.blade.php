@@ -33,19 +33,41 @@
                     </div>
                 </div>
 
-                <div class="input-group mb-3">
-                    <input id="image" type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" >
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                        </div>
+                <div class="container">
+                    <div class="input-group mb-3">
+                        <label for="labImg">Foto de de perfil Administrador    </label>
                     </div>
-                    @if($errors->has('image'))
-                        <div class="invalid-feedback">
-                            <strong>{{ $errors->first('image') }}</strong>
+                    <div class="input-group mb-3">    
+                        <input id="image" type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-camera {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                            </div>
                         </div>
-                    @endif
+                        @if($errors->has('image'))
+                            <div class="invalid-feedback">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="labImg">Foto de laboratorio    </label>
+                    </div>
+                    <div class="input-group mb-3">     
+                        <input id="labImg" type="file" accept="labImg/*" class="form-control @error('labImg') is-invalid @enderror" name="labImg" value="{{ old('labImg') }}" >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-images {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                            </div>
+                        </div>
+                        @if($errors->has('labImg'))
+                            <div class="invalid-feedback">
+                                <strong>{{ $errors->first('labImg') }}</strong>
+                            </div>
+                        @endif
+                    </div>
                 </div>
+                
                 
                 <input type="hidden" name="plan_id" value="{{$plan->id}}">       
                  {{-- form's part destinate to create new Admin User  --}}

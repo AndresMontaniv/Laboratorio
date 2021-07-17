@@ -24,6 +24,9 @@ class PatientController extends Controller
             'username' => ['required', 'string'],
             'password' => ['required', 'string']
          ]);
+        if((User::isAdmin($user) || User::isNurse($user) || User::isSuperAdmin($user))){
+             return back()->withErrors('Usted no tiene los permisos para acceder a este login, para acceder necesita tener el rol PACIENTE');
+        }  
         $remember = request()->filled('remember');
          if(Auth::attempt($credentials, $remember)){
             request()->session()->regenerate();
@@ -63,10 +66,11 @@ class PatientController extends Controller
             'labId' => ['required']
         ]);
         //dd($request->image);
+        $filename = null;
         if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images', $filename, 'public');
         }
-        $request->image->storeAs('images', $filename, 'public');
         $user = User::create([
             'phone' => request('telefono'),
             'name' => request('name'),

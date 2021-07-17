@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Binnacle;
 use Illuminate\Support\Facades\DB;
 use App\Models\Period;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,7 +48,8 @@ class PeriodController extends Controller
             'end'=> request('fin'), 
             'laboratory_id' => Auth::user()->laboratory_id
         ]);
-        Binnacle::setInsert($periodo->inicio." - ".$periodo->fin,"periodos", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert($periodo->begin." - ".$periodo->end,"periodos", $actor);
         return redirect()->route('periods.index');
     }
 
@@ -90,7 +92,9 @@ class PeriodController extends Controller
         DB::table('periods')->where('id',$id)->update([
             'begin'=>$dato['inicio'],
             'end'=>$dato['fin'],
-            ]);
+        ]);
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($dato['inicio']."-".$dato['fin'],"periodos",$actor);
             return redirect()->route('periods.index');
     }
 

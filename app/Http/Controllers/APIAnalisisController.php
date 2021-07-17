@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Analysis;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class APIAnalisisController extends Controller
 {
@@ -13,7 +16,16 @@ class APIAnalisisController extends Controller
      */
     public function index()
     {
-        //
+        $analyses=Analysis::all();
+        return response($analyses, 200);
+    }
+
+
+    public function getAnalyses($userId)
+    {
+        $analyses=Analysis::where('pacienteId',$userId)
+                            ->where('estado',1)->get();
+        return response($analyses, 200);
     }
 
     /**
@@ -24,7 +36,20 @@ class APIAnalisisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $precio=request('precio');
+        $descuento=request('descuento');
+        $total=$precio-$precio*$descuento;
+        $test = Test::create([ 
+            'descuento' => request('descuento'),
+            'detalle' => request('detalle'),
+            'doc' => request('doc'),
+            'precio' => request('precio'),
+            'total' => $total,
+        ]);
+        return response()->json([
+            'status' => 'ok',
+            'data' => $test
+            ], 200);
     }
 
     /**
@@ -35,7 +60,8 @@ class APIAnalisisController extends Controller
      */
     public function show($id)
     {
-        //
+        $analysis=Analysis::findOrFail($id);
+        return response($analysis, 200);
     }
 
     /**
@@ -47,7 +73,21 @@ class APIAnalisisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $test=Test::findOrFail($id);
+        $precio=request('precio');
+        $descuento=request('descuento');
+        $total=$precio-$precio*$descuento;
+        $test->estado=1;
+        $test->descuento=request('descuento');
+        $test->detalle=request('detalle');
+        $test->precio=request('precio');
+        $test->total=$total;
+        $test->update();
+        return response()->json([
+            'status' => 'ok',
+            'data' => $test
+            ], 200);
+
     }
 
     /**
@@ -58,6 +98,12 @@ class APIAnalisisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $test=Test::findOrFail($id);
+        $test->estado=0;
+        $test->update();
+        return response()->json([
+            'status' => 'ok',
+            'data' => $test
+            ], 200);
     }
 }

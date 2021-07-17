@@ -179,6 +179,11 @@ class User extends Authenticatable
     }
     
 
+    public static function isSuperAdmin(User $user){    
+        $permissions = Permission::where('user_id', $user->id)->where('role_id',4)->where('status',1)->get();
+        return ( sizeof($permissions) != 0);
+    }
+
     public static function isAdmin(User $user){    
         $permissions = Permission::where('user_id', $user->id)->where('role_id',1)->where('status',1)->get();
         return ( sizeof($permissions) != 0);

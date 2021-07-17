@@ -39,10 +39,14 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre de usuario</th>
+                        {{-- @if (Auth::user()->laboratory_id == null)
+                        <th scope="col">Laboratorio</th>
+                        @endif --}}
                         <th scope="col">Nombre </th>
                         <th scope="col">Email</th>
-                        <th scope="col">Roles</th>
+                        <th scope="col">Especialidades</th>
                         <th scope="col">Acciones</th>
+                        <th scope="col">Permisos</th>
                     </tr>
                 </thead>
 
@@ -53,9 +57,14 @@
                             <td>{{$user->username}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
+                            
+                            @if (App\Models\User::isNurse($user))
                             <td>
-                                <a href="{{route('userSpeciality.index', $user->id)}}" class="btn btn-success btn-sm fas fa-eye  cursor-pointer"><a> 
-                            </td>
+                                <a href="{{route('userSpeciality.index', $user->id)}}" class="btn btn-success cursor-pointer"><i class="fas fa-briefcase-medical"></i><a> 
+                            </td>  
+                            @else
+                            <td>No es parte del personal medico</td>    
+                            @endif                   
                             <td>
                                <form action="{{route('users.destroy', $user->id)}}" method="post">
                                     @csrf
@@ -64,10 +73,11 @@
        
                                     <button class="btn btn-danger btn-sm fas fa-trash-alt" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button> 
                                     
-                                    <a href="{{route('users.show', $user->id)}}" class="btn btn-success btn-sm fas fa-eye  cursor-pointer"><a> 
-
-                                    
+                                    <a href="{{route('users.show', $user->id)}}" class="btn btn-success btn-sm fas fa-eye  cursor-pointer"><a>                   
                                 </form>
+                            </td>
+                            <td>
+                                <a href="{{route('permissions.index', $user->id)}}" class="btn btn-success cursor-pointer"><i class="fas fa-key"></i><a> 
                             </td>
                         </tr>
                     @endforeach
