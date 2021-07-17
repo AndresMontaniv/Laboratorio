@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PeriodSeeder::class);
         $this->call(RoomSeeder::class);
         $this->call(SpecialitySeeder::class);
+        $this->call(CampaignSeeder::class);
         //esto es para los 3 usuarios del seeder que no se porque no se les asigna el laboratory_id
         $user1 = User::findOrFail(2);
         $user1->laboratory_id = 1;
