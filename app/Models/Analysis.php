@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Analysis extends Model
 {
     use HasFactory;
+    protected $table="analyses";
+    protected $guarded=['id','created_at','updated_at'];
 }

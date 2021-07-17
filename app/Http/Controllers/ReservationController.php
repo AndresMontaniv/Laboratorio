@@ -20,8 +20,8 @@ class ReservationController extends Controller
     public function index()
     {
         $users = User::select('id')->where('laboratory_id', Auth::user()->laboratory_id)->get();
-        $reserva= Reservation::whereIn('id',$users)->get();
-        return view('reservas.index',compact('reserva'));
+        $reservations= Reservation::whereIn('id',$users)->get();
+        return view('reservas.index',compact('reservations'));
     }
 
 

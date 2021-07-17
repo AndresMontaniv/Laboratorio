@@ -4,6 +4,8 @@ use App\Http\Controllers\ApiCampaignController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIAnalisisController;
+use App\Http\Controllers\APIInvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,9 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/getLaboratories', [AuthController::class, 'getLaboratories']);
 // });
 Route::apiResource('campaigns',ApiCampaignController::class);
+
+Route::resource('analysis', APIAnalisisController::class)->names('analysis');
+Route::get('analysis/getAnalyses/{id}',[APIAnalisisController::class, 'getAnalyses'])->name('analysis.getAnalyses');
+Route::resource('invoice', APIInvoiceController::class)->names('invoice');
+Route::get('invoice/getInvoices/{id}',[APIInvoiceController::class, 'getInvoices'])->name('invoice.getInvoices');
 
