@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIAnalisisController;
 use App\Http\Controllers\APIInvoiceController;
+use App\Http\Controllers\ApiReservationController;
+use App\Http\Controllers\ApiTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +37,8 @@ Route::get('analysis/getAnalyses/{id}',[APIAnalisisController::class, 'getAnalys
 Route::resource('invoice', APIInvoiceController::class)->names('invoice');
 Route::get('invoice/getInvoices/{id}',[APIInvoiceController::class, 'getInvoices'])->name('invoice.getInvoices');
 
+Route::get('tests/index/{campaign}',[ApiTestController::class, 'index'])->name('test.index'); 
+Route::get('campaign/index/{id}',[ApiCampaignController::class, 'index'])->name('campaign.index'); 
+Route::get('reservation/index/{id}',[ApiReservationController::class, 'index'])->name('reservation.index'); 
+Route::post('reservation/searched/{laboratory}',[ApiReservationController::class, 'searched'])->name('reservation.searched'); 
+Route::get('reservation/store/{period}/{date}/{user}',[ApiReservationController::class, 'store'])->name('reservation.store'); 

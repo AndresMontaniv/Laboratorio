@@ -20,21 +20,24 @@ class CampaignSeeder extends Seeder
                 'expiration' => Carbon::create(2021,8,1,12,12,12),
                 'initialDate'=> Carbon::create(2021,7,1,12,12,12),
                 'body'=> 'Lorem ipsum cum harum labore quam, debitis tempore aut ut ipsa ad provident asperiores. Dolorum.',
-                'title' => 'Descuento para pacientes vacunados'
+                'title' => 'Descuento para pacientes vacunados',
+                'laboratory_id' => 1
             ],
             [
                 'discount' => 0.5,
                 'expiration' => Carbon::create(2021,10,1,12,12,12),
                 'initialDate'=> Carbon::create(2021,6,1,12,12,12),
                 'body'=> 'Lorem ipsum cum harum labore quam, debitis tempore aut ut ipsa ad provident asperiores. Dolorum.',
-                'title' => 'Descuento para hinchas del boquita papa'
+                'title' => 'Descuento para hinchas del boquita papa',
+                'laboratory_id' => 1
             ],
             [
                 'discount' => 0.5,
                 'expiration' => Carbon::create(2021,5,1,12,12,12),
                 'initialDate'=> Carbon::create(2021,4,1,12,12,12),
                 'body'=> 'Lorem ipsum cum harum labore quam, debitis tempore aut ut ipsa ad provident asperiores. Dolorum.',
-                'title' => 'Descuento pa embarazadas'
+                'title' => 'Descuento pa embarazadas',
+                'laboratory_id' => 1
             ]
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\campaign;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ApiCampaignController extends Controller
@@ -14,9 +15,10 @@ class ApiCampaignController extends Controller
      */
 
 
-    public function index() //muestra las campanias disponibles
+    public function index($id) //muestra las campanias disponibles del laboratorio de un usuario
     {
-        $campaigns =  campaign::where('status',1)->get();
+        $user = User::findOrFail($id);
+        $campaigns =  campaign::where('status',1)->where('laboratory_id',$user->laboratory_id)->get();
         return response()->json([
             'status' => 'ok',
             'data' => $campaigns

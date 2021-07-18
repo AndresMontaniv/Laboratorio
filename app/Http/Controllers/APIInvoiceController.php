@@ -12,16 +12,16 @@ class APIInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // getting all invoices 
     {
         $invoices=Invoice::all();
         return response($invoices, 200);
     }
 
-    public function getInvoices($userId)
+    public function getInvoices($userId) // getting all invoices from a User
     {
         
-        $invoices=Invoice::where('userId',$userId)->get();
+        $invoices=Invoice::where('user_id',$userId)->get();
         return response($invoices, 200);
     }
 

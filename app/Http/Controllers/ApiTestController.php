@@ -13,7 +13,7 @@ class ApiTestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($campaign) //muestra las pruebas de una campania en especifico
+    public function index($campaign) //muestra las pruebas de una campania en especifico 
     {
         $testCampaign = TestCampaign::select('test_id')->where('campaign_id',$campaign)->where('status',1)->get();
         $tests = Test::whereIn('id', $testCampaign)->get();
@@ -22,7 +22,7 @@ class ApiTestController extends Controller
             'data' => $tests
         ], 200);
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      *

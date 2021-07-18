@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomSeeder::class);
         $this->call(SpecialitySeeder::class);
         $this->call(CampaignSeeder::class);
+        $this->call(TestSeeder::class);
         //esto es para los 3 usuarios del seeder que no se porque no se les asigna el laboratory_id
         $user1 = User::findOrFail(2);
         $user1->laboratory_id = 1;
@@ -39,41 +40,41 @@ class DatabaseSeeder extends Seeder
         $user3->update();
 
         $analysis1= new Analysis();
-        $analysis1->descuento=0.25;
-        $analysis1->detalle="detalle1";
+        $analysis1->discount=0.25;
+        $analysis1->detail="detalle1";
         $analysis1->doc="doc1";
-        $analysis1->precio=100;
+        $analysis1->price=100;
         $analysis1->total=75;
-        $analysis1->pacienteId=1;
-        $analysis1->enfermeroId=1;
-        $analysis1->pruebaId=1;
+        $analysis1->patient_id=1;
+        $analysis1->nurse_id=1;
+        $analysis1->test_id=1;
         $analysis1->save();
 
         $analysis2= new Analysis();
-        $analysis2->descuento=0;
-        $analysis2->detalle="detalle2";
+        $analysis2->discount=0;
+        $analysis2->detail="detalle2";
         $analysis2->doc="doc2";
-        $analysis2->precio=200;
+        $analysis2->price=200;
         $analysis2->total=200;
-        $analysis2->pacienteId=2;
-        $analysis2->enfermeroId=2;
-        $analysis2->pruebaId=2;
+        $analysis2->patient_id=2;
+        $analysis2->nurse_id=2;
+        $analysis2->test_id=2;
         $analysis2->save();
 
         $invoice1= new Invoice();
-        $invoice1->descuento=0.25;
+        $invoice1->discount=0.25;
         $invoice1->nit="123456789";
-        $invoice1->precioNeto=100;
-        $invoice1->precioBruto=125;
-        $invoice1->userId=1;
+        $invoice1->netPrice=100;
+        $invoice1->grossPrice=125;
+        $invoice1->user_id=1;
         $invoice1->save();
 
         $invoice2= new Invoice();
-        $invoice2->descuento=0.15;
+        $invoice2->discount=0.15;
         $invoice2->nit="987654321";
-        $invoice2->precioNeto=200;
-        $invoice2->precioBruto=225;
-        $invoice2->userId=1;
+        $invoice2->netPrice=200;
+        $invoice2->grossPrice=225;
+        $invoice2->user_id=1;
         $invoice2->save();
         
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Carbon\Carbon;
 class CreateInvoicesTable extends Migration
 {
     /**
@@ -15,11 +15,12 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('nit');
-            $table->float('descuento');
-            $table->float('precioNeto');
-            $table->float('precioBruto');
-            $table->unsignedBigInteger('userId');
+            $table->float('discount')->nullable();
+            $table->date('date')->default(Carbon::now('America/Caracas'));
+            $table->integer('nit')->nullable();
+            $table->float('grossPrice')->default(0); //precio bruto
+            $table->float('netPrice')->default(0); //precio neto
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

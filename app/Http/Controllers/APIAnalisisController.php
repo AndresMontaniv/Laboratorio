@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Analysis;
+use App\Models\Test;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,8 +24,8 @@ class APIAnalisisController extends Controller
 
     public function getAnalyses($userId)
     {
-        $analyses=Analysis::where('pacienteId',$userId)
-                            ->where('estado',1)->get();
+        $analyses=Analysis::where('patient_id',$userId)
+                            ->where('status',1)->get();
         return response($analyses, 200);
     }
 
@@ -36,14 +37,14 @@ class APIAnalisisController extends Controller
      */
     public function store(Request $request)
     {
-        $precio=request('precio');
-        $descuento=request('descuento');
+        $precio=request('price');
+        $descuento=request('discount');
         $total=$precio-$precio*$descuento;
         $test = Test::create([ 
-            'descuento' => request('descuento'),
-            'detalle' => request('detalle'),
+            'discount' => request('discount'),
+            'detail' => request('detail'),
             'doc' => request('doc'),
-            'precio' => request('precio'),
+            'price' => request('price'),
             'total' => $total,
         ]);
         return response()->json([
@@ -74,13 +75,12 @@ class APIAnalisisController extends Controller
     public function update(Request $request, $id)
     {
         $test=Test::findOrFail($id);
-        $precio=request('precio');
-        $descuento=request('descuento');
+        $precio=request('price');
+        $descuento=request('discount');
         $total=$precio-$precio*$descuento;
-        $test->estado=1;
-        $test->descuento=request('descuento');
-        $test->detalle=request('detalle');
-        $test->precio=request('precio');
+        $test->discount=request('discount');
+        $test->detail=request('detail');
+        $test->price=request('price');
         $test->total=$total;
         $test->update();
         return response()->json([
@@ -99,7 +99,7 @@ class APIAnalisisController extends Controller
     public function destroy($id)
     {
         $test=Test::findOrFail($id);
-        $test->estado=0;
+        $test->status=0;
         $test->update();
         return response()->json([
             'status' => 'ok',
