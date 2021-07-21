@@ -13,7 +13,8 @@ class campaign extends Model
         'initialDate',
         'discount',
         'body',
-        'title'
+        'title',
+        'laboratory_id'
     ];
     
     protected $dates = ['created_at', 'updated_at','initialDate','expiration'];

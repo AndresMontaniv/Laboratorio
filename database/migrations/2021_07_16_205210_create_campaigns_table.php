@@ -16,6 +16,7 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->float("discount")->nullable();
+            // $table->string("imagen")->nullable();
             $table->date("expiration");
             $table->date("initialDate");
             $table->text("body");
