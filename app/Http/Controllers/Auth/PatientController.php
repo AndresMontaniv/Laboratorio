@@ -16,7 +16,7 @@ class PatientController extends Controller
 {
 
     public function login()
-    {
+    {   //franz was here
         // dd(request()->ip());
         $user = User::where('username', request('username'))->first();
         
