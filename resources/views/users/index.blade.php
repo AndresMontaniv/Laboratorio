@@ -18,13 +18,13 @@
   
                 </div>
                 <div class="col">
-                    <a href="{{route('exceluser')}}" class="btn btn-danger btb-sm ">Exportar Excel</a>
+                    <a href="{{route('exceluser')}}" class="btn btn-success btb-sm ">Exportar Excel</a>
                 </div>
                 <div class="col">
-                    <a href="{{route('pdfuser')}}" class="btn btn-warning btb-sm ">Exportar PDF</a>
+                    <a href="{{route('pdfuser')}}" class="btn btn-danger btb-sm  text-white">Exportar PDF</a>
                 </div>
                 <div class="col"> 
-                    <a href="{{url('/userbuscador/create')}}" class="btn btn-success btb-sm mx-3">Query Builder</a>
+                    <a href="{{url('/userbuscador/create')}}" class="btn btn-warning text-white btb-sm mx-3">Query Builder</a>
                 </div> 
             </div>
         </div>

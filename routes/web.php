@@ -5,6 +5,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\Auth\PatientController;
 use App\Http\Controllers\BillsController;
 use App\Http\Controllers\BinnacleController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReservationController;
@@ -105,3 +106,11 @@ Route::get('plans/desactive/{id}',[PlanController::class, 'desactivate'])->name(
 Route::post('plans/store',[PlanController::class, 'store'])->name('plans.store');
 Route::post('plans/update/{id}',[PlanController::class, 'update'])->name('plans.update');
 
+Route::get('campaign/index/{laboratory}',[CampaignController::class, 'index'])->name('campaign.index');
+Route::get('campaign/all',[CampaignController::class, 'all'])->name('campaign.all');
+Route::get('campaign/create',[CampaignController::class, 'create'])->name('campaign.create');
+Route::post('campaign/store',[CampaignController::class, 'store'])->name('campaign.store');
+Route::get('campaign/active/{id}',[CampaignController::class, 'active'])->name('campaign.active');
+Route::get('campaign/desactive/{id}',[CampaignController::class, 'desactive'])->name('campaign.desactive');
+Route::get('campaign/edit/{id}',[CampaignController::class, 'edit'])->name('campaign.edit');
+Route::post('campaign/update/{id}',[CampaignController::class, 'update'])->name('campaign.update');

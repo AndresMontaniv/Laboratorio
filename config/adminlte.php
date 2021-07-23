@@ -282,6 +282,12 @@ return [
             'route' => 'binnacle.index'
         ],
         [
+            'text' => 'Campañas',
+            'icon' => 'fas fa-fw fa-address-book',
+            'can'  => 'admin',
+            'route' => 'campaign.all'
+        ],
+        [
             'text' => 'Bitacora',
             'icon' => 'fas fa-fw fa-address-book',
             'can'  => 'superAdmin',
