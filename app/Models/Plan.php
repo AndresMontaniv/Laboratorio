@@ -11,7 +11,10 @@ class Plan extends Model
     protected $fillable = [
         'price',
         'name',
-        'description'
+        'description',
+        'months',
+        'image',
+        'status'
     ];
     
     public function laboratoyPlan(){

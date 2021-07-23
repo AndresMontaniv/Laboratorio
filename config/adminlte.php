@@ -1,5 +1,7 @@
 <?php
 
+// use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -129,7 +131,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-light navbar-light',///-------------
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -240,30 +242,69 @@ return [
         [
             'text'        => 'Inicio',
             'url'         => 'admin',
+            'icon_color' => 'red',
             'icon'        => 'fas fa-heartbeat',
             'icon_color' => 'red',
             
+        ], 
+        [
+            'text' => 'Laboratorios',
+            'route'  => 'laboratories.index',
+            'icon_color' => 'red',
+            'can'  => 'superAdmin',
+            'icon' => 'fas fa-flask',
         ],
-
         [
             'text' => 'Roles',
             'route'  => 'roles.index',
+            'can'  => 'superAdmin',
+            'icon' => 'fas fa-users-cog',
+        ],
+        [
+            'text' => 'Planes',
+            'route'  => 'plans.show',
+            'can'  => 'superAdmin',
             'icon' => 'fas fa-users-cog',
         ],
         [
             'text' => 'Usuario',
             'route'  => 'users.index',
+            'icon_color' => 'red',
+            'can'  => 'nurse',
+            'can'  => 'admin',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Bitacora',
+            'icon' => 'fas fa-fw fa-address-book',
+            'icon_color' => 'red',
+            'can'  => 'admin',
+            'route' => 'binnacle.index'
+        ],
+        [
+            'text' => 'Bitacora',
+            'icon' => 'fas fa-fw fa-address-book',
+            'can'  => 'superAdmin',
+            'icon_color' => 'red',
+            'route' => 'binnacle.all'
+        ],
+        [
+            'text' => 'Todos los Usuarios',
+            'icon' => 'fas fa-address-book',
+            'can'  => 'superAdmin',
+            'route' => 'user.allUsers'
         ],
         [
             'text'    => 'ADM Reservas',
             'icon'    => 'fas fa-fw fa-calendar-check',
             'icon_color' => 'red',
+            'can'  => 'admin',
             'submenu' => [
                 [
                     'text' => 'Gestionar periodo',
                     'icon'    => "far fa-clock",
                     'route'  => 'periods.index',
+                    'can'  => 'admin',
                     'icon_color'=>'red',
                     //'can'=>'Ver lista de reservas',
                 ],
@@ -271,6 +312,7 @@ return [
                     'text' => 'Gestionar sala',
                     'icon'    => "fas fa-procedures",
                     'route'  => 'rooms.index',
+                    'can'  => 'admin',
                     'icon_color'=>'red',
                   
                     //'can'=>'Ver lista de reservas',
@@ -279,6 +321,7 @@ return [
                     'text' => 'Gestionar reserva',
                     'icon'    => "fas fa-calendar",
                     'route'  => 'reservations',
+                    'can'  => 'admin',
                     'icon_color'=>'red',
                     //'can'=>'Ver lista de reservas',
                 ],
@@ -286,7 +329,40 @@ return [
             ],
         ],
 
-        
+        [
+            'text'    => 'ADM Prueba',
+            'icon'    => 'fas fa-flask',
+            'icon_color' => 'red',
+           
+            'submenu' => [
+                [
+                    'text' => 'Gestionar prueba',
+                    'icon'    => "fas fa-vial",
+                    'route'  => 'proofs.index',
+                    'icon_color'=>'red',
+
+                ],
+               
+            ],
+        ],
+
+
+        [
+            'text'    => 'ADM Facturación',
+            'icon'    => 'fas  fa-wallet',
+            'icon_color' => 'red',
+           
+            'submenu' => [
+                [
+                    'text' => 'Gestionar Facturación',
+                    'icon'    => "fas fa-money-check-alt",
+                    'route'  => 'bills.index',
+                    'icon_color'=>'red',
+
+                ],
+               
+            ],
+        ],
         
        
        

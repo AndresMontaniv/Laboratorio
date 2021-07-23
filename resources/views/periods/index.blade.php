@@ -12,7 +12,7 @@
 <div class="card">
   
   <div class="card-header">
-    <a href="{{route('periods.create')}}" class="btn btn-primary btb-sm">Registrar Periodo</a>
+    <a href="{{route('periods.create')}}" class="btn btn-primary btb-sm">Registrar periodos</a>
 </div>
  
         
@@ -35,8 +35,8 @@
 
             <tr>
                 <td>{{$periodos->id}}</td>
-                <td>{{$periodos->inicio->toTimeString()}}</td>
-                <td>{{$periodos->fin->toTimeString()}}</td>
+                <td>{{$periodos->begin->toTimeString()}}</td>
+                <td>{{$periodos->end->toTimeString()}}</td>
     
               <td>
                 <form action="{{route('periods.destroy',$periodos->id)}}" method="post">

@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LaboratoryController extends Controller
@@ -21,7 +22,28 @@ class LaboratoryController extends Controller
      */
     public function index()
     {
-        //
+        $laboratories = Laboratory::all();
+        return view('laboratories.index', compact('laboratories'));
+    }
+
+    public function active($id)
+    {
+        $laboratory = Laboratory::findOrFail($id);
+        $laboratory->status = 1;
+        $laboratory->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($laboratory->name,"laboratorios",$actor);
+        return redirect()->route('laboratories.index');
+    }
+
+    public function desactive($id)
+    {
+        $laboratory = Laboratory::findOrFail($id);
+        $laboratory->status = 0;
+        $laboratory->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($laboratory->name,"laboratorios",$actor);
+        return redirect()->route('laboratories.index');
     }
 
     /**
@@ -46,6 +68,7 @@ class LaboratoryController extends Controller
 
     public function store(Request $request)
     {
+        
         $credentials =   Request()->validate([ //validate all attributes 
             'nameL' => ['required','string'],
             'name' => ['required','string'],
@@ -54,9 +77,15 @@ class LaboratoryController extends Controller
             'birthday' => ['date'],
             'password' => ['required','string','min:3', 'confirmed'],
         ]);
+        $filename1 = null;
+        if($request->hasFile('labImg')){
+            $filename1 = $request->labImg->getClientOriginalName(). time();
+            $request->labImg->storeAs('images', $filename1, 'public');
+        }
 
         $lab = Laboratory::create([ //create a new instance of laboratory
-            'name' => request('nameL')
+            'name' => request('nameL'),
+            'imagen' => $filename1
         ]);
 
         $plan = Plan::findOrFail(request('plan_id'));
@@ -68,6 +97,12 @@ class LaboratoryController extends Controller
             'plan_id' => $plan->id,
             'laboratory_id' => $lab->id
         ]);
+        $filename = null;
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images', $filename, 'public');
+        }
+        
         $user = User::create([
             'name' => request('name'),
             'phone' => request('phone'),
@@ -76,8 +111,9 @@ class LaboratoryController extends Controller
             'email' => request('email'),
             'laboratory_id' => $lab->id,
             'password' => Hash::make(request('password')),
+            'photo' => $filename
         ]);
-        $user->username = User::getUniqueUsername(request('name'),request('nameL'));
+        $user->username = User::getUniqueUsername(request('name'),request('nameL'),$user->id);
         $user->update();
         DB::table('permissions')->insert([
             [
@@ -88,7 +124,7 @@ class LaboratoryController extends Controller
         // despues de crear el usuario administrador y laboratorio no se donde deberia redireccionarlo
         //quizas a la HOME PAGE debido a que su laboratorio no lo habriamos activado y por lo tanto deberia tener status = 0  lab pendiente
         Binnacle::setInsert($user->username,"usuarios", $user);
-        return redirect()->route('login');
+        return redirect()->route('patients.credentials', $user->id);
         //return redirect()->route('user.create');
     }
 

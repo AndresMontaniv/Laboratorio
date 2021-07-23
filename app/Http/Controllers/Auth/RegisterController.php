@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Binnacle;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -76,8 +77,9 @@ class RegisterController extends Controller
             'phone' => $data['telefono'],
             'birthday' => $data['fechaNac']
         ]);
-        $user->username = User::getUniqueUsername($data['name'],$labName);
+        $user->username = User::getUniqueUsername($data['name'],$labName,$user->id);
         $user->update();
+        Binnacle::setInsert($user->username,"usuarios",$user);
         DB::table('permissions')->insert([
             [
                 'user_id' => $user->id,

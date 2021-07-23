@@ -25,7 +25,8 @@ class User extends Authenticatable
         'phone',
         'ci',
         'birthday',
-        'laboratory_id'
+        'laboratory_id',
+        'photo'
     ];
 
     /**
@@ -51,15 +52,136 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Permission');
     }
 
+    public function user_specialities(){
+        return $this->hasMany('App\Models\Speciality');
+    }
+
     public function binnacles(){
         return $this->hasMany('App\Models\Binnacle');
     }
 
-    public static function getUniqueUsername($name,$labName){    
+    public function laboratory(){
+        return $this->belongsTo('App\Models\Laboratory');
+    }
+
+    public static function getUniqueUsername($name,$labName, $id){    
         $labName = strtoupper($labName);                   
         $palabraLimpia = str_replace(' ', '', $labName);  
-        $final= $palabraLimpia."-".str_replace(' ', '', $name); 
+        $final= $palabraLimpia."-".str_replace(' ', '', $name).$id; 
         return $final;
+    }
+
+    public static function getIdArray($id){
+        $array=array();
+        $users=User::all();
+        if ($id!=null){
+            array_push($array,$id);
+        }else{
+            foreach($users as $user){
+                if($user->id!=null){
+                    array_push($array,$user->id);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getUsernameArray($username){
+        $array=array();
+        $users=User::all();
+        if ($username!=null){
+            array_push($array,$username);
+        }else{
+            foreach($users as $user){
+                if($user->username!=null){
+                    array_push($array,$user->username);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getNameArray($name){
+        $array=array();
+        $users=User::all();
+        if ($name!=null){
+            array_push($array,$name);
+        }else{
+            foreach($users as $user){
+                if($user->name!=null){
+                    array_push($array,$user->name);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getLastnameArray($lastname){
+        $array=array();
+        $users=User::all();
+        if ($lastname!=null){
+            array_push($array,$lastname);
+        }else{
+            foreach($users as $user){
+                if($user->lastname!=null){
+                    array_push($array,$user->lastname);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getPhoneArray($phone){
+        $array=array();
+        $users=User::all();
+        if ($phone!=null){
+            array_push($array,$phone);
+        }else{
+            foreach($users as $user){
+                if($user->phone!=null){
+                    array_push($array,$user->phone);
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function getCiArray($ci){
+        $array=array();
+        $users=User::all();
+        if ($ci!=null){
+            array_push($array,$ci);
+        }else{
+            foreach($users as $user){
+                if($user->ci!=null){
+                    array_push($array,$user->ci);
+                }
+            }
+        }
+        return $array;
+    }
+
+    
+
+    public static function getEmailArray($email){
+        $array=array();
+        $users=User::all();
+        if ($email!=null){
+            array_push($array,$email);
+        }else{
+            foreach($users as $user){
+                if($user->email!=null){
+                    array_push($array,$user->email);
+                }
+            }
+        }
+        return $array;
+    }
+    
+
+    public static function isSuperAdmin(User $user){    
+        $permissions = Permission::where('user_id', $user->id)->where('role_id',4)->where('status',1)->get();
+        return ( sizeof($permissions) != 0);
     }
 
     public static function isAdmin(User $user){    

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Binnacle;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $sala=Room::all();
+        $sala=Room::where('laboratory_id', Auth::user()->laboratory_id)->get();
         return view('salas.index',compact('sala'));
     }
 
@@ -39,15 +40,12 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $name=request('name');
-        $status=request('status');
-
         $sala=Room::create([
             'name'=> request('name'),
-            'status'=> request('status'), 
-            
+            'laboratory_id' => Auth::user()->laboratory_id
         ]);
-        Binnacle::setInsert($sala->nombre,"salas", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert(request('name'),"salas",$actor);
         return redirect()->route('rooms.index');
     }
 
@@ -88,11 +86,10 @@ class RoomController extends Controller
             'status'=>['required'],
             ]);
         DB::table('rooms')->where('id',$id)->update([
-            'name'=>$dato['name'],
-            'status'=>$dato['status'],
-           
+            'name'=>$dato['nombre'],
             ]);
-        Binnacle::setUpdate($dato['nombre'],"salas", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($dato['nombre'],"salas", $actor);
             return redirect()->route('rooms.index');
     }
 
@@ -106,7 +103,8 @@ class RoomController extends Controller
     {
         $sala = Room::findOrFail($id);
         Room::destroy($id);
-        Binnacle::setDelete($sala->nombre,"salas", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setDelete($sala->nombre,"salas",$actor);
         return redirect()->route('rooms.index');
     }
 }

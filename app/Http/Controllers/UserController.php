@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Binnacle;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 Use App\Models\User;
@@ -16,10 +17,16 @@ class UserController extends Controller
     public function index()
     {
         //'user_id'=> Auth::user()->id
-        $id=Auth::user()->laboratory_id;
-        $users=DB::table('users')->where('laboratory_id',$id)->where('status','=',1)->get();
+        //$id=Auth::user()->laboratory_id;
+        $users= User::where('laboratory_id',Auth::user()->laboratory_id)->where('status','=',1)->get();
         return view('users.index',compact('users'));
-      
+    }
+
+    public function allUsers()
+    {
+        $users= User::all();
+        $users->load('laboratory');
+        return view('users.index',compact('users'));
     }
 
    
@@ -52,8 +59,11 @@ class UserController extends Controller
         ]);
         $user->laboratory_id=$id;
         $laboratorio=Laboratory::findOrfail($user->laboratory_id);
-        $user->username=User::getUniqueUsername($user->name,$laboratorio->name);
+        $user->username=User::getUniqueUsername($user->name,$laboratorio->name,$user->id);
         $user->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        
+        Binnacle::setInsert($user->name,"usuarios", $actor);
         $permiso=new Permission();
         $permiso->user_id=$user->id;
         $permiso->role_id= $request->roles;
@@ -97,9 +107,10 @@ class UserController extends Controller
           ]);
           $user=User::findOrfail($id);
         $laboratorio=Laboratory::findOrfail($user->laboratory_id);
-        $user->username=User::getUniqueUsername($user->name,$laboratorio->name);
+        $user->username=User::getUniqueUsername($user->name,$laboratorio->name,$user->id);
         $user->update();
-
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($user->name,"usuarios",$actor);
         DB::table('permissions')->where('user_id', $user->id)->update(['role_id'=>$request->roles]); 
         return redirect()->route('users.index');
 
@@ -115,6 +126,8 @@ class UserController extends Controller
        Permission::destroy($permiso->id);*/
         $user->status=0; //inavilitado
         $user->update();
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setDelete($user->name,"usuarios", $actor);
        return redirect()->route('users.index');
     }
 }

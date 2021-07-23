@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Binnacle;
 use Illuminate\Support\Facades\DB;
 use App\Models\Period;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        $periodo=Period::all();
+        $periodo=Period::where('laboratory_id', Auth::user()->laboratory_id)->get();
         return view('periods.index',compact('periodo'));
     }
 
@@ -43,11 +44,12 @@ class PeriodController extends Controller
         $fin=request('fin');
 
         $periodo = Period::create([
-            'inicio'=> request('inicio'),
-            'fin'=> request('fin'), 
-            
+            'begin'=> request('inicio'),
+            'end'=> request('fin'), 
+            'laboratory_id' => Auth::user()->laboratory_id
         ]);
-        Binnacle::setInsert($periodo->inicio." - ".$periodo->fin,"periodos", Auth::user());
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert($periodo->begin." - ".$periodo->end,"periodos", $actor);
         return redirect()->route('periods.index');
     }
 
@@ -88,10 +90,11 @@ class PeriodController extends Controller
             'fin'=>['required'],
             ]);
         DB::table('periods')->where('id',$id)->update([
-            'inicio'=>$dato['inicio'],
-            'fin'=>$dato['fin'],
-           
-            ]);
+            'begin'=>$dato['inicio'],
+            'end'=>$dato['fin'],
+        ]);
+        $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setUpdate($dato['inicio']."-".$dato['fin'],"periodos",$actor);
             return redirect()->route('periods.index');
     }
 
@@ -104,5 +107,6 @@ class PeriodController extends Controller
     public function destroy($id)
     {
         Period::destroy($id);
-        return redirect()->route('periods.index');    }
+        return redirect()->route('periods.index');   
+    }
 }

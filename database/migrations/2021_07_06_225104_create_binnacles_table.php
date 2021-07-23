@@ -19,7 +19,8 @@ class CreateBinnaclesTable extends Migration
             $table->string('entity');
             $table->string('table');
             $table->string('ip')->nullable();
-            $table->foreignId('laboratory_id')->constrained('laboratories');
+            $table->unsignedBigInteger('laboratory_id')->nullable();
+            $table->foreign('laboratory_id')->references('id')->on('laboratories');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

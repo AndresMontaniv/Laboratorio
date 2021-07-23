@@ -21,6 +21,15 @@
 @section('auth_header', 'Ingresa tus datos de paciente para acceder')
 
 @section('auth_body')
+    @if ($errors->count() > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="{{ route('patients.login') }}" method="post">
         {{ csrf_field() }}
 

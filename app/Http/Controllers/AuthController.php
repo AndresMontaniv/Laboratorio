@@ -10,16 +10,17 @@ class AuthController extends Controller {
 
     public $loginAfterSignUp = true;
 
-    public function register(Request $request) {
-        $user = new User();
-        $lab = Laboratory::findOrFail($request->laboratory_id);
+    public function register(Request $request) { //recibe una request
+        $user = new User(); //creamos nuevo usuario
+        $lab = Laboratory::findOrFail($request->laboratory_id); //en la request viene la llave de laboratorio
         $user->birthday = $request->birthday;
         $user->phone = $request->phone;
-        $user->username = User::getUniqueUsername($request->name, $lab->name);
+        $user->username = User::getUniqueUsername($request->name, $lab->name, $user->id); 
         $user->ci = $request->ci;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->laboratory_id = $request->laboratory_id;
         $user->save();
         if ($this->loginAfterSignUp) {
         return $this->login($request);
@@ -50,7 +51,7 @@ class AuthController extends Controller {
         'token' => 'required'
         ]);
         try {
-        JWTAuth::invalidate($request->token);
+        JWTAuth::invalidate($request->token); // invalidar el token
         return response()->json([
         'status' => 'ok',
         'message' => 'Cierre de sesión exitoso.'
