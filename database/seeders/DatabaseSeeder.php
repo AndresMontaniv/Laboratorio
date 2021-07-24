@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Analysis;
 use App\Models\Invoice;
+use App\Models\TestCampaign;
 use Illuminate\Database\Seeder;
 
 
@@ -76,6 +77,17 @@ class DatabaseSeeder extends Seeder
         $invoice2->grossPrice=225;
         $invoice2->user_id=1;
         $invoice2->save();
+
+        $testCampaign1= new TestCampaign();
+        $testCampaign1->campaign_id=1;
+        $testCampaign1->test_id=1;
+        $testCampaign1->save();
+
+        $testCampaign2= new TestCampaign();
+        $testCampaign2->campaign_id=2;
+        $testCampaign2->test_id=2;
+        $testCampaign2->save();
+
         
 
     }
