@@ -15,6 +15,7 @@ use App\Http\Controllers\ProofsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestCampaignController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
 use App\Models\Proof;
@@ -63,6 +64,7 @@ Route::resource('period', PeriodController::class)->names('periods');
 Route::resource('user',UserController::class)->names('users');
 
 Route::resource('userbuscador',UserBuscadorController::class)->names('userbuscador');
+Route::resource('analysis',AnalysisController::class)->names('analysis');
 
 Route::get('reservations_create', [ReservationController::class, 'create'] )->name('reservations_create');
 Route::get('reservacion', [ReservationController::class, 'index'] )->name('reservations');

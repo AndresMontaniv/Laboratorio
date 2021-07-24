@@ -352,6 +352,23 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'ADM Analisis',
+            'icon'    => 'fas fa-flask',
+            'icon_color' => 'red',
+           
+            'submenu' => [
+                [
+                    'text' => 'Gestionar Analisis',
+                    'icon'    => "fas fa-vial",
+                    'route'  => 'analysis.index',
+                    'icon_color'=>'red',
+
+                ],
+               
+            ],
+        ],
+
 
         [
             'text'    => 'ADM Facturación',

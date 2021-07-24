@@ -15,16 +15,18 @@ class CreateAnalysesTable extends Migration
     {
         Schema::create('analyses', function (Blueprint $table) {
             $table->id();
-            $table->float('discount');
-            $table->string('detail');
+            $table->float('discount')->default(0);
+            $table->string('detail')->nullable();
             $table->string('doc')->nullable();
             $table->Integer('status')->default('1');
             $table->float('price');
             $table->float('total');
             $table->unsignedBigInteger('patient_id');
+            $table->unsignedBigInteger('lab_id')->nullable();
             $table->unsignedBigInteger('nurse_id');
-            $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->unsignedBigInteger('proof_id');
             $table->foreign('patient_id')->references('id')->on('users');
+            $table->foreign('lab_id')->references('id')->on('laboratories');
             $table->foreign('nurse_id')->references('id')->on('users');
             $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->foreignId('proof_id')->constrained('proofs');
