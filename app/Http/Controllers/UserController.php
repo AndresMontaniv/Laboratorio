@@ -33,6 +33,7 @@ class UserController extends Controller
     public function create()
     {
         $roles=DB::table('roles')->where('id','!=',3)->where('id','!=',4)->get();
+        
        return view('users.create',compact('roles'));
     }
 
@@ -61,6 +62,7 @@ class UserController extends Controller
         $user->username=User::getUniqueUsername($user->name,$laboratorio->name,$user->id);
         $user->update();
         $actor = User::findOrFail(Auth::user()->id);
+        
         Binnacle::setInsert($user->name,"usuarios", $actor);
         $permiso=new Permission();
         $permiso->user_id=$user->id;
@@ -74,6 +76,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+       // $permiso=DB::table('permissions')->where('user_id',$id)->get();
         return view('users.show',compact('user'));
     }
 

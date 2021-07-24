@@ -3,16 +3,20 @@
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\Auth\PatientController;
+use App\Http\Controllers\BillsController;
 use App\Http\Controllers\BinnacleController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ProofsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
+use App\Models\Proof;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +44,13 @@ Route::get('patient/credentials/{id}',[PatientController::class, 'showCredential
 
 Route::get('binnacle/index',[BinnacleController::class, 'index'])->name('binnacle.index');
 Route::get('binnacle/all',[BinnacleController::class, 'all'])->name('binnacle.all');
+//-------------------------------------controladores xd ccc---------------------------
+Route::resource('proofs', ProofsController::class)->names('proofs');
+Route::get('proofshowall',[ProofsController::class, 'showall'])->name('proofshowall');
+Route::resource('bills',BillsController::class)->names('bills');
+Route::get('pdfactura/{id}',[ExcelController::class, 'Pdfactura'])->name('pdfactura');
 
+//------------------------------------------------------------------------------------
 
 Route::resource('role', RoleController::class)->names('roles');
 
@@ -96,3 +106,11 @@ Route::get('plans/desactive/{id}',[PlanController::class, 'desactivate'])->name(
 Route::post('plans/store',[PlanController::class, 'store'])->name('plans.store');
 Route::post('plans/update/{id}',[PlanController::class, 'update'])->name('plans.update');
 
+Route::get('campaign/index/{laboratory}',[CampaignController::class, 'index'])->name('campaign.index');
+Route::get('campaign/all',[CampaignController::class, 'all'])->name('campaign.all');
+Route::get('campaign/create',[CampaignController::class, 'create'])->name('campaign.create');
+Route::post('campaign/store',[CampaignController::class, 'store'])->name('campaign.store');
+Route::get('campaign/active/{id}',[CampaignController::class, 'active'])->name('campaign.active');
+Route::get('campaign/desactive/{id}',[CampaignController::class, 'desactive'])->name('campaign.desactive');
+Route::get('campaign/edit/{id}',[CampaignController::class, 'edit'])->name('campaign.edit');
+Route::post('campaign/update/{id}',[CampaignController::class, 'update'])->name('campaign.update');

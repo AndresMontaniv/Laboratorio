@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Enfermeria-MERLEN')
+@section('title', 'Laboratorio')
 
 @section('content_header')
     <h1>Editar Rol</h1>

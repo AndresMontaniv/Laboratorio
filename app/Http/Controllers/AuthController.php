@@ -70,6 +70,7 @@ class AuthController extends Controller {
             Binnacle::setLogin($user->username,"usuarios",$user);
             return response()->json([
                 'status' => 'ok',
+                'data' => $user
             ], 200);
          }
          return response()->json([

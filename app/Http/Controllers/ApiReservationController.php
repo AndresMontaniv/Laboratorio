@@ -31,6 +31,9 @@ class ApiReservationController extends Controller
     }
 
     public function searched(Request $request, $laboratory){ //mostrar los periodos disponibles y las datas usadas
+        if($request['date']== null){
+            $request['date'] = Carbon::now('America/Caracas')->today();
+        }
         $today = Carbon::now('America/Caracas')->today();
         if(Carbon::parse($request['date']) < $today){
             $today = Carbon::parse($request['date']);

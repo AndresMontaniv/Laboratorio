@@ -3,48 +3,55 @@
 @section('title', 'Laboratorio')
 
 @section('content_header')
-    <h1>Listar Roles</h1>
+    <h1>Listar Prueba</h1>
 @stop
 
 @section('content')
 <div class="card">
     <div class="card-header">
-        <a href="{{route('roles.create')}}" class="btn btn-primary btb-sm">Crear Rol</a>
+        <a href="{{route('proofs.create')}}" class="btn btn-primary btb-sm">Crear Análisis</a>
 
     </div>
 </div>
 <div class="card">
     <div class="card-body">
-        <table class="table table-striped" id="roles" style="width:100%">
+        <table class="table table-striped" id="proofs" style="width:100%">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre de Rol</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Imagen</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($roles as $rol)
-                 @if ($rol->id!=4)
+                @foreach ($proofs as $proof)
                      
                
                     <tr>
-                        <td>{{$rol->id}}</td>
-                        <td>{{$rol->name}}</td>                            
+                        <td>{{$proof->id}}</td>
+                        <td>{!!$proof->detail!!}</td> 
+                        <td>{{$proof->price}}</td>                            
+                        @if ($proof->image==NULL)
+                            <td><img src="{{asset('images/imagen.jpg')}}" alt="" width="60" height="70" ></td>
+                            @else
+                            <td><img src="{{asset('images/'.$proof->image)}}" alt="" width="60" height="70" ></td>
+                        @endif
+                       
                         <td >
-                            <form action="{{route('roles.destroy', $rol->id)}}" method="post">
+                            <form action="{{route('proofs.destroy', $proof->id)}}" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="{{route('roles.edit', $rol->id)}}" class="btn btn-primary btn-sm fas fa-edit  cursor-pointer"></a>
+                                <a href="{{route('proofs.edit', $proof->id)}}" class="btn btn-primary btn-sm fas fa-edit  cursor-pointer"></a>
 
                                 <button class="btn btn-danger btn-sm fas fa-trash-alt  cursor-pointer" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>                                    
 
                             </form>
                         </td>
-                        
                     </tr>
-                    @endif
+               
                 @endforeach
             </tbody>
         </table>
@@ -63,7 +70,7 @@
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-         $('#roles').DataTable();
+         $('#proofs').DataTable();
         } );
     </script> 
-@stop
+    @stop

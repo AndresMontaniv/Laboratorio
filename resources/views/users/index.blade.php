@@ -77,7 +77,7 @@
                                 </form>
                             </td>
                             <td>
-                                <a href="{{route('permissions.index', $user->id)}}" class="btn btn-success cursor-pointer"><i class="fas fa-key"></i><a> 
+                                <a href="{{route('permissions.index', $user->id)}}" class="btn btn-warning btn-sm cursor-pointer"><i class="fas fa-key"></i><a> 
                             </td>
                         </tr>
                     @endforeach
