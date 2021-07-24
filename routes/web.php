@@ -13,10 +13,12 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProofsController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TestCampaignController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
 use App\Models\Proof;
+use App\Models\TestCampaign;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -114,3 +116,9 @@ Route::get('campaign/active/{id}',[CampaignController::class, 'active'])->name('
 Route::get('campaign/desactive/{id}',[CampaignController::class, 'desactive'])->name('campaign.desactive');
 Route::get('campaign/edit/{id}',[CampaignController::class, 'edit'])->name('campaign.edit');
 Route::post('campaign/update/{id}',[CampaignController::class, 'update'])->name('campaign.update');
+
+Route::get('testCampaign/index/{id}',[TestCampaignController::class, 'index'])->name('testCampaign.index');
+Route::get('testCampaign/store/{proof}/{campaign}',[TestCampaignController::class, 'store'])->name('testCampaign.store');
+Route::get('testCampaign/active/{testCampaign}',[TestCampaignController::class, 'active'])->name('testCampaign.active');
+Route::get('testCampaign/desactive/{testCampaign}',[TestCampaignController::class, 'desactive'])->name('testCampaign.desactive');
+

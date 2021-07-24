@@ -47,6 +47,14 @@ class UserSeeder extends Seeder
                 'email' => 'maria@gmail.com',
                 'password' => Hash::make('123'),
                 'laboratory_id' => 1,
+            ],
+            [
+                'name' => 'sebastiansito',
+                'username' => 'TELCHI-sebastiansito5',
+                'phone' => '764121231',
+                'email' => 'sebas@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id' => 1,
             ]
            
         ]);

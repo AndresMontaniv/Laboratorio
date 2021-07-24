@@ -14,7 +14,8 @@ class campaign extends Model
         'discount',
         'body',
         'title',
-        'laboratory_id'
+        'laboratory_id',
+        'status'
     ];
     
     protected $dates = ['created_at', 'updated_at','initialDate','expiration'];
@@ -22,4 +23,5 @@ class campaign extends Model
     public function testCampaigns(){
         return $this->hasMany('App\Models\TestCampaign');
     }
+    
 }

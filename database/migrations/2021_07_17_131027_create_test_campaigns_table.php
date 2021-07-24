@@ -16,7 +16,7 @@ class CreateTestCampaignsTable extends Migration
         Schema::create('test_campaigns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('campaign_id')->constrained('campaigns');
-            $table->foreignId('test_id')->constrained('tests');
+            $table->foreignId('proof_id')->constrained('proofs');
             $table->Integer('status')->default('1');
             $table->timestamps();
         });

@@ -26,6 +26,7 @@
                     <th scope="col">descuento</th>
                     <th scope="col">estado</th>
                     <th scope="col">editar</th>
+                    <th scope="col">pruebas</th>
                 </tr>
             </thead>
 
@@ -49,6 +50,9 @@
                             @endif
                             <td>
                             <a href="{{route('campaign.edit', $campaign->id)}}" class="btn btn-info btn-sm fas fa-edit  cursor-pointer"></a>
+                            </td>
+                            <td>
+                                <a href="{{route('testCampaign.index', $campaign->id)}}" class="btn btn-info btn-sm ">pruebas</a>
                             </td>
                     </tr>
                 @endforeach

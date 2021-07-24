@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proof;
 use App\Models\Test;
 use App\Models\TestCampaign;
 use Illuminate\Http\Request;
@@ -15,8 +16,8 @@ class ApiTestController extends Controller
      */
     public function index($campaign) //muestra las pruebas de una campania en especifico 
     {
-        $testCampaign = TestCampaign::select('test_id')->where('campaign_id',$campaign)->where('status',1)->get();
-        $tests = Test::whereIn('id', $testCampaign)->get();
+        $testCampaign = TestCampaign::select('proof_id')->where('campaign_id',$campaign)->where('status',1)->get();
+        $tests = Proof::whereIn('id', $testCampaign)->get();
             return response()->json([
             'status' => 'ok',
             'data' => $tests

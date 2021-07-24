@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\campaign;
+use App\Models\Proof;
 use App\Models\TestCampaign;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
 
 class TestCampaignController extends Controller
 {
@@ -12,9 +16,24 @@ class TestCampaignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        // $user = User::findOrFail($id);
+        // $using = UserSpeciality::select('speciality_id')->where('user_id',$user->id)->get();
+        // $User_Specialities = UserSpeciality::where('user_id',$id)->get();
+        // $User_Specialities->load('speciality');
+        // $User_Specialities->load('user');
+        // $specialities = Speciality::where('status',1)->whereNotIn('id', $using)->where('laboratory_id',$user->laboratory_id )->get();
+
+        $campaign =  campaign::findOrFail($id);
+        $using = TestCampaign::select('proof_id')->where('campaign_id', $campaign->id)->get();
+        $usedTests = TestCampaign::where('campaign_id',$id)->get();
+        $usedTests->load('proof');
+        $usedTests->load('campaign');
+        $notUsedTests = Proof::where('status',1)->whereNotIn('id',$using)->where('laboratory_id',$campaign->laboratory_id)->get();
+        // $notUsedTests = Proof::whereNotIn('id',TestCampaign::select('proof_id')->where('campaign_id',$id)
+        // ->get())->where('laboratory_id', Auth::user()->laboratory_id)->get();  //pruebas del lab que no estan en la campania
+        return view('testsCampaign.index',compact('usedTests'),compact('notUsedTests'))->with('campaign', $campaign);
     }
 
     /**
@@ -24,7 +43,7 @@ class TestCampaignController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,9 +52,13 @@ class TestCampaignController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($proof, $campaign)
     {
-        //
+        TestCampaign::create([
+            'proof_id' => $proof,
+            'campaign_id' => $campaign
+        ]);
+        return redirect()->route('testCampaign.index',$campaign);
     }
 
     /**
@@ -44,6 +67,21 @@ class TestCampaignController extends Controller
      * @param  \App\Models\TestCampaign  $testCampaign
      * @return \Illuminate\Http\Response
      */
+
+    public function active($testCampaign){
+        $cambiar = TestCampaign::findOrFail($testCampaign);
+        $cambiar->status = 1;
+        $cambiar->update();
+        return redirect()->route('testCampaign.index',$cambiar->campaign_id);
+    }
+
+    public function desactive($testCampaign){
+        $cambiar = TestCampaign::findOrFail($testCampaign);
+        $cambiar->status = 0;
+        $cambiar->update();
+        return redirect()->route('testCampaign.index',$cambiar->campaign_id);
+    }
+
     public function show(TestCampaign $testCampaign)
     {
         //

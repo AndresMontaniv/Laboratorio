@@ -27,7 +27,7 @@ class CreateAnalysesTable extends Migration
             $table->foreign('patient_id')->references('id')->on('users');
             $table->foreign('nurse_id')->references('id')->on('users');
             $table->foreign('invoice_id')->references('id')->on('invoices');
-            $table->foreignId('test_id')->constrained('tests');
+            $table->foreignId('proof_id')->constrained('proofs');
             $table->timestamps();
         });
     }

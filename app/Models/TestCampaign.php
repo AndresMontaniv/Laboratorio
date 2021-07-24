@@ -10,12 +10,13 @@ class TestCampaign extends Model
     use HasFactory;
 
     protected $fillable = [
-        'test_id',
+        'proof_id',
         'campaign_id',
+        'status'
     ];
 
-    public function test(){
-        return $this->belongsTo('App\Models\Test');
+    public function proof(){
+        return $this->belongsTo('App\Models\Proof');
     }
 
     public function campaign(){
