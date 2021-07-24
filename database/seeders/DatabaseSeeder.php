@@ -40,27 +40,7 @@ class DatabaseSeeder extends Seeder
         $user3->laboratory_id = 1;
         $user3->update();
 
-        $analysis1= new Analysis();
-        $analysis1->discount=0.25;
-        $analysis1->detail="detalle1";
-        $analysis1->doc="doc1";
-        $analysis1->price=100;
-        $analysis1->total=75;
-        $analysis1->patient_id=1;
-        $analysis1->nurse_id=1;
-        $analysis1->test_id=1;
-        $analysis1->save();
-
-        $analysis2= new Analysis();
-        $analysis2->discount=0;
-        $analysis2->detail="detalle2";
-        $analysis2->doc="doc2";
-        $analysis2->price=200;
-        $analysis2->total=200;
-        $analysis2->patient_id=2;
-        $analysis2->nurse_id=2;
-        $analysis2->test_id=2;
-        $analysis2->save();
+        
 
         $invoice1= new Invoice();
         $invoice1->discount=0.25;
