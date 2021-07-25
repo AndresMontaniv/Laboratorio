@@ -65,14 +65,17 @@ class CampaignController extends Controller
             'title' => ['required'],
             'laboratory_id' => ['required'],
         ]);
-        campaign::create([
+        
+        $campaign=campaign::create([
             'expiration' => request('expiration'),
             'initialDate' => request('initialDate'),
             'body' => request('body'),
             'title' => request('title'),
             'laboratory_id' => request('laboratory_id'),
-            'discount' => request('discount')
+            'discount' => request('discount'),
         ]);
+        $code="CAMPDC".$campaign->id;
+        $campaign->discountCode=$code;
         $actor = User::findOrFail(Auth::user()->id);
         Binnacle::setInsert(request('title'),"campaña",$actor);
         return redirect()->route('campaign.all');

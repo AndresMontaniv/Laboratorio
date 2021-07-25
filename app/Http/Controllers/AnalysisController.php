@@ -6,6 +6,7 @@ use App\Models\Analysis;
 use App\Models\Laboratory;
 use App\Models\Permission;
 Use App\Models\User;
+use App\Models\campaign;
 use App\Models\Proof;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class AnalysisController extends Controller
      */
     public function index()
     {
-        $analyses=Analysis::where('lab_id',Auth::user()->laboratory_id)->get();
+        $analyses=Analysis::where('lab_id',Auth::user()->laboratory_id)->where('status',1)->get();
         return view('analysis.index', compact('analyses'));
     }
 
@@ -61,8 +62,9 @@ class AnalysisController extends Controller
     public function store(Request $request)
     {
         $lab=Laboratory::findOrFail(Auth::user()->laboratory_id);
-        $discount=0; //Aqui va a calcular el discount cuanto tenga la class
+        $discount=campaign::where('discountCode',request('code'))->value('discount');
         $price=Proof::where('id',request('proof_id'))->value('price');
+        
         $total=$price-($price*$discount);
         date_default_timezone_set("America/La_Paz");
         $analysis=Analysis::create([
@@ -103,27 +105,28 @@ class AnalysisController extends Controller
      */
     public function edit($id)
     {
+        
         $analysis=Analysis::findOrFail($id);
         $laboratorio=Laboratory::findOrFail($analysis->lab_id);
         $prueba=Proof::findOrFail($analysis->proof_id);
         $paciente=User::findOrFail($analysis->patient_id);
         $enfermera=User::findOrFail($analysis->nurse_id);
-
+        
         $nurses=Permission::where('role_id',2)->get();
         $array=array();
         foreach($nurses as $nurse){
             array_push($array,$nurse->user_id);
         }
-        $nurses=User::whereIn('id',$array)->whereNot('id',$enfermera->id)->where('laboratory_id',$lab->id)->get();
+        $nurses=User::whereIn('id',$array)->where('id','!=',$enfermera->id)->where('laboratory_id',$laboratorio->id)->get();
 
         $patients=Permission::where('role_id',3)->get();
         $array=array();
         foreach($patients as $patient){
             array_push($array,$patient->user_id);
         }
-        $patients=User::whereIn('id',$array)->whereNot('id',$paciente->id)->where('laboratory_id',$lab->id)->get();
+        $patients=User::whereIn('id',$array)->where('id','!=',$paciente->id)->where('laboratory_id',$laboratorio->id)->get();
 
-        $proofs=Proof::where('laboratory_id',$lab->id)->whereNot('id',$prueba->id)->get();
+        $proofs=Proof::where('laboratory_id',$laboratorio->id)->where('id','!=',$prueba->id)->get();
 
         return view('analysis.edit',compact('analysis'),['nurses'=>$nurses,
         'patients'=> $patients ,'proofs'=>$proofs, 'enfermera'=>$enfermera,
@@ -142,7 +145,7 @@ class AnalysisController extends Controller
     {
         $analysis=Analysis::findOrFail($id);
         $lab=Laboratory::findOrFail(Auth::user()->laboratory_id);
-        $discount=0; //Aqui va a calcular el discount cuanto tenga la class
+        $discount=campaign::where('discountCode',request('code'))->value('discount');
         $price=Proof::where('id',request('proof_id'))->value('price');
         $total=$price-($price*$discount);
         date_default_timezone_set("America/La_Paz");
@@ -150,7 +153,7 @@ class AnalysisController extends Controller
         
         if ($request->hasFile('doc')){
             $filename= $request->doc->getClientOriginalName();
-            $request->image->storeAs('analisis',$filename, 'public');
+            $request->doc->storeAs('analisis',$filename, 'public');
         }
 
 
@@ -178,6 +181,6 @@ class AnalysisController extends Controller
     {
         $analysis=Analysis::findOrFail($id);
         $analysis->status=0;
-        $analysis->save();
+        $analysis->update();
     }
 }

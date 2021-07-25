@@ -14,7 +14,7 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tests')->insert([
+        DB::table('proofs')->insert([
             [
                 'name' => 'Prueba de sangre',
                 'laboratory_id' => 1,

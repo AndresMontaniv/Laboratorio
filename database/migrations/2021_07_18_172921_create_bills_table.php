@@ -20,7 +20,8 @@ class CreateBillsTable extends Migration
             $table->decimal('importe')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->integer('status')->default('1');
-            $table->unsignedBigInteger('laboratory_id');
+            $table->foreignId('analysis_id')->constrained('analyses');
+            $table->foreignId('laboratory_id')->constrained('laboratories');
             $table->timestamps();
         });
     }

@@ -55,6 +55,30 @@ class UserSeeder extends Seeder
                 'email' => 'sebas@gmail.com',
                 'password' => Hash::make('123'),
                 'laboratory_id' => 1,
+            ],
+            [
+                'name' => 'Enfermero',
+                'username' => 'TELCHI-enfermero',
+                'phone' => '76411131',
+                'email' => 'enfermero@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id' => 1,
+            ],
+            [
+                'name' => 'Paciente1',
+                'username' => 'TELCHI-Paciente15',
+                'phone' => '764121231',
+                'email' => 'paciente1@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id' => 1,
+            ],
+            [
+                'name' => 'Paciente2',
+                'username' => 'TELCHI-Paciente25',
+                'phone' => '764222232',
+                'email' => 'paciente2@gmail.com',
+                'password' => Hash::make('123'),
+                'laboratory_id' => 1,
             ]
            
         ]);

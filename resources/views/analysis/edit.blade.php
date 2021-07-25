@@ -25,7 +25,7 @@
 
             <br>
             <h5 class="text-capitalize">Enfermera:</h5>
-            <select name="enfermera_id" id="select-enfermera" class="form-control" onchange="habilitar()" >
+            <select name="nurse_id" id="select-enfermera" class="form-control" onchange="habilitar()" >
                 <option value="{{$enfermera->id}}">{{$enfermera->name}}</option>
                     @foreach ($nurses as $nurse)
                         <option value="{{$nurse->id}}">
@@ -36,7 +36,7 @@
             <br>
 
             <h5 class="text-capitalize">Prueba:</h5>
-            <select name="prueba_id" id="select-prueba" class="form-control" onchange="habilitar()" >
+            <select name="proof_id" id="select-prueba" class="form-control" onchange="habilitar()" >
                 <option value="{{$prueba->id}}">{{$prueba->name}}</option>
                     @foreach ($proofs as $proof)
                         <option value="{{$proof->id}}">
@@ -46,11 +46,16 @@
             </select>
             <br>
             <h5 class="text-capitalize">Detalle :</h5>
-            <input type="text"  name="detail" class="focus border-primary  form-control">
+            <input type="text"  name="detail" value="{{$analysis->detail}}" class="focus border-primary  form-control">
             
             <br>
-            <h5 class="text-capitalize">Documento :</h5>
-            <input type="file"  name="doc" class="focus border-primary  form-control">
+            <h5 class="text-capitalize">Documento :{{$analysis->doc}} </h5>
+            <input type="file"  name="doc"  class="focus  border-0 form-control">
+            
+            <br>
+
+            <h5 class="text-capitalize">Codigo de Descuento</h5>
+            <input type="text"  name="code"  class="focus border-primary  form-control">
             
             <br>
             <br>
