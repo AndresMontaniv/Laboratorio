@@ -14,7 +14,7 @@
 
     <div>
         <label for="name">Nombre paciente</label>
-        <input type="text"  name="user_id"  class="focus border-primary  form-control" value={{DB::table('users')->where('id',$bills->user_id)->value('username')}}>
+        <input type="text" readonly name="user_id"  class="focus border-primary  form-control" value={{DB::table('users')->where('id',$bills->user_id)->value('username')}}>
 
          
         @error('user_id')

@@ -37,7 +37,7 @@
                
                 <div class="form-row">
 
-                    <div class="form-group ">
+                   
                         <label for="image">Image</label>
                         <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" value="{{old('image')}}">
                    
@@ -45,7 +45,7 @@
                         <small>*{{$message}}</small>
                         <br><br>
                     @enderror
-                    </div>
+                   
                 </div>
               
                 <div class="form-group">

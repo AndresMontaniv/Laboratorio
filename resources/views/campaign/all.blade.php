@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Consultorio-Sonrie')
+@section('title', 'Laboratorio')
 
 @section('content_header')
     <h1>Campañas</h1>
@@ -52,7 +52,7 @@
                             <a href="{{route('campaign.edit', $campaign->id)}}" class="btn btn-info btn-sm fas fa-edit  cursor-pointer"></a>
                             </td>
                             <td>
-                                <a href="{{route('testCampaign.index', $campaign->id)}}" class="btn btn-info btn-sm ">pruebas</a>
+                                <a href="{{route('testCampaign.index', $campaign->id)}}" class="btn btn-warning btn-sm ">Prueba</a>
                             </td>
                     </tr>
                 @endforeach
