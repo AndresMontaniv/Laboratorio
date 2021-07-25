@@ -9,7 +9,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <a href="{{route('proofs.create')}}" class="btn btn-primary btb-sm">Crear Análisis</a>
+        <a href="{{route('proofs.create')}}" class="btn btn-primary btb-sm">Crear Prueba</a>
 
     </div>
 </div>

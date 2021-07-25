@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Binnacle;
 use App\Models\campaign;
 use App\Models\User;
+use App\Models\Proof;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

@@ -25,8 +25,7 @@ class ExcelController extends Controller
 
    public function Pdfactura($id){
       $bill=Bill::findOrfail($id);
-        $analyse=DB::table('analyses_bill')->where('bill_id',$bill->id)->get();
-      $pdf=PDF::loadview('bills.pdf',compact('analyse','bill'));
+      $pdf=PDF::loadview('bills.pdf',compact('bill'));
      // return $pdf->download('Users.pdf');
      return $pdf->stream('factura.pdf');
    }
