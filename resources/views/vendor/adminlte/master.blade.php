@@ -96,7 +96,7 @@
             x.parentNode.insertBefore(s, x);
           }
         }
-        </script>
+        </script> 
     {{-- END CHATBOT  --}}
 
     {{-- Base Scripts --}}
