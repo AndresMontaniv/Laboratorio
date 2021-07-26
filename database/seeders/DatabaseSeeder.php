@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialitySeeder::class);
         $this->call(CampaignSeeder::class);
         $this->call(ProofSeeder::class);
-        // $this->call(TestSeeder::class);
+        $this->call(TestCampaignSeeder::class);
+        $this->call(TestSeeder::class);
         //esto es para los 3 usuarios del seeder que no se porque no se les asigna el laboratory_id
         $user1 = User::findOrFail(2);
         $user1->laboratory_id = 1;
@@ -50,25 +51,6 @@ class DatabaseSeeder extends Seeder
         // $invoice1->user_id=1;
         // $invoice1->save();
 
-        $invoice2= new Invoice();
-        $invoice2->discount=0.15;
-        $invoice2->nit="987654321";
-        $invoice2->netPrice=200;
-        $invoice2->grossPrice=225;
-        $invoice2->user_id=1;
-        $invoice2->save();
-
-        $testCampaign1= new TestCampaign();
-        $testCampaign1->campaign_id=1;
-        $testCampaign1->test_id=1;
-        $testCampaign1->save();
-
-        $testCampaign2= new TestCampaign();
-        $testCampaign2->campaign_id=2;
-        $testCampaign2->test_id=2;
-        $testCampaign2->save();
-
-        
 
     }
 }

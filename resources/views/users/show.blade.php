@@ -18,7 +18,7 @@
         <div class="author">
           <a href="#" class="d-flex">
             @if ($user->photo != null)
-            <img src="{{ asset('/storage/images/'.$user->photo )}}" alt="avatar" width="150" height="150">    
+            <img src="{{ asset('images/'.$user->photo )}}" alt="avatar" width="150" height="150">    
             @else
             <img src="{{asset('./Icons/user.png')}}" alt="avatar" width="150" height="150">
             @endif

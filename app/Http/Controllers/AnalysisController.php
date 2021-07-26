@@ -114,16 +114,16 @@ class AnalysisController extends Controller
         foreach($nurses as $nurse){
             array_push($array,$nurse->user_id);
         }
-        $nurses=User::whereIn('id',$array)->whereNot('id',$enfermera->id)->where('laboratory_id',$lab->id)->get();
+        $nurses=User::whereIn('id',$array)->whereNot('id',$enfermera->id)->where('laboratory_id',$laboratorio->id)->get();
 
         $patients=Permission::where('role_id',3)->get();
         $array=array();
         foreach($patients as $patient){
             array_push($array,$patient->user_id);
         }
-        $patients=User::whereIn('id',$array)->whereNot('id',$paciente->id)->where('laboratory_id',$lab->id)->get();
+        $patients=User::whereIn('id',$array)->whereNot('id',$paciente->id)->where('laboratory_id',$laboratorio->id)->get();
 
-        $proofs=Proof::where('laboratory_id',$lab->id)->whereNot('id',$prueba->id)->get();
+        $proofs=Proof::where('laboratory_id',$laboratorio->id)->whereNot('id',$prueba->id)->get();
 
         return view('analysis.edit',compact('analysis'),['nurses'=>$nurses,
         'patients'=> $patients ,'proofs'=>$proofs, 'enfermera'=>$enfermera,

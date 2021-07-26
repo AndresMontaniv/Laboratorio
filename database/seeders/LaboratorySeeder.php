@@ -18,7 +18,6 @@ class LaboratorySeeder extends Seeder
             [
                 'name' => 'Telchi',
                 'status' => 1,
-                'imagen' => 'logotelchi.png'
             ]
         ]);
     }

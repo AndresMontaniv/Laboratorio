@@ -66,10 +66,20 @@ class PatientController extends Controller
             'labId' => ['required']
         ]);
         //dd($request->image);
+
+        // if ($request->hasFile('image')) {
+        //     $imgname=$request->image->getClientOriginalName();
+        //     $destino=public_path('images');
+        //     $request->image->move($destino,$imgname);
+        // }else{
+        //      $imgname=NULL;
+        // }
+
         $filename = null;
         if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('images', $filename, 'public');
+            $destino=public_path('images');
+            $request->image->move($destino,$filename);
         }
         $user = User::create([
             'phone' => request('telefono'),

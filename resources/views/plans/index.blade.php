@@ -13,7 +13,7 @@
                         @if ($plan->image == null)
                         <li class="list-group-item" style= "text-align: center;"><img src="{{asset('./Icons/offer.png')}}" style="text-align: center;" class="card-img-top" alt="logo" width="100" height="200"></li>
                         @else
-                        <li class="list-group-item" style= "text-align: center;"><img src="{{ asset('/storage/images/'.$plan->image )}}" class="card-img-top" alt="logo" width="150" height="200"></li>
+                        <li class="list-group-item" style= "text-align: center;"><img src="{{ asset('images/'.$plan->image )}}" class="card-img-top" alt="logo" width="150" height="200"></li>
                         @endif
                         <li class="list-group-item" style= "text-align: center;"><h4 class="card-title">{{$plan->name}}</h4></li>
                         <li class="list-group-item"><p class="card-text" style="width: 12rem; height: 7rem; padding: 3px; margin: 8px; text-align: center;">{{$plan->description}}</p></li>

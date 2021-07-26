@@ -21,6 +21,14 @@ class ApiTestController extends Controller
             return response()->json([
             'status' => 'ok',
             'data' => $tests
+            ], 200);
+    }
+
+    public function proofs($id){
+        $proofs = Proof::findOrFail($id);
+        return response()->json([
+            'status' => 'ok',
+            'data' => $proofs
         ], 200);
     }
  

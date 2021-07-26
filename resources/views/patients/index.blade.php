@@ -6,7 +6,7 @@
             <ul class="list-group list-group-flush "> 
                 @if (Auth::user()->photo != null)
                 <li class="list-group-item" style="text-align: center">
-                    <img src="{{ asset('/storage/images/'.Auth::user()->photo )}}" alt="avatar" width="150" height="150">
+                    <img src="{{ asset('images/'.Auth::user()->photo )}}" alt="avatar" width="150" height="150">
                 </li>
                 @endif
                 <li class="list-group-item" style="text-align: center">{{"Nombre: ".Auth::user()->name}}</li>
