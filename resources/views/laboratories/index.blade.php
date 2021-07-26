@@ -32,7 +32,7 @@
                             @if ($laboratory->imagen == null)
                             <img src="{{asset('./Icons/lab.png')}}" alt="avatar" width="50" height="50">  
                             @else
-                            <img src="{{ asset('/storage/images/'. $laboratory->imagen )}}" alt="avatar" width="60" height="60">
+                            <img src="{{ asset('images/'. $laboratory->imagen )}}" alt="avatar" width="60" height="60">
                             @endif
                         </td>
                         <td>{{$laboratory->name}}</td>

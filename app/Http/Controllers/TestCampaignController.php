@@ -18,13 +18,6 @@ class TestCampaignController extends Controller
      */
     public function index($id)
     {
-        // $user = User::findOrFail($id);
-        // $using = UserSpeciality::select('speciality_id')->where('user_id',$user->id)->get();
-        // $User_Specialities = UserSpeciality::where('user_id',$id)->get();
-        // $User_Specialities->load('speciality');
-        // $User_Specialities->load('user');
-        // $specialities = Speciality::where('status',1)->whereNotIn('id', $using)->where('laboratory_id',$user->laboratory_id )->get();
-
         $campaign =  campaign::findOrFail($id);
         $using = TestCampaign::select('proof_id')->where('campaign_id', $campaign->id)->get();
         $usedTests = TestCampaign::where('campaign_id',$id)->get();

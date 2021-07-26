@@ -77,10 +77,17 @@ class LaboratoryController extends Controller
             'birthday' => ['date'],
             'password' => ['required','string','min:3', 'confirmed'],
         ]);
+        // $filename1 = null;
+        // if($request->hasFile('labImg')){
+        //     $filename1 = $request->labImg->getClientOriginalName(). time();
+        //     $request->labImg->storeAs('images', $filename1, 'public');
+        // }
+
         $filename1 = null;
         if($request->hasFile('labImg')){
-            $filename1 = $request->labImg->getClientOriginalName(). time();
-            $request->labImg->storeAs('images', $filename1, 'public');
+            $filename1 = $request->labImg->getClientOriginalName();
+            $destino=public_path('images');
+            $request->labImg->move($destino,$filename1);
         }
 
         $lab = Laboratory::create([ //create a new instance of laboratory
@@ -97,12 +104,20 @@ class LaboratoryController extends Controller
             'plan_id' => $plan->id,
             'laboratory_id' => $lab->id
         ]);
+        
+        // $filename = null;
+        // if($request->hasFile('image')){
+        //     $filename = $request->image->getClientOriginalName();
+        //     $request->image->storeAs('images', $filename, 'public');
+        // }
+        
         $filename = null;
         if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('images', $filename, 'public');
+            $destino=public_path('images');
+            $request->image->move($destino,$filename);
         }
-        
+
         $user = User::create([
             'name' => request('name'),
             'phone' => request('phone'),
