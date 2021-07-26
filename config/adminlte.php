@@ -283,7 +283,8 @@ return [
         ],
         [
             'text' => 'Campañas',
-            'icon' => 'fas fa-fw fa-address-book',
+            'icon' => 'fas fa-ad',
+            'icon_color' => 'red',
             'can'  => 'admin',
             'route' => 'campaign.all'
         ],
@@ -354,13 +355,13 @@ return [
 
         [
             'text'    => 'ADM Analisis',
-            'icon'    => 'fas fa-flask',
+            'icon'    => 'fas fa-vials',
             'icon_color' => 'red',
            
             'submenu' => [
                 [
                     'text' => 'Gestionar Analisis',
-                    'icon'    => "fas fa-vial",
+                    'icon'    => "fas fa-diagnoses",
                     'route'  => 'analysis.index',
                     'icon_color'=>'red',
 

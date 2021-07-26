@@ -33,21 +33,21 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($analyses as $anlysis)
+                    @foreach ($analyses as $analysis)
                         <tr>
-                            <td>{{$anlysis->id}}</td>
-                            <td>{{$anlysis->lab_id}}</td>
+                            <td>{{$analysis->id}}</td>
+                            <td>{{$analysis->lab_id}}</td>
                             <td>{{$analysis->updated_at}}</td> 
-                            <td>{{DB::table('users')->where('id',$anlysis->patient_id)->value('name')}}</td> 
-                            <td>{{$anlysis->total}}</td>
+                            <td>{{DB::table('users')->where('id',$analysis->patient_id)->value('name')}}</td> 
+                            <td>{{$analysis->total}}</td>
                             
                             <td>
                                 <form action="" method="post">
                                     @csrf
                                     @method('delete')
 
-                                    <a href="{{route('bills.edit',$anlysis->id)}}" class="btn btn-primary btn-sm fas fa-edit  cursor-pointer"></a>
-                                    <a class="btn btn-success btn-sm fas fa-eye  cursor-pointer" href="{{route('bills.show',$facturas->id)}}"></a>
+                                    <a href="{{route('analysis.edit',$analysis->id)}}" class="btn btn-primary btn-sm fas fa-edit  cursor-pointer"></a>
+                                    <a class="btn btn-success btn-sm fas fa-eye  cursor-pointer" href="{{route('analysis.show',$analysis->id)}}"></a>
 
                                     <button class="btn btn-danger btn-sm fas fa-trash-alt" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>
 

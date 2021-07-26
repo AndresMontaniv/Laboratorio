@@ -114,30 +114,37 @@
 				<div class="row my-2">
 					<div class="col">
 						
-					{{--	<table class="table table-striped" id="pac" style="width:100%">
+						<table class="table table-striped" id="pac" style="width:100%">
 								<thead>
 									<tr>
 										<th>CÓDIGO</th>
+										<th>DETALLE DE  ANÁLISIS</th>
 										<th>NOMBRE ANÁLISIS</th>
 										<th>PRECIO </th>
 									</tr>
 
 								</thead>
 								<tbody>
-									@foreach ($analyse as $analyses)
+					
+							 <?php
+							 $id=DB::table('analyses')->where('id',$bill->analysis_id)->value('id');
+							 ?>
+							
 									
 										<tr>
-											<td>{{DB::table('analyses')->where('id',$analyses->analyses_id)->value('id')}}</td>
-											<td>{{DB::table('analyses')->where('id',$analyses->analyses_id)->value('name')}}</td>
-											<td>{{DB::table('analyses')->where('id',$analyses->analyses_id)->value('price')}}</td>
+
+											<td>{{$id}}</td>
+											<td>{{DB::table('analyses')->where('id',$bill->analysis_id)->value('detail')}}</td>
+											<td>{{DB::table('proofs')->where('id',$id)->value('name')}}</td>
+											<td>{{DB::table('proofs')->where('id',$id)->value('price')}}</td>
 										</tr>
-									@endforeach
+								
 									<tr>
-										<td colspan="2" class="text-bold">IMPORTE TOTAL</td>
+										<td colspan="3" class="text-bold">IMPORTE TOTAL</td>
 										<td>{{$bill->importe}}</td>
 									</tr>
 								</tbody>
-							</table>--}}
+							</table>
 					
 					
 					</div>

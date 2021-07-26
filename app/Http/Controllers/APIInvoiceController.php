@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Invoice;
+use App\Models\Bill;
 
 class APIInvoiceController extends Controller
 {
@@ -14,14 +14,14 @@ class APIInvoiceController extends Controller
      */
     public function index() // getting all invoices 
     {
-        $invoices=Invoice::all();
+        $invoices=Bill::all();
         return response($invoices, 200);
     }
 
     public function getInvoices($userId) // getting all invoices from a User
     {
         
-        $invoices=Invoice::where('user_id',$userId)->get();
+        $invoices=Bill::where('user_id',$userId)->get();
         return response($invoices, 200);
     }
 
@@ -44,7 +44,7 @@ class APIInvoiceController extends Controller
      */
     public function show($id)
     {
-        $invoice=Invoice::findOrFail($id);
+        $invoice=Bill::findOrFail($id);
         return response($invoice, 200);
     }
 

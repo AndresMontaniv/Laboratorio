@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Consultorio-Sonrie')
+@section('title', 'Laboratorio')
 
 @section('content_header')
     <h1>Crear nuevo campaña</h1>
@@ -67,6 +67,10 @@
                         <br><br>
                     @enderror
             </div>
+            <br>
+              
+
+
 
             <input type="hidden" name="laboratory_id" value="{{Auth::user()->laboratory_id}}">
             <br><br>

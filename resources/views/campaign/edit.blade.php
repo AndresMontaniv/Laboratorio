@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Consultorio-Sonrie')
+@section('title', 'Laboratorio')
 
 @section('content_header')
     <h1>Editar campaña</h1>

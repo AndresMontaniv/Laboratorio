@@ -24,7 +24,7 @@
 
             <br>
             <h5 class="text-capitalize">Enfermera:</h5>
-            <select name="enfermera_id" id="select-enfermera" class="form-control" onchange="habilitar()" >
+            <select name="nurse_id" id="select-enfermera" class="form-control" onchange="habilitar()" >
                 <option value="nulo">Seleccione una Enfermera</option>
                     @foreach ($nurses as $nurse)
                         <option value="{{$nurse->id}}">
@@ -35,7 +35,7 @@
             <br>
 
             <h5 class="text-capitalize">Prueba:</h5>
-            <select name="prueba_id" id="select-prueba" class="form-control" onchange="habilitar()" >
+            <select name="proof_id" id="select-prueba" class="form-control" onchange="habilitar()" >
                 <option value="nulo">Seleccione una Prueba</option>
                     @foreach ($proofs as $proof)
                         <option value="{{$proof->id}}">
@@ -44,7 +44,8 @@
                     @endforeach
             </select>
             <br>
-            
+            <h5 class="text-capitalize">Codigo de Descuento</h5>
+            <input type="text"  name="code"  class="focus border-primary  form-control">
             
             <br>
             <br>
