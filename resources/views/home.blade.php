@@ -17,6 +17,6 @@
             <h1>Hola soy paciente</h1>
             <br>
         @endcan
-    </div>
+    </div> 
 </div>
 @endsection
