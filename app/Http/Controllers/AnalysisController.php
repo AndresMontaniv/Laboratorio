@@ -25,6 +25,13 @@ class AnalysisController extends Controller
         return view('analysis.index', compact('analyses'));
     }
 
+    public function myAnalyses($id)
+    {
+        $analyses= Analysis::where('patient_id', $id)->get();
+        $analyses->load('nurse');
+        return view('analysis.myAnalysis', compact('analyses'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

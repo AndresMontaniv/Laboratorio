@@ -67,7 +67,7 @@
                             <a class="nav-link" href="{{route('reservation.myReservations', Auth::user()->id)}}">{{ __('mis reservas') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('mis analisis') }}</a>
+                            <a class="nav-link" href="{{route('analysis.myAnalyses',Auth::user()->id )}}">{{ __('mis analisis') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('proofshowall')}}">{{ __('Laboratorio Análisis') }}</a>

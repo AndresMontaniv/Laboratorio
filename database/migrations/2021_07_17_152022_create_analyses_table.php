@@ -19,8 +19,8 @@ class CreateAnalysesTable extends Migration
             $table->string('detail')->nullable();
             $table->string('doc')->nullable();
             $table->Integer('status')->default('1');
-            $table->float('price');
-            $table->float('total');
+            $table->float('price')->nullable();
+            $table->float('total')->nullable();
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('lab_id')->nullable();
             $table->unsignedBigInteger('nurse_id');

@@ -64,7 +64,8 @@ Route::resource('period', PeriodController::class)->names('periods');
 Route::resource('user',UserController::class)->names('users');
 
 Route::resource('userbuscador',UserBuscadorController::class)->names('userbuscador');
-Route::resource('analysis',AnalysisController::class)->names('analysis');
+Route::resource('analysis',AnalysisController::class)->names('analysis'); 
+Route::get('analysis/myAnalyses/{id}', [AnalysisController::class, 'myAnalyses'] )->name('analysis.myAnalyses');
 
 Route::get('reservations_create', [ReservationController::class, 'create'] )->name('reservations_create');
 Route::get('reservacion', [ReservationController::class, 'index'] )->name('reservations');

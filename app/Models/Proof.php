@@ -22,4 +22,8 @@ class Proof extends Model
     public function testCampaigns(){
         return  $this->hasMany('App\Models\TestCampaign');
     }    
+
+    public function analyses(){
+        return $this->hasMany('App\Models\Analysis');
+    }
 }
