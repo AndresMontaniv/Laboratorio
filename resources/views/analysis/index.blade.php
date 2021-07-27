@@ -36,7 +36,7 @@
                     @foreach ($analyses as $analysis)
                         <tr>
                             <td>{{$analysis->id}}</td>
-                            <td>{{$analysis->lab_id}}</td>
+                            <td>{{DB::table('laboratories')->where('id',$analysis->lab_id)->value('name')}}</td> 
                             <td>{{$analysis->updated_at}}</td> 
                             <td>{{DB::table('users')->where('id',$analysis->patient_id)->value('name')}}</td> 
                             <td>{{$analysis->total}}</td>

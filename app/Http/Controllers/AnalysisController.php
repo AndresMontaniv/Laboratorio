@@ -74,13 +74,15 @@ class AnalysisController extends Controller
         
         $total=$price-($price*$discount);
         date_default_timezone_set("America/La_Paz");
+
+        $p=request('proof_id');
         $analysis=Analysis::create([
             'price'=> $price,
             'total'=> $total,
             'patient_id'=> request('patient_id'),
+            'proof_id'=> $p,
             'nurse_id'=> request('nurse_id'),
-            'proof_id'=> request('proof_id'),
-            'lab_id'=> $lab->id,
+            'lab_id'=> $lab->id
         ]);
         return redirect('analysis');
 
@@ -157,10 +159,11 @@ class AnalysisController extends Controller
         $total=$price-($price*$discount);
         date_default_timezone_set("America/La_Paz");
 
-        
+        $filename= NULL;
         if ($request->hasFile('doc')){
             $filename= $request->doc->getClientOriginalName();
-            $request->doc->storeAs('analisis',$filename, 'public');
+            $destino=public_path('analisis');
+            $request->doc->move($destino,$filename);
         }
 
 
