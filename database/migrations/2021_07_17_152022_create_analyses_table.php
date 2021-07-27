@@ -24,9 +24,11 @@ class CreateAnalysesTable extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('lab_id')->nullable();
             $table->unsignedBigInteger('nurse_id');
+            $table->unsignedBigInteger('proof_id');
             $table->foreign('patient_id')->references('id')->on('users');
             $table->foreign('lab_id')->references('id')->on('laboratories');
             $table->foreign('nurse_id')->references('id')->on('users');
+            $table->foreign('proof_id')->references('id')->on('proofs');
             $table->timestamps();
         });
     }
