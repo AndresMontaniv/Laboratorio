@@ -55,6 +55,10 @@ class User extends Authenticatable
     //     return [];
     // }
 
+    public function analyses(){
+        return $this->hasMany('App\Models\Analysis');
+    }
+    
     public function permissions(){
         return $this->hasMany('App\Models\Permission');
     }

@@ -78,13 +78,13 @@ class DatabaseSeeder extends Seeder
         // $testCampaign2->proof_id=2;
         // $testCampaign2->save();
 
-        $bill1= new Bill();
-        $bill1->nit='123456789';
-        $bill1->importe='100';
-        $bill1->user_id=7;
-        $bill1->laboratory_id=1;
-        $bill1->analysis_id=1;
-        $bill1->save();
+        // $bill1= new Bill();
+        // $bill1->nit='123456789';
+        // $bill1->importe='100';
+        // $bill1->user_id=7;
+        // $bill1->laboratory_id=1;
+        // $bill1->analysis_id=1;
+        // $bill1->save();
 
         
 
