@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Analysis;
+use App\Models\Field;
 use App\Models\Laboratory;
 use App\Models\Permission;
 Use App\Models\User;
@@ -40,6 +41,7 @@ class AnalysisController extends Controller
     public function create()
     {
         $lab=Laboratory::findOrFail(Auth::user()->laboratory_id);
+        $fields=Field::where('laboratory_id',$lab->id)->get();
         $nurses=Permission::where('role_id',2)->get();
         $array=array();
         foreach($nurses as $nurse){
@@ -56,7 +58,7 @@ class AnalysisController extends Controller
 
         $proofs=Proof::where('laboratory_id',$lab->id)->get();
         return view('analysis.create',['nurses'=>$nurses,
-        'patients'=> $patients ,'proofs'=>$proofs]);
+        'patients'=> $patients ,'proofs'=>$proofs, 'fields'=>$fields]);
 
     }
 

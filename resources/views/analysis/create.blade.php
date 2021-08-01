@@ -48,6 +48,15 @@
             <input type="text"  name="code"  class="focus border-primary  form-control">
             
             <br>
+
+            <h5 class="text-capitalize">Atributos de Prueba:</h5>
+            <div class="form-check mx-2">
+                @foreach ($fields as $field)
+                    <input type="checkbox"  value="{{$field->id}}" name="fields[]" class="form-check-input">
+                    <p class="text-capitalize">{{$field->name}}</p>
+                    
+                @endforeach
+            </div>
             <br>
 
             <button  class="btn btn-danger btn-sm" type="submit">Registrar</button>

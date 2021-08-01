@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
+use App\Http\Controllers\FieldController;
 use App\Models\Proof;
 use App\Models\TestCampaign;
 use GuzzleHttp\Middleware;
@@ -65,6 +66,7 @@ Route::resource('user',UserController::class)->names('users');
 
 Route::resource('userbuscador',UserBuscadorController::class)->names('userbuscador');
 Route::resource('analysis',AnalysisController::class)->names('analysis'); 
+Route::resource('field',FieldController::class)->names('field'); 
 Route::get('analysis/myAnalyses/{id}', [AnalysisController::class, 'myAnalyses'] )->name('analysis.myAnalyses');
 
 Route::get('reservations_create', [ReservationController::class, 'create'] )->name('reservations_create');

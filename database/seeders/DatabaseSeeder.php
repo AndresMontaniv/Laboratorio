@@ -7,6 +7,7 @@ use App\Models\Analysis;
 use App\Models\Invoice;
 use App\Models\Proof;
 use App\Models\Bill;
+use App\Models\Field;
 use App\Models\TestCampaign;
 use Illuminate\Database\Seeder;
 
@@ -85,6 +86,25 @@ class DatabaseSeeder extends Seeder
         // $bill1->laboratory_id=1;
         // $bill1->analysis_id=1;
         // $bill1->save();
+
+
+        $field1= new Field();
+        $field1->name='field1';
+        $field1->femaleMinParam=2;
+        $field1->femaleMaxParam=7;
+        $field1->maleMinParam=3;
+        $field1->maleMaxParam=9;
+        $field1->laboratory_id=1;
+        $field1->save();
+
+        $field2= new Field();
+        $field2->name='field2';
+        $field2->femaleMinParam=1;
+        $field2->femaleMaxParam=5;
+        $field2->maleMinParam=4;
+        $field2->maleMaxParam=10;
+        $field2->laboratory_id=1;
+        $field2->save();
 
         
 

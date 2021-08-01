@@ -366,6 +366,13 @@ return [
                     'icon_color'=>'red',
 
                 ],
+                [
+                    'text' => 'Gestionar Atributos',
+                    'icon'    => "fas fa-diagnoses",
+                    'route'  => 'field.index',
+                    'icon_color'=>'red',
+
+                ],
                
             ],
         ],
