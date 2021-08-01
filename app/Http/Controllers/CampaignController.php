@@ -127,6 +127,7 @@ class CampaignController extends Controller
         $campaign->expiration = request('expiration');
         $campaign->discount = request('discount');
         $campaign->update();
+        Binnacle::setUpdate("Campaña ".$campaign->body,"campaña",Auth::user());
         return redirect()->route('campaign.all');
     }
 

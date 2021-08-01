@@ -23,6 +23,10 @@ class Analysis extends Model
         'nurse_id'
     ];
 
+    public function notification (){
+        return $this->hasOne('App\Models\Notification');
+    }
+
     public function nurse(){
         return $this->belongsTo('App\Models\User');
     }

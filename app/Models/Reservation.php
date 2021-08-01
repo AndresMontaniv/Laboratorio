@@ -11,6 +11,9 @@ class Reservation extends Model
     public $guarded =['id','created_at','updated_at'];
     protected $dates = ['created_at', 'updated_at', 'date'];
 
+    public function notification (){
+        return $this->hasOne('App\Models\Notification');
+    }
     public function user()
     {
         return  $this->belongsTo('App\Models\User');

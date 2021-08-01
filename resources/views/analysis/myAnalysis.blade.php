@@ -29,7 +29,7 @@
                     <td>{{$analysis->nurse->name}}</td>
                     <td>{{$analysis->discount}}</td>
                     <td>{{$analysis->total}}</td>
-                    <td>{{$analysis->created_at->toTimeString()}}</td>
+                    <td>{{$analysis->created_at->toDateString()}}</td>
                 </tr> 
                 @endforeach
             </tbody>

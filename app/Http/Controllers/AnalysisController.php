@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Analysis;
+use App\Models\Binnacle;
 use App\Models\Laboratory;
 use App\Models\Permission;
 Use App\Models\User;
@@ -39,7 +40,7 @@ class AnalysisController extends Controller
      */
     public function create()
     {
-        $lab=Laboratory::findOrFail(Auth::user()->laboratory_id);
+        $lab=Laboratory::findOrFail(Auth::user()->laboratory_id); 
         $nurses=Permission::where('role_id',2)->get();
         $array=array();
         foreach($nurses as $nurse){
@@ -82,6 +83,7 @@ class AnalysisController extends Controller
             'proof_id'=> request('proof_id'),
             'lab_id'=> $lab->id,
         ]);
+        Binnacle::setInsert("analisis de precio ".$analysis->price,"analisis",Auth::user());
         return redirect('analysis');
 
         
@@ -174,7 +176,7 @@ class AnalysisController extends Controller
             'lab_id'=> $lab->id,
             'doc'=> $filename,
         ]);
-        
+        Binnacle::setUpdate("analisis de precio ".$price,"analisis",Auth::user());
         return redirect('analysis');
     }
 
