@@ -19,6 +19,7 @@ class Analysis extends Model
         'price',
         'total',
         'patient_id',
+        'proof_id',
         'lab_id',
         'nurse_id'
     ];

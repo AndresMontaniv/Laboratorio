@@ -77,6 +77,7 @@ class CampaignController extends Controller
         ]);
         $code="CAMPDC".$campaign->id;
         $campaign->discountCode=$code;
+        $campaign->update();
         $actor = User::findOrFail(Auth::user()->id);
         Binnacle::setInsert(request('title'),"campaña",$actor);
         return redirect()->route('campaign.all');

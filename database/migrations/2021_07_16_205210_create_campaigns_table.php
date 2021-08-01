@@ -21,7 +21,7 @@ class CreateCampaignsTable extends Migration
             $table->date("initialDate");
 
             $table->text("body");
-            $table->text("discountCode")->unique();
+            $table->string("discountCode")->nullable();
             $table->text("title");
             $table->Integer('status')->default('1');
             $table->foreignId('laboratory_id')->constrained('laboratories');
