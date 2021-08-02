@@ -15,6 +15,46 @@
                 <li class="list-group-item" style="text-align: center">{{"Email: ".Auth::user()->email}}</li>
             </ul>
     </div>
-</div>                
+    <a href="{{route('notification.index',Auth::user()->id)}}"><button type="button" class="btn btn-info  btn-lg btn-block"><b>Mis notificationes</b></button></a>
+</div>  
 <br>
+
+
+@if((isset($notifications)))
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ "Notificaciones proximas"}}</div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>detalle</th>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($notifications as $notification)
+                                    <tr>
+                                        <td>{{$notification->detail}}</td>
+                                        <td>{{$notification->date->toFormattedDateString()}}</td>
+                                        <td>
+                                            @if ($notification->analysis_id != null)
+                                                {{"analysis"}}
+                                            @else
+                                                {{"reserva"}}
+                                            @endif
+                                        </td>
+                                    </tr> 
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 @endsection

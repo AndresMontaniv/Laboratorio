@@ -16,6 +16,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestCampaignController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
 use App\Http\Controllers\FieldController;
@@ -127,3 +128,8 @@ Route::get('testCampaign/store/{proof}/{campaign}',[TestCampaignController::clas
 Route::get('testCampaign/active/{testCampaign}',[TestCampaignController::class, 'active'])->name('testCampaign.active');
 Route::get('testCampaign/desactive/{testCampaign}',[TestCampaignController::class, 'desactive'])->name('testCampaign.desactive');
 
+Route::get('notification/index/{id}',[NotificationController::class, 'index'])->name('notification.index');
+Route::get('notification/create/{id}',[NotificationController::class, 'create'])->name('notification.create');
+Route::post('notification/store',[NotificationController::class, 'store'])->name('notification.store');
+Route::get('notification/edit/{id}',[NotificationController::class, 'edit'])->name('notification.edit');
+Route::post('notification/update',[NotificationController::class, 'update'])->name('notification.update');

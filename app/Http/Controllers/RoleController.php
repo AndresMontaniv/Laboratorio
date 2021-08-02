@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Binnacle;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -41,10 +44,10 @@ class RoleController extends Controller
 
         $dato = request()->validate([
             'name' => 'required',
-       
         ]);
         $rol = request()->except('_token');
         Role::insert($rol);
+       
         return redirect()->route('roles.index');
     }
 

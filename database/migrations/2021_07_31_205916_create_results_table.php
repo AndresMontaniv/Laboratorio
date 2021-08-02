@@ -15,7 +15,7 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->float('resultado');
+            $table->float('resultado')->nullable();
             $table->foreignId('analysis_id')->constrained('analyses');
             $table->foreignId('field_id')->constrained('fields');
             $table->timestamps();

@@ -129,6 +129,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row my-2">
+                        <div class="col">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Atributo de Prueba</th>
+                                        <th scope="col">Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($results as $result)
+                                        <tr>
+                                            <td>{{DB::table('fields')->where('id',$result->field_id)->value('name')}}</td>
+                                            <td>{{$result->resultado}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <div class="row mt-3">
                         <a href="{{url('/analysis/')}}"class="btn btn-primary text-white btn-lg btn-block">Volver</a>
                     </div>

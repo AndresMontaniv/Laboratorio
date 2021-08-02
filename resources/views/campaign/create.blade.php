@@ -69,9 +69,6 @@
             </div>
             <br>
               
-
-
-
             <input type="hidden" name="laboratory_id" value="{{Auth::user()->laboratory_id}}">
             <br><br>
             <button  class="btn btn-success btn-sm" type="submit">Crear</button>

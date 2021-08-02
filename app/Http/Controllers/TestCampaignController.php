@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Binnacle;
 use App\Models\campaign;
 use App\Models\Proof;
 use App\Models\TestCampaign;
@@ -47,10 +48,13 @@ class TestCampaignController extends Controller
      */
     public function store($proof, $campaign)
     {
-        TestCampaign::create([
+        $usedTests = TestCampaign::create([
             'proof_id' => $proof,
             'campaign_id' => $campaign
         ]);
+        $usedTests->load('proof');
+        $usedTests->load('campaign');
+        Binnacle::setInsert("campaña de ".$usedTests->campaign->title." con prueba ".$usedTests->proof->name,"prueba campaña",Auth::user());
         return redirect()->route('testCampaign.index',$campaign);
     }
 
@@ -65,6 +69,9 @@ class TestCampaignController extends Controller
         $cambiar = TestCampaign::findOrFail($testCampaign);
         $cambiar->status = 1;
         $cambiar->update();
+        $cambiar->load('proof');
+        $cambiar->load('campaign');
+        Binnacle::setUpdate("campaña de ".$cambiar->campaign->title." con prueba activada".$cambiar->proof->name,"prueba campaña",Auth::user());
         return redirect()->route('testCampaign.index',$cambiar->campaign_id);
     }
 
@@ -72,6 +79,9 @@ class TestCampaignController extends Controller
         $cambiar = TestCampaign::findOrFail($testCampaign);
         $cambiar->status = 0;
         $cambiar->update();
+        $cambiar->load('proof');
+        $cambiar->load('campaign');
+        Binnacle::setUpdate("campaña de ".$cambiar->campaign->title." con prueba desactivada".$cambiar->proof->name,"prueba campaña",Auth::user());
         return redirect()->route('testCampaign.index',$cambiar->campaign_id);
     }
 
