@@ -64,7 +64,8 @@ class ReservationController extends Controller
         $notification= Notification::create([
             'date' =>$date,
             'detail' => 'reservacion : desde '.$res->period->begin->toTimeString(). ' hasta '. $res->period->end->toTimeString().' en la sala '. $res->room->name,
-            'reservation_id' => $res->id
+            'reservation_id' => $res->id,
+            'user_id' => Auth::user()->id
         ]);
         $actor = User::findOrFail(Auth::user()->id);
         Binnacle::setInsert($notification->detail,"notificaciones",$actor);

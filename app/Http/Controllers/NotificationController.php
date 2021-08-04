@@ -22,14 +22,7 @@ class NotificationController extends Controller
     public function index($id)
     {
         $user = User::findOrFail($id);
-        $analyses = Analysis::where('patient_id',$id)->get();
-        $reservations = Reservation::where('user_id',$id)->where('status',1)->get();
-        $notifications = Notification::where('id','>=',1)->orWhereIn('analysis_id', $analyses)
-        ->orWhereIn('reservation_id', $reservations)->whereDate('date','>=',Carbon::now('America/Caracas')->today())->get();
-        // $notifications1 = Notification::WhereIn('reservation_id', $reservations)->orWhereIn('reservation_id', $reservations)->get();
-        //dd($notifications);
-        // $notifications->analysis->load('nurse');
-        // $notifications->analysis->load('nurse');
+        $notifications = Notification::where('user_id',$id)->whereDate('date','>=',Carbon::now('America/Caracas')->today())->get();
         return view('patients.index',compact('user'), compact('notifications'));
     }
 
@@ -58,10 +51,14 @@ class NotificationController extends Controller
             'detail' => ['required'],
             'analysis_id' => ['required']
         ]);
+        $user = Analysis::select('patient_id')->where('id', request('analysis_id'))->get();
+        $usuario = User::findOrFail($user)->first();
+        //dd($usuario);
         $notification= Notification::create([
             'date' => request('date'),
             'detail' => request('detail'),
-            'analysis_id' => request('analysis_id')
+            'analysis_id' => request('analysis_id'),
+            'user_id' => $usuario->id
         ]);
         Binnacle::setInsert($notification->detail,"notification",Auth::user());
         return redirect()->route('analysis.index');

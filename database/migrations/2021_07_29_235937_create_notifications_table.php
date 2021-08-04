@@ -21,6 +21,7 @@ class CreateNotificationsTable extends Migration
             $table->foreign('analysis_id')->references('id')->on('analyses');
             $table->unsignedBigInteger('reservation_id')->nullable();
             $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
