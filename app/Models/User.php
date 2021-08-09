@@ -55,6 +55,10 @@ class User extends Authenticatable
     //     return [];
     // }
 
+    public function notification (){
+        return $this->hasOne('App\Models\Notification');
+    }
+    
     public function analyses(){
         return $this->hasMany('App\Models\Analysis');
     }

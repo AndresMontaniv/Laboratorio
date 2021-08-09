@@ -12,11 +12,16 @@ class Notification extends Model
         'date',
         'detail',
         'analysis_id',
-        'reservation_id'
+        'reservation_id',
+        'user_id'
     ];
     protected $dates = ['created_at', 'updated_at','date'];
     public function analysis (){
         return $this->belongsTo('App\Models\Analysis');
+    }
+
+    public function user (){
+        return $this->belongsTo('App\Models\User');
     }
 
     public function reservation(){

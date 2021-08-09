@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIAnalisisController;
 use App\Http\Controllers\APIInvoiceController;
+use App\Http\Controllers\ApiNotificationController;
 use App\Http\Controllers\ApiReservationController;
 use App\Http\Controllers\ApiTestController;
 
@@ -43,3 +44,6 @@ Route::get('campaign/index/{id}',[ApiCampaignController::class, 'index'])->name(
 Route::get('reservation/index/{id}',[ApiReservationController::class, 'index'])->name('reservation.index'); 
 Route::post('reservation/searched/{laboratory}',[ApiReservationController::class, 'searched'])->name('reservation.searched'); 
 Route::get('reservation/store/{period}/{date}/{user}',[ApiReservationController::class, 'store'])->name('reservation.store'); 
+
+
+Route::get('notification/index/{id}',[ApiNotificationController::class, 'index'])->name('notification.index'); 
