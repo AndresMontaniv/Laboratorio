@@ -241,7 +241,7 @@ return [
       
         [
             'text'        => 'Inicio',
-            'url'         => 'admin',
+            'route'         => 'home',
             'icon_color' => 'red',
             'icon'        => 'fas fa-heartbeat',
             'icon_color' => 'red',
@@ -259,6 +259,13 @@ return [
             'route'  => 'roles.index',
             'can'  => 'superAdmin',
             'icon' => 'fas fa-users-cog',
+        ],
+        [
+            'text' => 'Grafica',
+            'route'  => 'grafica',
+            //'can'  => 'superAdmin',
+            'icon_color' => 'warning',
+            'icon' => 'fas fa-chart-pie',
         ],
         [
             'text' => 'Planes',
@@ -369,7 +376,25 @@ return [
                
             ],
         ],
+         
 
+
+        [
+            'text'    => 'ADM Instrumentos',
+            'icon'    => 'fas  fa-medkit',
+            'icon_color' => 'red',
+           
+            'submenu' => [
+                [
+                    'text' => 'Gestionar Instrumentos',
+                    'icon'    => "fas fa-stethoscope",
+                    'route'  => 'instruments.index',
+                    'icon_color'=>'red',
+
+                ],
+               
+            ],
+        ],
 
         [
             'text'    => 'ADM Facturación',

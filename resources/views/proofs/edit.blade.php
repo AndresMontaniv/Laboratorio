@@ -53,9 +53,23 @@
                     <textarea id="detail" class="form-control" name="detail" rows="3" >{{$proofs->detail}}</textarea>
                 </div>
 
-                <br><br>
 
 
+                <label for="instruments">Seleccione los instrumentos</label>
+                <div class="form-check ">
+                   <div class="form row">
+                      @foreach ($instruments as $instrument)
+                      <div class="form-group col-md-3">
+                            @if (in_array($instrument->id, $instrumento))
+                            <input type="checkbox" value="{{$instrument->id}}" name="instruments[]" class="form-check-input" checked>{{$instrument->name}} <br>
+                                
+                            @else
+                            <input type="checkbox" value="{{$instrument->id}}" name="instruments[]" class="form-check-input">{{$instrument->name}} <br>
+                            @endif
+                      </div>
+                      @endforeach
+                   </div>
+                </div>
                 <button  class="btn btn-danger btn-sm" type="submit">Actualizar </button>
             </form>
 

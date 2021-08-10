@@ -29,6 +29,7 @@ class User extends Authenticatable
         'photo'
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -56,7 +57,7 @@ class User extends Authenticatable
     // }
 
     public function permissions(){
-        return $this->hasMany('App\Models\Permission');
+        return $this->belongsTo('App\Models\Permission');
     }
 
     public function user_specialities(){
