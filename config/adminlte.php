@@ -258,6 +258,7 @@ return [
             'text' => 'Roles',
             'route'  => 'roles.index',
             'can'  => 'superAdmin',
+            'icon_color' => 'green',
             'icon' => 'fas fa-users-cog',
         ],
         [
@@ -271,14 +272,14 @@ return [
             'text' => 'Planes',
             'route'  => 'plans.show',
             'can'  => 'superAdmin',
+            'icon_color' => 'green',
             'icon' => 'fas fa-users-cog',
         ],
         [
             'text' => 'Usuario',
             'route'  => 'users.index',
             'icon_color' => 'red',
-            'can'  => 'nurse',
-            'can'  => 'admin',
+            'can'  => 'nurseAdmin',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -290,8 +291,8 @@ return [
         ],
         [
             'text' => 'Campañas',
-            'icon' => 'fas fa-ad',
-            'icon_color' => 'red',
+            'icon' => 'fas fa-fw fa-address-book',
+            'icon_color' => 'blue',
             'can'  => 'admin',
             'route' => 'campaign.all'
         ],
@@ -309,7 +310,7 @@ return [
             'route' => 'user.allUsers'
         ],
         [
-            'text'    => 'ADM Reservas',
+            'text'    => 'ADM informacion',
             'icon'    => 'fas fa-fw fa-calendar-check',
             'icon_color' => 'red',
             'can'  => 'admin',
@@ -330,16 +331,7 @@ return [
                     'icon_color'=>'red',
                   
                     //'can'=>'Ver lista de reservas',
-                ],
-                [
-                    'text' => 'Gestionar reserva',
-                    'icon'    => "fas fa-calendar",
-                    'route'  => 'reservations',
-                    'can'  => 'admin',
-                    'icon_color'=>'red',
-                    //'can'=>'Ver lista de reservas',
-                ],
-               
+                ]               
             ],
         ],
 
@@ -347,6 +339,7 @@ return [
             'text'    => 'ADM Prueba',
             'icon'    => 'fas fa-flask',
             'icon_color' => 'red',
+            'can'  => 'admin',
            
             'submenu' => [
                 [
@@ -364,12 +357,20 @@ return [
             'text'    => 'ADM Analisis',
             'icon'    => 'fas fa-vials',
             'icon_color' => 'red',
+            'can'  => 'nurseAdmin',
            
             'submenu' => [
                 [
                     'text' => 'Gestionar Analisis',
                     'icon'    => "fas fa-diagnoses",
                     'route'  => 'analysis.index',
+                    'icon_color'=>'red',
+                    'can'  => 'nurseAdmin',
+                ],
+                [
+                    'text' => 'Gestionar Atributos',
+                    'icon'    => "fas fa-diagnoses",
+                    'route'  => 'field.index',
                     'icon_color'=>'red',
 
                 ],
@@ -400,6 +401,7 @@ return [
             'text'    => 'ADM Facturación',
             'icon'    => 'fas  fa-wallet',
             'icon_color' => 'red',
+            'can'  => 'nurseAdmin',
            
             'submenu' => [
                 [
@@ -407,7 +409,7 @@ return [
                     'icon'    => "fas fa-money-check-alt",
                     'route'  => 'bills.index',
                     'icon_color'=>'red',
-
+                    'can'  => 'nurseAdmin',
                 ],
                
             ],

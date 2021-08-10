@@ -45,13 +45,9 @@
                                 <form action="" method="post">
                                     @csrf
                                     @method('delete')
-
                                     <a href="{{route('bills.edit',$facturas->id)}}" class="btn btn-primary btn-sm fas fa-edit  cursor-pointer"></a>
                                     <a class="btn btn-success btn-sm fas fa-eye  cursor-pointer" href="{{route('bills.show',$facturas->id)}}"></a>
-
                                     <button class="btn btn-danger btn-sm fas fa-trash-alt" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>
-
-
                                 </form>
                             </td>
 

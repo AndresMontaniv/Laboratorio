@@ -22,10 +22,16 @@ class AuthController extends Controller {
             'password' => ['required'],
             'laboratory_id' => ['required']
         ]);
+        // $filename = null;
+        // if($request->hasFile('image')){
+        //     $filename = $request->image->getClientOriginalName();
+        //     $request->image->storeAs('images', $filename, 'public');
+        // }
         $filename = null;
         if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('images', $filename, 'public');
+            $destino=public_path('images');
+            $request->image->move($destino,$filename);
         }
         $user = User::create([
             'phone' => request('telefono'),

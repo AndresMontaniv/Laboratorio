@@ -26,4 +26,7 @@ class Proof extends Model
     public function Instrument(){
         return $this->belongsToMany(Instrument::class);
     }
+    public function analyses(){
+        return $this->hasMany('App\Models\Analysis');
+    }
 }

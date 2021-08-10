@@ -15,14 +15,14 @@
 
     <label for="inicio">Fecha Inicio</label>
 
-         <input type="time"  name="inicio" value="{{$periodo->inicio}}" class="focus border-primary  form-control" >
+         <input type="time"  name="inicio" value="{{$periodo->inicio->toTimeString()}}" class="focus border-primary  form-control" >
 
          @error('inicio')
          <span class="text-danger">{{ $message }}</span>
         @enderror
 
         <label for="fin">Fecha Fin</label>
-         <input type="time"  name="fin" value="{{$periodo->fin}}" class="focus border-primary  form-control" >
+         <input type="time"  name="fin" value="{{$periodo->fin->toTimeString()}}" class="focus border-primary  form-control" >
 
          @error('fin')
             <span class="text-danger">{{$message}}</span>

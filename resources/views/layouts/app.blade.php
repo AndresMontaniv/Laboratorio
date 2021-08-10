@@ -19,11 +19,13 @@
     <link rel="shortcut icon" type="image/png" href=" {{asset('./Icons/hospital.png')}}">
 
     <!-- Styles -->
+    <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bk3">
             <div class="container">
                 @auth
                 @php
@@ -64,10 +66,13 @@
                             </li>
                         @else
                         <li class="nav-item">
+                            <a class="nav-link" href="{{route('patients.index', Auth::user()->id)}}">{{ __('Inicio') }}</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{route('reservation.myReservations', Auth::user()->id)}}">{{ __('mis reservas') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('mis analisis') }}</a>
+                            <a class="nav-link" href="{{route('analysis.myAnalyses',Auth::user()->id )}}">{{ __('mis analisis') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('proofshowall')}}">{{ __('Laboratorio Análisis') }}</a>

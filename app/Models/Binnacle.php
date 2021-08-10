@@ -16,7 +16,7 @@ class Binnacle extends Model
         'laboratory_id',
         'ip'
     ];
-
+    protected $dates = ['created_at', 'updated_at'];
     public function user(){
         return $this->BelongsTo('App\Models\User');
     }

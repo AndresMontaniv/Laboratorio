@@ -9,9 +9,9 @@ class Bill extends Model
 {
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
-
-    public function Analyses(){
-        return $this->belongsToMany('App\Models\Analyses');
-        }
-        
+    protected $dates = ['created_at', 'updated_at'];
+    public function analyses(){
+        return $this->hasMany('App\Models\Analysis');
+    }
+     
 }

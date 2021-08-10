@@ -27,6 +27,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         
         $this->registerPolicies();
+        Gate::define('nurseAdmin', function($user){         
+            $permissions = DB::table('permissions')->where('user_id',$user->id)->whereIn('role_id',[1,2])->where('status',1)->get();
+            return ( sizeof($permissions) != 0);
+        });
+
         Gate::define('admin', function($user){         
             $permissions = DB::table('permissions')->where('user_id',$user->id)->where('role_id',1)->where('status',1)->get();
             return ( sizeof($permissions) != 0);

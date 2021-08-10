@@ -71,12 +71,17 @@ class PlanController extends Controller
             'description' => ['required','string'],
         ]);
 
+        // $filename1 = null;
+        // if($request->hasFile('image')){
+        //     $filename1 = $request->image->getClientOriginalName(). time();
+        //     $request->image->storeAs('images', $filename1, 'public');
+        // }
         $filename1 = null;
         if($request->hasFile('image')){
-            $filename1 = $request->image->getClientOriginalName(). time();
-            $request->image->storeAs('images', $filename1, 'public');
+            $filename1 = $request->image->getClientOriginalName();
+            $destino=public_path('images');
+            $request->image->move($destino,$filename1);
         }
-
         $plan = Plan::create([ //create a new instance of laboratory
             'name' => request('name'),
             'image' => $filename1,
@@ -110,10 +115,16 @@ class PlanController extends Controller
             'months' => ['required'],
             'description' => ['required','string'],
         ]);
+        // $filename1 = null;
+        // if($request->hasFile('image')){
+        //     $filename1 = $request->image->getClientOriginalName(). time();
+        //     $request->image->storeAs('images', $filename1, 'public');
+        // }
         $filename1 = null;
         if($request->hasFile('image')){
-            $filename1 = $request->image->getClientOriginalName(). time();
-            $request->image->storeAs('images', $filename1, 'public');
+            $filename1 = $request->image->getClientOriginalName();
+            $destino=public_path('images');
+            $request->image->move($destino,$filename1);
         }
         $plan = Plan::findOrFail($id);
         $plan->price = request('price');

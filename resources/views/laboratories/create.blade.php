@@ -35,7 +35,7 @@
 
                 <div class="container">
                     <div class="input-group mb-3">
-                        <label for="labImg">Foto de de perfil Administrador    </label>
+                        <label for="image">Foto de de perfil Administrador    </label>
                     </div>
                     <div class="input-group mb-3">    
                         <input id="image" type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" >

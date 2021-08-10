@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instrument;
+use App\Models\Binnacle;
 use App\Models\Proof;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,7 @@ class ProofsController extends Controller
         if ($request->instruments){
             $proof->Instrument()->attach($request->instruments);
         }
+        Binnacle::setInsert($proof->detail,"prueba",Auth::user());
         return redirect()->route('proofs.index');
     }
 
@@ -109,6 +111,7 @@ class ProofsController extends Controller
          if($request->instruments){
             $proofs->Instrument()->sync($request->instruments);
            }
+         Binnacle::setUpdate($proofs->detail,"prueba",Auth::user());
         return redirect()->route('proofs.index');
      
     }
@@ -119,6 +122,7 @@ class ProofsController extends Controller
         $proofs=Proof::findOrfail($id);
         $proofs->status= 0;
         $proofs->update();
+        Binnacle::setDelete($proofs->detail,"prueba",Auth::user());
         return redirect()->route('proofs.index');
     }
 

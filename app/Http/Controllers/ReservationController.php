@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Binnacle;
+use App\Models\Notification;
 use App\Models\Period;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -36,7 +37,8 @@ class ReservationController extends Controller
         //     return back()->withErrors('Necesita ingresar una fecha para poder realizar la busqueda'); 
         // }
         if(Carbon::parse($request['date']) < $today){
-            $today = Carbon::parse($request['date']);
+            // $today = Carbon::parse($request['date']);
+            return back()->withErrors('No puedes reservar en una fecha pasada'); 
         }
         $dateUsed = ["date" => $request['date'], "error" => "No es posible
         realizar una reserva para una fecha pasada a la actual, se mostrara los periodos disponibles para 
@@ -58,7 +60,16 @@ class ReservationController extends Controller
             'room_id' => $room->id
         ]);  
         $res->load('user');
+        $res->load('period');
+        $res->load('room');
+        $notification= Notification::create([
+            'date' =>$date,
+            'detail' => 'reservacion : desde '.$res->period->begin->toTimeString(). ' hasta '. $res->period->end->toTimeString().' en la sala '. $res->room->name,
+            'reservation_id' => $res->id,
+            'user_id' => Auth::user()->id
+        ]);
         $actor = User::findOrFail(Auth::user()->id);
+        Binnacle::setInsert($notification->detail,"notificaciones",$actor);
         Binnacle::setInsert("reserva en ".$res->date." de ".$res->user->name,"reservaciones",$actor);
         return redirect()->route('reservation.myReservations', Auth::user()->id);
     }

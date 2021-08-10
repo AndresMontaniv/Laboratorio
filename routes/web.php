@@ -17,9 +17,12 @@ use App\Http\Controllers\TestCampaignController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\InstrumentsController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
-
+use App\Http\Controllers\FieldController;
+use App\Models\Proof;
+use App\Models\TestCampaign;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -71,7 +74,9 @@ Route::resource('period', PeriodController::class)->names('periods');
 Route::resource('user',UserController::class)->names('users');
 
 Route::resource('userbuscador',UserBuscadorController::class)->names('userbuscador');
-Route::resource('analysis',AnalysisController::class)->names('analysis');
+Route::resource('analysis',AnalysisController::class)->names('analysis'); 
+Route::resource('field',FieldController::class)->names('field'); 
+Route::get('analysis/myAnalyses/{id}', [AnalysisController::class, 'myAnalyses'] )->name('analysis.myAnalyses');
 
 Route::get('reservations_create', [ReservationController::class, 'create'] )->name('reservations_create');
 Route::get('reservacion', [ReservationController::class, 'index'] )->name('reservations');
@@ -131,3 +136,8 @@ Route::get('testCampaign/store/{proof}/{campaign}',[TestCampaignController::clas
 Route::get('testCampaign/active/{testCampaign}',[TestCampaignController::class, 'active'])->name('testCampaign.active');
 Route::get('testCampaign/desactive/{testCampaign}',[TestCampaignController::class, 'desactive'])->name('testCampaign.desactive');
 
+Route::get('notification/index/{id}',[NotificationController::class, 'index'])->name('notification.index');
+Route::get('notification/create/{id}',[NotificationController::class, 'create'])->name('notification.create');
+Route::post('notification/store',[NotificationController::class, 'store'])->name('notification.store');
+Route::get('notification/edit/{id}',[NotificationController::class, 'edit'])->name('notification.edit');
+Route::post('notification/update',[NotificationController::class, 'update'])->name('notification.update');

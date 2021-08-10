@@ -60,6 +60,31 @@
             <br>
             <br>
 
+            <h5 class="text-capitalize">Atributos de Prueba:</h5>
+            <div class="form-check mx-2">
+                @foreach ($results as $result)
+
+                    <h5 class="text-capitalize">{{DB::table('fields')->where('id',$result->field_id)->value('name')}}</h5>
+                    <input type="number"  value="{{$result->resultado}}" name="results[]" class="focus border-primary form-control" >
+                    <input type="number"  value="{{$result->id}}" name="campos[]" class="form-check-input" hidden>
+                    <br>
+                    
+                @endforeach
+            </div>
+            <br>
+            @if(sizeof($atributos)>0)
+            <h5 class="text-capitalize"> Añadir Atributos de Prueba:</h5>
+            @endif
+            <div class="form-check mx-2">
+                @foreach ($atributos as $atributo)
+                    <input type="checkbox"  value="{{$atributo->id}}" name="fields[]" class="form-check-input">
+                    <p class="text-capitalize">{{$atributo->name}}</p>
+                    
+                    
+                @endforeach
+            </div>
+            <br>
+            
             <button  class="btn btn-danger btn-sm" type="submit">Guardar</button>
             <a href="{{url('/analysis/')}}"class="btn btn-warning text-white btn-sm">Volver</a>
         </form>

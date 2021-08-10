@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\User;
 use App\Models\Laboratory;
 use App\Models\Analysis;
+use App\Models\Binnacle;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +54,7 @@ class BillsController extends Controller
           }*/
        //  $bill->importe=$monto;
         // $bill->update();
+        Binnacle::setInsert("factura de nit ".$bill->nit,"facturas",Auth::user());
         $monto=Analysis::where('id',$bill->analysis_id)->value('total');
         $bill->importe=$monto;
         $bill->update();
@@ -79,7 +81,7 @@ class BillsController extends Controller
     {
        $bill=Bill::findOrfail($id);
         $bill->nit=request('nit');
-
+        
        /* if ($request->analyses){
             $bill->Analyses()->sync($request->analyses);
         }
@@ -90,6 +92,7 @@ class BillsController extends Controller
              $monto+=$price;
           }*/
          $bill->update();
+         Binnacle::setUpdate("factura de nit ".$bill->nit,"facturas",Auth::user());
         return redirect()->route('bills.index');
     }
 
@@ -99,6 +102,7 @@ class BillsController extends Controller
         $bills=Bill::findOrfail($id);
         $bills->status= 0;
         $bills->update();
+        Binnacle::setUpdate("factura de nit ".$bills->nit,"facturas",Auth::user());
         return redirect()->route('bills.index');
     }
 }

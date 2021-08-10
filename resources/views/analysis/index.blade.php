@@ -7,9 +7,6 @@
     <h1>Listar Analisis</h1>
 @stop
 
-
-
-
 @section('content')
 
     <div class="card">
@@ -29,20 +26,23 @@
                         <th scope="col">Paciente</th>
                         <th scope="col">Monto Total</th>
                         <th scope="col">Acciones</th>
+                        <th scope="col">Notificion</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($analyses as $analysis)
                         <tr>
+                            {{-- @php
+                                dd($analysis->notification->detail);
+                            @endphp --}}
                             <td>{{$analysis->id}}</td>
-                            <td>{{$analysis->lab_id}}</td>
+                            <td>{{DB::table('laboratories')->where('id',$analysis->lab_id)->value('name')}}</td> 
                             <td>{{$analysis->updated_at}}</td> 
                             <td>{{DB::table('users')->where('id',$analysis->patient_id)->value('name')}}</td> 
-                            <td>{{$analysis->total}}</td>
-                            
+                            <td>{{$analysis->total}}</td>           
                             <td>
-                                <form action="" method="post">
+                                <form action="{{url('/analysis/'.$analysis->id)}}" method="post">
                                     @csrf
                                     @method('delete')
 
@@ -50,12 +50,15 @@
                                     <a class="btn btn-success btn-sm fas fa-eye  cursor-pointer" href="{{route('analysis.show',$analysis->id)}}"></a>
 
                                     <button class="btn btn-danger btn-sm fas fa-trash-alt" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>
-
-
                                 </form>
                             </td>
-
-
+                            <td>
+                                @if ($analysis->notification == null)
+                                <a class="btn btn-success btn-sm" href="{{route('notification.create',$analysis->id)}}">Registrar</a>   
+                                @else
+                                <a class="btn btn-warning btn-sm" href="{{route('notification.edit',$analysis->notification->id)}}">Editar</a>   
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

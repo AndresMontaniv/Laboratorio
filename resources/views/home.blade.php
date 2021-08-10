@@ -14,6 +14,6 @@
         @can('patient')
         <h6>Paciente</h6>
         @endcan
-    </div>
+    </div> 
 </div>
 @endsection

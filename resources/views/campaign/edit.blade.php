@@ -34,7 +34,7 @@
 
             <div>
                 <label for="initialDate">Fecha inicial</label>
-                    <input type="date" name="initialDate" class="form-control" value="{{$campaign->initialDate}}" id="initialDate">
+                    <input type="date" name="initialDate" class="form-control" value="{{$campaign->initialDate->toDateString()}}" id="initialDate">
                     @error('initialDate')
                         <small>*{{$message}}</small>
                         <br><br>
@@ -43,7 +43,7 @@
 
             <div>
                 <label for="expiration">Fecha de expiracion</label>
-                    <input type="date" name="expiration" class="form-control" value="{{$campaign->expiration}}" id="expiration">
+                    <input type="date" name="expiration" class="form-control" value="{{$campaign->expiration->toDateString()}}" id="expiration">
                     @error('expiration')
                         <small>*{{$message}}</small>
                         <br><br>
