@@ -59,6 +59,9 @@ Route::resource('instruments',InstrumentsController::class)->names('instruments'
 Route::get('Usergrafica',[ExcelController::class, 'graficausuario'])->name('Usergrafica');
 Route::get('grafica',[ExcelController::class, 'grafica'])->name('grafica');
 Route::get('Reservagrafica',[ExcelController::class, 'graficaReserva'])->name('Reservagrafica');
+Route::get('Reservagrafica',[ExcelController::class, 'graficaReserva'])->name('Reservagrafica');
+Route::get('reserva',[ReservationController::class, 'index'])->name('reserva');
+
 
 
 //------------------------------------------------------------------------------------

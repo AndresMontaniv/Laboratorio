@@ -316,6 +316,15 @@ return [
             'can'  => 'admin',
             'submenu' => [
                 [
+                    'text' => 'Reservas',
+                    'icon'    => "fas fa-calendar-plus",
+                    'route'  => 'reserva',
+                    'can'  => 'admin',
+                    'icon_color'=>'red',
+                  
+                    //'can'=>'Ver lista de reservas',
+                ]  ,
+                [
                     'text' => 'Gestionar periodo',
                     'icon'    => "far fa-clock",
                     'route'  => 'periods.index',
