@@ -15,7 +15,7 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->integer('nit')->nullable();
+            $table->string('nit')->nullable();
             $table->timestamp('fecha');
             $table->decimal('importe')->nullable();
             $table->foreignId('user_id')->constrained('users');
