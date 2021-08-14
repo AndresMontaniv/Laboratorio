@@ -16,6 +16,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestCampaignController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\InstrumentsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserBuscadorController;
 use App\Http\Controllers\UserSpecialityController;
@@ -54,12 +55,22 @@ Route::resource('proofs', ProofsController::class)->names('proofs');
 Route::get('proofshowall',[ProofsController::class, 'showall'])->name('proofshowall');
 Route::resource('bills',BillsController::class)->names('bills');
 Route::get('pdfactura/{id}',[ExcelController::class, 'Pdfactura'])->name('pdfactura');
+Route::resource('instruments',InstrumentsController::class)->names('instruments');
+Route::get('Usergrafica',[ExcelController::class, 'graficausuario'])->name('Usergrafica');
+Route::get('grafica',[ExcelController::class, 'grafica'])->name('grafica');
+Route::get('Reservagrafica',[ExcelController::class, 'graficaReserva'])->name('Reservagrafica');
+Route::get('Reservagrafica',[ExcelController::class, 'graficaReserva'])->name('Reservagrafica');
+Route::get('reserva',[ReservationController::class, 'index'])->name('reserva');
+
+
 
 //------------------------------------------------------------------------------------
 
 Route::resource('role', RoleController::class)->names('roles');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Route::resource('room', RoomController::class)->names('rooms');
 //Route::resource('reservation', ReservationController::class)->names('reservations');
 Route::resource('period', PeriodController::class)->names('periods');

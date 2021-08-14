@@ -19,7 +19,15 @@
 
 <div class="card">
   <div class="card-header">
-    <a href="{{route('reservations_create')}}" class="btn btn-primary ">Registrar Reserva</a>
+    <div class="form-row">
+        <div class="end-100 mr-lg-5">
+        <a href="{{route('Reservagrafica')}}" class="btn btn-warning  fas fa-chart-bar">Grafica Reserva</a>
+      </div>
+      <div class=" end-100 " style="float: right">
+        <a class="btn btn-success  fas fa-calendar-plus"> Total Reservas:{{$count}}</a>
+      </div>
+     
+    </div>
 </div>
         
   </div>
@@ -31,14 +39,8 @@
 
           <tr>
             <th scope="col">Fecha</th>
-            <th scope="col">Comienza en</th>       
-            <th scope="col">Descripcion</th>
-          
             <th scope="col">periodo</th>
             <th scope="col">Sala</th>
-            <th scope="col">Estado</th>
-           
-            <th scope="col"> Acciones</th>
 
           
           </tr>
@@ -47,29 +49,15 @@
 
           @foreach ($reservations as $reservation)
           <tr>
-               <td>{{$reservation->date->toFormattedDateString()}}</td>
-               <td>{{\Carbon\Carbon::parse($reservation->date->toFormattedDateString().$reservation->period->inicio->toTimeString())->diffForHumans()}}</td>
-               <td>{{$reservation->description}}</td>
-              {{--<td>  {{$reservation->user->name}}</td><i class="fas fa-file-signature"></i><i class="fas fa-clipboard-check"></i>--}}
-               <td>{{$reservation->period->inicio->toTimeString()." - ".$reservation->period->fin->toTimeString()}}</td>
+            <td>{{$reservation->date->toFormattedDateString()}}</td>
+
+            <td>{{$reservation->date}}</td>   
+                  {{--<td>  {{$reservation->user->name}}</td><i class="fas fa-file-signature"></i><i class="fas fa-clipboard-check"></i>--}}
                <td>{{$room=DB::table('rooms')->where('id',$reservation->room_id)->value('name')}}</td>
                <td>
-                 @if ($reservation->active==1)
-                     <p>Proceso</p>
-                 @else
-                 <p>Finalizada</p>
-                 @endif
+                
                </td>
-               <td>
-                      <form action="{{route('destroy_reservations',$reservation->id)}}" method="post">
-                        @csrf
-                        <a href="{{route('update_status',$reservation->id)}}" class="fas fa-check  btn-success btn-sm "></a>
-
-                        @method('delete')
-                        <button class="btn btn-danger btn-sm fas fa-trash-alt cursor-pointer" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"></button>
-                 
-                      </form>
-                </td>
+             
           </tr> 
        @endforeach
          

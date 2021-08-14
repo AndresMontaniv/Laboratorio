@@ -26,6 +26,9 @@
                 <div class="col"> 
                     <a href="{{url('/userbuscador/create')}}" class="btn btn-warning text-white btb-sm mx-3">Query Builder</a>
                 </div> 
+                <div class="col"> 
+                    <a href="{{route('Usergrafica')}}" class="btn btn-primary text-white btb-sm ">Grafica Reporte</a>
+                </div> 
             </div>
         </div>
      

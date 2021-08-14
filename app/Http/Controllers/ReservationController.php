@@ -22,7 +22,8 @@ class ReservationController extends Controller
     {
         $users = User::select('id')->where('laboratory_id', Auth::user()->laboratory_id)->get();
         $reservations= Reservation::whereIn('id',$users)->get();
-        return view('reservas.index',compact('reservations'));
+        $count=Reservation::whereIn('id',$users)->count();
+        return view('reservas.index',compact('reservations','count'));
     }
 
 

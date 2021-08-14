@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Laboratory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -23,11 +24,17 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            
+            'username' => $this->faker->name(),
             'name' => $this->faker->name(),
+            'lastname' => $this->faker->lastName(),
+            'phone' => $this->faker->randomElement(['78125459','78178256','74940481','67711539']),
+            'ci' => $this->faker->randomElement(['8080814','8226422','8940481','8711229']),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' =>bcrypt('123'), 
             'remember_token' => Str::random(10),
+            'laboratory_id' => Laboratory::all()->random()->id
         ];
     }
 

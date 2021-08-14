@@ -1,11 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Permission;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class PermissionSeeder extends Seeder
+use App\Models\Reservation;
+use Illuminate\Database\Seeder;
+
+class ReservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::factory(60)->create();
+       Reservation::factory(70)->create();
     }
 }

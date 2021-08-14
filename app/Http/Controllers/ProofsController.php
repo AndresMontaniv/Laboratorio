@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instrument;
 use App\Models\Binnacle;
 use App\Models\Proof;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class ProofsController extends Controller
     
     public function create()
     {
-      return view('proofs.create');
+        $instruments=Instrument::where('laboratory_id',Auth::user()->laboratory_id)->get();
+      return view('proofs.create',compact('instruments'));
     }
 
     
@@ -43,14 +45,17 @@ class ProofsController extends Controller
            }else{
                $imgname=NULL;
            }
-        $prueba =  Proof::create([
+        $proof=Proof::create([
             'price'=>request('price'),
             'name'=>request('name'),
             'image'=>$imgname,
             'detail'=>request('detail'),
             'laboratory_id'=>Auth::user()->laboratory_id
         ]);
-        Binnacle::setInsert($prueba->detail,"prueba",Auth::user());
+        if ($request->instruments){
+            $proof->Instrument()->attach($request->instruments);
+        }
+        Binnacle::setInsert($proof->detail,"prueba",Auth::user());
         return redirect()->route('proofs.index');
     }
 
@@ -70,7 +75,13 @@ class ProofsController extends Controller
     public function edit($id)
     {
         $proofs=Proof::findOrfail($id);
-         return view('proofs.edit',compact('proofs'));
+        $instrumento=array();
+        $instruments=Instrument::where('laboratory_id',Auth::user()->laboratory_id)->get();
+        $instrument=DB::table('instrument_proof')->where('proof_id',$id)->get();
+         foreach($instrument  as $ins){
+           array_push($instrumento,$ins->instrument_id);
+         }
+         return view('proofs.edit',compact('proofs','instruments','instrumento'));
     }
 
     
@@ -96,6 +107,10 @@ class ProofsController extends Controller
          $proofs->detail= $request->get('detail');
          $proofs->image= $imgname;
          $proofs->update();
+
+         if($request->instruments){
+            $proofs->Instrument()->sync($request->instruments);
+           }
          Binnacle::setUpdate($proofs->detail,"prueba",Auth::user());
         return redirect()->route('proofs.index');
      

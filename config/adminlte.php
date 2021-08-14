@@ -241,7 +241,7 @@ return [
       
         [
             'text'        => 'Inicio',
-            'url'         => 'admin',
+            'route'         => 'home',
             'icon_color' => 'red',
             'icon'        => 'fas fa-heartbeat',
             'icon_color' => 'red',
@@ -260,6 +260,13 @@ return [
             'can'  => 'superAdmin',
             'icon_color' => 'green',
             'icon' => 'fas fa-users-cog',
+        ],
+        [
+            'text' => 'Grafica',
+            'route'  => 'grafica',
+            //'can'  => 'superAdmin',
+            'icon_color' => 'warning',
+            'icon' => 'fas fa-chart-pie',
         ],
         [
             'text' => 'Planes',
@@ -308,6 +315,15 @@ return [
             'icon_color' => 'red',
             'can'  => 'admin',
             'submenu' => [
+                [
+                    'text' => 'Reservas',
+                    'icon'    => "fas fa-calendar-plus",
+                    'route'  => 'reserva',
+                    'can'  => 'admin',
+                    'icon_color'=>'red',
+                  
+                    //'can'=>'Ver lista de reservas',
+                ]  ,
                 [
                     'text' => 'Gestionar periodo',
                     'icon'    => "far fa-clock",
@@ -370,7 +386,25 @@ return [
                
             ],
         ],
+         
 
+
+        [
+            'text'    => 'ADM Instrumentos',
+            'icon'    => 'fas  fa-medkit',
+            'icon_color' => 'red',
+           
+            'submenu' => [
+                [
+                    'text' => 'Gestionar Instrumentos',
+                    'icon'    => "fas fa-stethoscope",
+                    'route'  => 'instruments.index',
+                    'icon_color'=>'red',
+
+                ],
+               
+            ],
+        ],
 
         [
             'text'    => 'ADM Facturación',

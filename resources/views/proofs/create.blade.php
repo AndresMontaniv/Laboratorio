@@ -31,11 +31,7 @@
                        
                     
                     </div>
-                   </div>
-
-             
-
-               
+                   </div>             
                         <label for="image">Image</label>
                         <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" value="{{old('image')}}">
                    
@@ -43,19 +39,23 @@
                         <small>*{{$message}}</small>
                         <br><br>
                     @enderror
-     
-                   <br>
-                 
-               
+                   <br>     
                   <div class="form-group">
                       <label for="detail">Detalle</label>
                       <textarea id="detail" class="form-control" name="detail" rows="3"></textarea>
                   </div>
-                  
-    
-
-            
-
+                  <br>
+                  <label for="instruments">Asignacion de Instrumentos</label>
+                  <div class="form-check" >
+                     <div class="form-row">
+                         @foreach ($instruments as $instrument)
+                         <div class="form-group col-md-3">
+                             <input type="checkbox" name="instruments[]" value="{{$instrument->id}}"
+                             class="form-check-input">{{$instrument->name}} <br>
+                         </div>
+                         @endforeach
+                     </div>
+                 </div><br>
                 <button  class="btn btn-danger btn-sm" type="submit">Registrar</button>
               </form>
 

@@ -1,18 +1,21 @@
 <?php
 
 namespace Database\Factories;
+
+use App\Models\Period;
+use App\Models\Reservation;
+use App\Models\Room;
 use App\Models\User;
-use App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PermissionFactory extends Factory
+class ReservationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Permission::class;
+    protected $model = Reservation::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +25,10 @@ class PermissionFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id, //this is the super admin CARLOS
-            'role_id' => $this->faker->randomElement([1,2,3])
+           'date'=>$this->faker->date('Y-m-d','now'),
+           'user_id'=>User::all()->random()->id,
+           'room_id'=>Room::all()->random()->id,
+           'period_id'=>Period::all()->random()->id
         ];
     }
 }
