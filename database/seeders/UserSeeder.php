@@ -61,6 +61,8 @@ class UserSeeder extends Seeder
                 rand(1,3)
             ]);
         }*/
+
+        
     }
 
 }

@@ -99,16 +99,16 @@ class ExcelController extends Controller
    }
 
    public function graficausuario(){
-      $usuario=User::select(\DB::raw("COUNT(*) as count"))->where('laboratory_id',Auth::user()->laboratory_id)
+      $usuario=User::select(DB::raw("COUNT(*) as count"))->where('laboratory_id',Auth::user()->laboratory_id)
       ->whereYear('created_at',date('Y'))
-      ->groupBy(\DB::raw("Second(created_at)"))->pluck('count');
+      ->groupBy(DB::raw("Second(created_at)"))->pluck('count');
       return view('users.grafica',compact('usuario'));
    }
 
    public function graficaReserva(){
       $users = User::select('id')->where('laboratory_id', Auth::user()->laboratory_id)->get();
-      $reserva=Reservation::select(\DB::raw("COUNT(*) as count"))->whereIn('id',$users)
-      ->whereYear('created_at',date('Y'))->groupBy(\DB::raw("Second(created_at)"))->pluck('count');
+      $reserva=Reservation::select(DB::raw("COUNT(*) as count"))->whereIn('id',$users)
+      ->whereYear('created_at',date('Y'))->groupBy(DB::raw("Second(created_at)"))->pluck('count');
       return view('reservas.grafica',compact('reserva'));
    }
 }

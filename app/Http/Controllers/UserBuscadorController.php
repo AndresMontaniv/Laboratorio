@@ -46,20 +46,20 @@ class UserBuscadorController extends Controller
         $email=User::getEmailArray(request('email'));
         $from=request('from');
         $to=request('to');
-        $labs=request('labs');
-        // dd($request, $id, $ci, $username, $name, $lastname, $phone, $email, $labs);
+        $labs=User::getLabArray(request('labs'));
+        //dd($request, $id, $ci, $username, $name, $lastname, $phone, $email, $labs, $from, $to);
 
 
         $users=DB::table('users')
                 ->whereIn('id', $id )
-                // ->whereIn('ci', $ci)
+                //->whereIn('ci', $ci)
                 ->whereIn('username', $username)
                 ->whereIn('name', $name)
-                // ->whereIn('lastname', $lastname)
+                ->whereIn('lastname', $lastname)
                 ->whereIn('phone', $phone)
                 ->whereIn('email', $email)
                 ->whereIn('laboratory_id', $labs)
-                // ->whereBetween('birthday', [$from, $to])
+                ->whereBetween('birthday', [$from, $to])
                 ->get();
         
         

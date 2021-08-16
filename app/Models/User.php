@@ -193,6 +193,21 @@ class User extends Authenticatable
         }
         return $array;
     }
+
+    public static function getLabArray($labs){
+        $array=array();
+        $users=User::all();
+        if ($labs!=null){
+            return $labs;
+        }else{
+            foreach($users as $user){
+                if($user->laboratory_id!=null){
+                    array_push($array,$user->laboratory_id);
+                }
+            }
+        }
+        return $array;
+    }
     
 
     public static function isSuperAdmin(User $user){    

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LaboratorySeeder::class);
         $this->call(LaboratoryPlanSeeder::class);
         $this->call(UserSeeder::class);
+        
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(PeriodSeeder::class);
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AnalysisSeeder::class);
         // $this->call(TestSeeder::class);
         //esto es para los 3 usuarios del seeder que no se porque no se les asigna el laboratory_id
-       /* $user1 = User::findOrFail(2);
+        $user1 = User::findOrFail(2);
         $user1->laboratory_id = 1;
         $user1->update();
         $user2 = User::findOrFail(3);
@@ -48,17 +49,17 @@ class DatabaseSeeder extends Seeder
         $user3->laboratory_id = 1;
         $user3->update();
         
-        $user6 = User::findOrFail(6);
-        $user6->laboratory_id = 1;
-        $user6->update();
+        // $user6 = User::findOrFail(6);
+        // $user6->laboratory_id = 1;
+        // $user6->update();
         
-        $user7 = User::findOrFail(7);
-        $user7->laboratory_id = 1;
-        $user7->update();
+        // $user7 = User::findOrFail(7);
+        // $user7->laboratory_id = 1;
+        // $user7->update();
 
-        $user8 = User::findOrFail(8);
-        $user8->laboratory_id = 1;
-        $user8->update();*/
+        // $user8 = User::findOrFail(8);
+        // $user8->laboratory_id = 1;
+        // $user8->update();
         
         // $invoice1= new Invoice();
         // $invoice1->discount=0.25;
@@ -87,7 +88,7 @@ class DatabaseSeeder extends Seeder
         // $bill1->laboratory_id=1;
         // $bill1->analysis_id=1;
         // $bill1->save();
-
+        
 
         $field1= new Field();
         $field1->name='field1';

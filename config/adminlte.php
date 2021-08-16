@@ -264,7 +264,7 @@ return [
         [
             'text' => 'Grafica',
             'route'  => 'grafica',
-            //'can'  => 'superAdmin',
+            'can'  => 'superAdmin',
             'icon_color' => 'warning',
             'icon' => 'fas fa-chart-pie',
         ],
