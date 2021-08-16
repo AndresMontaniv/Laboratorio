@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LaboratorySeeder::class);
         $this->call(LaboratoryPlanSeeder::class);
         $this->call(UserSeeder::class);
+        
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(PeriodSeeder::class);
@@ -87,7 +88,7 @@ class DatabaseSeeder extends Seeder
         // $bill1->laboratory_id=1;
         // $bill1->analysis_id=1;
         // $bill1->save();
-
+        
 
         $field1= new Field();
         $field1->name='field1';

@@ -15,5 +15,11 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         Permission::factory(60)->create();
+
+        $permi= new Permission();
+        $permi->user_id=1;
+        $permi->role_id=1;
+        $permi->save();
+
     }
 }

@@ -18,11 +18,19 @@ class UserSeeder extends Seeder
     public function run()
 
     {
+        $user1= new User();
+        $user1->username='administrador';
+        $user1->name='administrador';
+        $user1->laboratory_id=1;
+        $user1->password='123';
+        $user1->save();
         $user=User::factory(60)->create();
       /*  foreach($user as $use){
             $use->permissions()->attach([
                 rand(1,3)
             ]);
         }*/
+
+        
     }
 }
