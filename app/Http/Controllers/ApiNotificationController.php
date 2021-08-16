@@ -14,6 +14,7 @@ class ApiNotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index($id)
     {
         //$user = User::findOrFail($id);

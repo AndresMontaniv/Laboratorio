@@ -17,38 +17,31 @@ class LaboratorySeeder extends Seeder
         DB::table('laboratories')->insert([
             [
                 'name' => 'Telchi',
-                'status' => 1,
-                'imagen' => 'logotelchi.png'
+                'status' => 1
             ],
             [
                 'name' => 'Farmacorp',
-                'status' => 1,
-                'imagen' => 'Farmacorp.png'
+                'status' => 1
             ],
             [
                 'name' => 'Analiza',
-                'status' => 1,
-                'imagen' => 'Analiza.png'
+                'status' => 1
             ],
             [
                 'name' => 'Bago',
-                'status' => 1,
-                'imagen' => 'Bago.png'
+                'status' => 1
             ],
             [
                 'name' => 'Biomedico',
-                'status' => 1,
-                'imagen' => 'Biomedico.png'
+                'status' => 1
             ],
             [
                 'name' => 'Biotest',
-                'status' => 1,
-                'imagen' => 'Biotest.png'
+                'status' => 1
             ],
              [
                 'name' => 'Cental',
-                'status' => 1,
-                'imagen' => 'Cental.png'
+                'status' => 1
             ]
         ]);
     }
